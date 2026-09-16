@@ -1,0 +1,241 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Moon, Sun, ArrowRight } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
+
+const navLinks = [
+  { label: 'About', href: '#aboutme' },
+  { label: 'Services', href: '#services' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Work', href: '#work' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const NavBar: React.FC = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  // Scroll logic for navbar background
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Intersection Observer for active section
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(`#${entry.target.id}`);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    navLinks.forEach((link) => {
+      const id = link.href.substring(1);
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
+  const handleScrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    const id = href.substring(1);
+    const element = document.getElementById(id);
+    
+    if (element) {
+      // Smooth scroll using window.scrollTo
+      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <>
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-[100] flex justify-center w-full transition-all duration-500 ${
+          scrolled ? 'py-4 px-4 sm:px-8' : 'py-8 px-6 lg:px-12'
+        }`}
+      >
+        <div 
+          className={`flex items-center justify-between transition-all duration-500 ease-out w-full ${
+            scrolled 
+              ? 'max-w-4xl mx-auto bg-white/60 dark:bg-[#0a0a0a]/60 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full py-3 px-6 shadow-[0_4px_30px_rgba(168,85,247,0.06)]' 
+              : 'max-w-7xl mx-auto bg-transparent border-transparent py-0'
+          }`}
+        >
+          {/* LEFT: Logo */}
+          <a 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            style={{ fontFamily: "'Ysabeau SC', sans-serif" }}
+            className="text-[#111111] dark:text-white font-extrabold text-2xl sm:text-3xl tracking-tighter hover:text-purple-600 dark:hover:text-purple-300 transition-colors duration-300 z-50 relative"
+          >
+            SK.
+          </a>
+
+          {/* CENTER: Desktop Links */}
+          <div className="hidden md:flex items-center gap-2">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleScrollToSection(e, link.href)}
+                  className={`relative px-5 py-2 text-[12px] font-medium tracking-[0.05em] uppercase transition-colors duration-300 ${
+                    isActive ? 'text-[#111111] dark:text-white' : 'text-[#111111]/50 dark:text-white/50 hover:text-[#111111]/90 dark:hover:text-white/90'
+                  }`}
+                >
+                  <span className="relative z-10 transition-transform duration-300 block hover:-translate-y-0.5">{link.label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavBackground"
+                      className="absolute inset-0 bg-black/5 dark:bg-white/10 rounded-full"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                </a>
+              );
+            })}
+          </div>
+
+          {/* RIGHT: Theme & CTA */}
+          <div className="hidden md:flex items-center gap-4">
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ rotate: 15, scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="w-10 h-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-[#111111]/70 dark:text-white/70 hover:text-[#111111] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300"
+            >
+              {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            </motion.button>
+            
+            <a 
+              href="#contact"
+              onClick={(e) => handleScrollToSection(e, '#contact')}
+              className="group relative flex items-center gap-2 bg-[#111111] dark:bg-white text-white dark:text-[#0a0a0a] px-6 py-2.5 rounded-full font-semibold text-[13px] tracking-wide hover:bg-purple-900 dark:hover:bg-purple-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+            >
+              Let's Talk
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </div>
+
+          {/* MOBILE: Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="md:hidden w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-[#111111] dark:text-white z-50 relative hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        </div>
+      </motion.nav>
+
+      {/* MOBILE: Full Screen Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[200] bg-[#F5F3EF]/95 dark:bg-[#050108]/95 backdrop-blur-3xl flex flex-col items-center justify-center transition-colors duration-500"
+          >
+            {/* Mobile Close Button */}
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute top-8 right-8 w-12 h-12 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-[#111111] dark:text-white hover:bg-black/10 dark:hover:bg-white/10 hover:scale-105 transition-all duration-300"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <motion.div 
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+                hidden: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
+              }}
+              className="flex flex-col items-center gap-8 w-full px-6"
+            >
+              {navLinks.map((link) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleScrollToSection(e, link.href)}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
+                  }}
+                  className="text-[#111111] dark:text-white text-4xl sm:text-5xl font-light tracking-wide hover:text-purple-600 dark:hover:text-purple-300 transition-colors duration-300"
+                  style={{ fontFamily: "'Arima', sans-serif" }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
+                }}
+                className="mt-12 flex flex-col items-center gap-8 w-full"
+              >
+                <div className="w-16 h-px bg-black/10 dark:bg-white/10" />
+                <a 
+                  href="#contact"
+                  onClick={(e) => handleScrollToSection(e, '#contact')}
+                  className="bg-[#111111] dark:bg-white text-white dark:text-black px-10 py-4 rounded-full font-semibold tracking-wider text-sm hover:scale-105 transition-transform duration-300 flex items-center gap-3"
+                >
+                  Let's Talk
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default NavBar;
