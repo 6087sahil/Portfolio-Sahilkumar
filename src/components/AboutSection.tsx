@@ -8,7 +8,7 @@ const AboutSection: React.FC = () => {
   const { theme } = useTheme();
 
   return (
-    <section id="about" className="relative w-full min-h-screen bg-[#F5F3EF] dark:bg-[#050108] transition-colors duration-500 flex flex-col md:flex-row overflow-hidden border-y border-[#DCD9D4] dark:border-white/5 pt-20 pb-20 md:py-0">
+    <section id="about" className="relative w-full min-h-screen bg-[#F5F3EF] dark:bg-[#06000c] transition-colors duration-500 flex flex-col md:flex-row overflow-hidden border-y border-[#DCD9D4] dark:border-white/5 pt-20 pb-20 md:py-0">
       
       {/* Animated Ambient Orbs */}
       <motion.div 

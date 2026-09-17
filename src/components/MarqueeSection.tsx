@@ -49,7 +49,7 @@ const MarqueeSection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#F5F3EF] dark:bg-[#0f0420] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden flex flex-col gap-3 border-t border-[#DCD9D4] dark:border-white/5 relative transition-colors duration-500">
+    <section ref={sectionRef} className="bg-[#F5F3EF] dark:bg-[#0a0212] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden flex flex-col gap-3 border-t border-[#DCD9D4] dark:border-white/5 relative transition-colors duration-500">
       <div 
         className="flex gap-3 will-change-transform whitespace-nowrap relative z-10"
         style={{ transform: `translateX(${scrollOffset - 200}px)` }}

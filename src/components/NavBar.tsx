@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Moon, Sun, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
+import Magnet from './Magnet';
 
 const navLinks = [
-  { label: 'About', href: '#aboutme' },
   { label: 'Services', href: '#services' },
   { label: 'Skills', href: '#skills' },
   { label: 'Work', href: '#work' },
@@ -95,7 +95,7 @@ const NavBar: React.FC = () => {
         <div 
           className={`flex items-center justify-between transition-all duration-500 ease-out w-full ${
             scrolled 
-              ? 'max-w-4xl mx-auto bg-white/60 dark:bg-[#0a0a0a]/60 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full py-3 px-6 shadow-[0_4px_30px_rgba(168,85,247,0.06)]' 
+              ? 'max-w-4xl mx-auto bg-white/60 dark:bg-[#06000c]/60 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full py-3 px-6 shadow-[0_4px_30px_rgba(168,85,247,0.06)]' 
               : 'max-w-7xl mx-auto bg-transparent border-transparent py-0'
           }`}
         >
@@ -140,23 +140,17 @@ const NavBar: React.FC = () => {
 
           {/* RIGHT: Theme & CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <motion.button
-              onClick={toggleTheme}
-              whileHover={{ rotate: 15, scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-[#111111]/70 dark:text-white/70 hover:text-[#111111] dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300"
-            >
-              {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-            </motion.button>
             
-            <a 
-              href="#contact"
-              onClick={(e) => handleScrollToSection(e, '#contact')}
-              className="group relative flex items-center gap-2 bg-[#111111] dark:bg-white text-white dark:text-[#0a0a0a] px-6 py-2.5 rounded-full font-semibold text-[13px] tracking-wide hover:bg-purple-900 dark:hover:bg-purple-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
-            >
-              Let's Talk
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+            <Magnet strength={5} padding={50}>
+              <a
+                href="#contact"
+                onClick={(e) => handleScrollToSection(e, '#contact')}
+                className="group relative flex items-center gap-2 bg-[#111111] dark:bg-white text-white dark:text-[#0a0a0a] px-6 py-2.5 rounded-full font-semibold text-[13px] tracking-wide hover:bg-purple-900 dark:hover:bg-purple-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+              >
+                Let's Talk
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
+            </Magnet>
           </div>
 
           {/* MOBILE: Menu Button */}
@@ -177,7 +171,7 @@ const NavBar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[200] bg-[#F5F3EF]/95 dark:bg-[#050108]/95 backdrop-blur-3xl flex flex-col items-center justify-center transition-colors duration-500"
+            className="fixed inset-0 z-[200] bg-[#F5F3EF]/95 dark:bg-[#06000c]/95 backdrop-blur-3xl flex flex-col items-center justify-center transition-colors duration-500"
           >
             {/* Mobile Close Button */}
             <button

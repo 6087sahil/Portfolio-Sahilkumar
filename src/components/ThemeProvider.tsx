@@ -10,32 +10,16 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Check localStorage first
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-      return savedTheme;
-    }
-    // Default to dark mode as requested by the user's initial state
-    return 'dark';
-  });
+  const [theme] = useState<Theme>('dark');
 
   useEffect(() => {
-    // When theme changes, update localStorage and the document class
-    localStorage.setItem('portfolio-theme', theme);
-    
-    // Add transition class to body to prevent flash, then update theme class
-    document.documentElement.classList.add('transition-colors', 'duration-500');
-    
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+    localStorage.setItem('portfolio-theme', 'dark');
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    // No-op since light mode is removed
   };
 
   return (

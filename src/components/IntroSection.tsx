@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-import { useTheme } from './ThemeProvider';
+import TextReveal from './TextReveal';
 
 const IntroSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -38,10 +38,8 @@ const IntroSection: React.FC = () => {
     mouseY.set(0);
   }
 
-  const { theme } = useTheme();
-
   return (
-    <section ref={sectionRef} id="about" className="relative w-full min-h-screen bg-[#F5F3EF] dark:bg-[#0a0a0a] transition-colors duration-500 flex items-center overflow-hidden border-t border-[#DCD9D4] dark:border-white/5">
+    <section ref={sectionRef} id="about" className="relative w-full min-h-screen bg-[#F5F3EF] dark:bg-[#06000c] transition-colors duration-500 flex items-center overflow-hidden border-t border-[#DCD9D4] dark:border-white/5">
       
       {/* Subtle Premium Background Shifting */}
       <motion.div 
@@ -65,22 +63,26 @@ const IntroSection: React.FC = () => {
               </span>
             </ScrollReveal>
 
-            {/* 2. Main Typography */}
-            <ScrollReveal delay={0.2} staggerChildren={0.1} className="mb-6 flex flex-col">
-              <motion.span 
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                className="text-[#686868] dark:text-white/70 text-2xl sm:text-3xl md:text-4xl font-light tracking-wide mb-3 transition-colors duration-500"
+            {/* 2. Main Typography — word-mask reveal */}
+            <div className="mb-6 flex flex-col">
+              <TextReveal
+                as="span"
+                className="text-[#686868] dark:text-white/70 text-2xl sm:text-3xl md:text-4xl font-light tracking-wide mb-3 transition-colors duration-500 block"
+                delay={0.15}
+                stagger={0.06}
               >
-                UI/UX & Product Designer
-              </motion.span>
-              <motion.span 
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                className="text-[#111111] dark:text-white text-5xl sm:text-6xl md:text-7xl lg:text-[90px] tracking-tight leading-[1.0] transition-colors duration-500" 
+                UI/UX &amp; Product Designer
+              </TextReveal>
+              <TextReveal
+                as="span"
+                className="text-[#111111] dark:text-white text-5xl sm:text-6xl md:text-7xl lg:text-[90px] tracking-tight leading-[1.0] transition-colors duration-500 block"
                 style={{ fontFamily: "'Arima', sans-serif" }}
+                delay={0.35}
+                stagger={0.07}
               >
                 Sahil Kumar
-              </motion.span>
-            </ScrollReveal>
+              </TextReveal>
+            </div>
 
             {/* 3. Description */}
             <ScrollReveal delay={0.4} staggerChildren={0.15} className="mt-4 sm:mt-6 max-w-lg mb-10" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>

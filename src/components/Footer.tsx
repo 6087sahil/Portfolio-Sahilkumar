@@ -3,7 +3,7 @@ import ScrollReveal, { ScrollRevealItem } from './ScrollReveal';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-[#F5F3EF] dark:bg-[#030108] border-t border-[#DCD9D4] dark:border-white/5 pt-16 pb-12 relative z-20 overflow-hidden transition-colors duration-500">
+    <footer className="w-full bg-[#F5F3EF] dark:bg-[#06000c] border-t border-[#DCD9D4] dark:border-white/5 pt-16 pb-12 relative z-20 overflow-hidden transition-colors duration-500">
       <ScrollReveal delay={0.1} duration={1} yOffset={30} className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
         
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">

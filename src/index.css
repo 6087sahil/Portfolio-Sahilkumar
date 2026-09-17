@@ -24,6 +24,17 @@ html, body, #root {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Lenis smooth scroll */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
 .main-wrapper {
   overflow-x: clip;
 }
@@ -34,3 +45,99 @@ html, body, #root {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ─── Fluid Type Scale ─────────────────────────────── */
+:root {
+  --text-xs:      clamp(0.625rem, 0.5vw + 0.5rem,   0.75rem);
+  --text-sm:      clamp(0.8125rem, 0.6vw + 0.65rem,  0.9375rem);
+  --text-base:    clamp(0.9375rem, 0.8vw + 0.75rem,  1.0625rem);
+  --text-lg:      clamp(1.0625rem, 1vw + 0.85rem,    1.25rem);
+  --text-xl:      clamp(1.2rem,    1.4vw + 0.95rem,  1.5rem);
+  --text-2xl:     clamp(1.4rem,    1.8vw + 1rem,     1.875rem);
+  --text-3xl:     clamp(1.75rem,   2.5vw + 1rem,     2.5rem);
+  --text-4xl:     clamp(2rem,      3.5vw + 0.75rem,  3.25rem);
+  --text-5xl:     clamp(2.5rem,    5vw + 0.5rem,     4.5rem);
+  --text-display: clamp(3rem,      7vw + 0.5rem,     6.5rem);
+}
+
+/* ─── Word-mask base styles (used by TextReveal) ─── */
+.word-mask-wrapper {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.1em;
+}
+.word-mask-inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ─── Clip path reveal base (GPU-only) ──────────── */
+.clip-reveal {
+  clip-path: inset(0 0 100% 0);
+  will-change: clip-path, opacity;
+}
+
+/* ─── Scroll progress bar ─────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #7c3aed, #a855f7, #c084fc);
+  transform-origin: left;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ── Custom Utilities ── */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── Continuous Marquee ── */
+.marquee-track {
+  animation: marquee 35s linear infinite;
+}
+.group:hover .marquee-track {
+  animation-play-state: paused;
+}
+/* Alternate: if you want it to just slow down instead of pause, use:
+  animation-duration: 100s; 
+*/
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 0.5rem)); } /* -50% of the duplicated content width minus gap */
+}
+
+/* ─── Reduced motion override ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable Lenis by telling JS */
+  :root {
+    --reduced-motion: 1;
+  }
+
+  #scroll-progress {
+    display: none;
+  }
+
+  .word-mask-inner {
+    transform: none !important;
+  }
+}
+
