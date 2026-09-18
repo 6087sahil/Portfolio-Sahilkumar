@@ -1,25 +1,22 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+
 import NavBar from './components/NavBar';
 import CustomCursor from './components/CustomCursor';
-import HeroSection from './components/HeroSection';
-import MarqueeSection from './components/MarqueeSection';
 import LoadingScreen from './components/LoadingScreen';
 import ScrollProgressBar from './components/ScrollProgressBar';
-
-
-import ProjectsSection from './components/ProjectsSection';
-import ServicesSection from './components/ServicesSection';
-import ProcessSection from './components/ProcessSection';
-import SkillsSection from './components/SkillsSection';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
 
-  // Lenis smooth scroll — respects prefers-reduced-motion
+function AppContent() {
+  const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
+
+  // Lenis smooth scroll
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
@@ -45,6 +42,25 @@ function App() {
     };
   }, []);
 
+  // Handle scrolling to hash on route change
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          const offsetTop = element.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -55,17 +71,23 @@ function App() {
         <ScrollProgressBar />
         <CustomCursor />
         {!isLoading && <NavBar />}
-        <HeroSection isLoaded={!isLoading} />
-        <MarqueeSection />
-
-        <ProjectsSection />
-        <ServicesSection />
-        <ProcessSection />
-        <SkillsSection />
-        <ContactSection />
+        
+        <Routes>
+          <Route path="/" element={<HomePage isLoading={isLoading} />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+        
         <Footer />
       </div>
     </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 

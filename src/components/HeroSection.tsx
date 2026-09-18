@@ -1,6 +1,4 @@
 import React from 'react';
-import FadeIn from './FadeIn';
-import TextReveal from './TextReveal';
 import RevealBackground from './RevealBackground';
 
 import { motion } from 'framer-motion';
@@ -130,7 +128,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ delay: 0.8, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-2 z-20 pointer-events-none"
+        className="absolute bottom-6 sm:bottom-10 w-full flex flex-col items-center justify-center gap-2 z-20 pointer-events-none"
       >
         <div className="w-4 sm:w-5 h-7 sm:h-8 border border-white/40 rounded-full flex justify-center pt-1.5">
           <motion.div 
@@ -139,7 +137,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           />
         </div>
-        <span className="text-white/50 text-[7px] sm:text-[8px] font-medium tracking-[0.3em] uppercase text-center ml-[0.3em]">
+        <span className="text-white/50 text-[7px] sm:text-[8px] font-medium tracking-[0.3em] uppercase text-center pl-[0.3em]">
           Scroll to explore
         </span>
       </motion.div>

@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import TextReveal from './TextReveal';
 import Magnet from './Magnet';
 import { ArrowRight } from 'lucide-react';
-import { useTheme } from './ThemeProvider';
 import { useState } from 'react';
 
 /* ── Underline Input Field ── */
@@ -70,7 +69,6 @@ const UnderlineField = ({
 
 const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const { theme } = useTheme();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,

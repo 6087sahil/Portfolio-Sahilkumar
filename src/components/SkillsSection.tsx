@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import TextReveal from './TextReveal';
-import { useTheme } from './ThemeProvider';
+
 
 /* ── Inline SVG logos ── */
 const FigmaLogo = () => (
@@ -45,8 +45,6 @@ const skills = [
 
 /* ── Featured Tool Card ── */
 const ToolCard = ({ tool, index }: { tool: typeof featuredTools[0]; index: number }) => {
-  const { theme } = useTheme();
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 28, scale: 0.95 }}

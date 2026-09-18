@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import TextReveal from './TextReveal';
 import ScrollReveal from './ScrollReveal';
-import { useTheme } from './ThemeProvider';
+
 
 const projectsData = [
   {
@@ -51,7 +51,6 @@ const ProjectCard = ({
   index: number;
   sectionScrollYProgress: any;
 }) => {
-  const { theme } = useTheme();
   const cardRef = useRef<HTMLDivElement>(null);
   const { sRotX, sRotY, handleMouseMove, handleMouseLeave } = useCardTilt();
 
@@ -161,7 +160,6 @@ const ProjectCard = ({
 
 const ProjectsSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { theme } = useTheme();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,

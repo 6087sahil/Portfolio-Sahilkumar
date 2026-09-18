@@ -29,8 +29,8 @@ const StepRow = ({
 
   const opacity = useTransform(
     scrollYProgress,
-    [Math.max(0, start - 0.04), start + 0.05, end + 0.08, Math.min(1, end + 0.25)],
-    [0.15, 1, 1, 0.25]
+    [Math.max(0, start - 0.05), start + 0.05, end + 0.05, Math.min(1, end + 0.15)],
+    [0.3, 1, 1, 0.3]
   );
   const x = useTransform(scrollYProgress, [Math.max(0, start - 0.04), start + 0.06], [-20, 0]);
   const isActiveScale = useTransform(scrollYProgress, [start, start + 0.06], [0.97, 1]);
@@ -38,9 +38,9 @@ const StepRow = ({
   return (
     <motion.div
       style={{ opacity, x, scale: isActiveScale }}
-      className="flex items-start gap-4 py-1.5 md:py-2 cursor-default"
+      className="flex items-start gap-4 py-2 md:py-3 cursor-default"
     >
-      <span className="text-[#111111]/25 dark:text-white/20 font-mono text-xs tracking-widest flex-shrink-0 w-6 pt-0.5 transition-colors duration-500">
+      <span className="text-[#111111]/40 dark:text-white/40 font-mono text-xs tracking-widest flex-shrink-0 w-6 pt-0.5 transition-colors duration-500">
         {step.num}
       </span>
       <div className="flex-1 min-w-0">
@@ -127,7 +127,7 @@ const ProcessSection: React.FC = () => {
       ref={outerRef}
       id="process"
       className="relative bg-[#F5F3EF] dark:bg-[#06000c] transition-colors duration-500 border-t border-[#DCD9D4] dark:border-white/5"
-      style={{ height: `${100 + stepCount * 55}vh` }}
+      style={{ height: `${100 + stepCount * 100}vh` }}
     >
       {/* Sticky panel */}
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
