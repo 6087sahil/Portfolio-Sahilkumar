@@ -40,16 +40,15 @@ const StepRow = ({
       style={{ opacity, x, scale: isActiveScale }}
       className="flex items-start gap-4 py-2 md:py-3 cursor-default"
     >
-      <span className="text-[#111111]/40 dark:text-white/40 font-mono text-xs tracking-widest flex-shrink-0 w-6 pt-0.5 transition-colors duration-500">
+      <span className="text-gray-900/40 dark:text-white/40 font-mono text-xs tracking-widest flex-shrink-0 w-6 pt-0.5 transition-colors duration-500">
         {step.num}
       </span>
       <div className="flex-1 min-w-0">
-        <h4 className="text-[#111111] dark:text-white font-bold text-base md:text-lg mb-0.5 transition-colors duration-500">
+        <h3 className="text-gray-900 dark:text-white font-bold text-base md:text-lg mb-0.5 transition-colors duration-500">
           {step.title}
-        </h4>
+        </h3>
         <p
-          className="text-[#686868] dark:text-white/40 text-sm leading-[1.4] transition-colors duration-300"
-          style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}
+          className="text-gray-500 dark:text-white/40 text-sm leading-[1.4] transition-colors duration-300"
         >
           {step.desc}
         </p>
@@ -91,15 +90,13 @@ const StepVisual = ({
             </span>
             {/* Giant step number */}
             <span
-              className="text-[100px] md:text-[140px] font-black text-[#111111]/[0.04] dark:text-white/[0.04] leading-none tracking-tighter select-none"
-              style={{ fontFamily: "'Arima', sans-serif" }}
+              className="text-[100px] md:text-[140px] font-black text-gray-900/[0.04] dark:text-white/[0.04] leading-none tracking-tighter select-none"
             >
               {step.num}
             </span>
             {/* Step title */}
             <span
-              className="text-[#111111] dark:text-white text-2xl md:text-3xl font-bold tracking-tight mt-2 transition-colors duration-500"
-              style={{ fontFamily: "'Arima', sans-serif" }}
+              className="text-gray-900 dark:text-white text-2xl md:text-3xl font-bold tracking-tight mt-2 transition-colors duration-500"
             >
               {step.title}
             </span>
@@ -127,7 +124,7 @@ const ProcessSection: React.FC = () => {
       ref={outerRef}
       id="process"
       className="relative bg-[#F5F3EF] dark:bg-[#06000c] transition-colors duration-500 border-t border-[#DCD9D4] dark:border-white/5"
-      style={{ height: `${100 + stepCount * 100}vh` }}
+      style={{ height: `${100 + stepCount * 30}vh` }}
     >
       {/* Sticky panel */}
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
@@ -140,7 +137,7 @@ const ProcessSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[#686868] dark:text-white/60 font-semibold tracking-[0.2em] text-[10px] sm:text-xs mb-2 block uppercase transition-colors duration-500"
+              className="text-gray-500 dark:text-white/60 font-semibold tracking-wide text-xs sm:text-sm mb-2 block uppercase transition-colors duration-500"
             >
               05 &bull; Design Process
             </motion.span>
@@ -148,15 +145,13 @@ const ProcessSection: React.FC = () => {
               <TextReveal
                 as="h2"
                 className="text-purple-500 dark:text-purple-200 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] transition-colors duration-500"
-                style={{ fontFamily: "'Arima', sans-serif" }}
                 delay={0.1} stagger={0.07}
               >
                 How I turn ideas
               </TextReveal>
               <TextReveal
                 as="h2"
-                className="text-[#111111]/30 dark:text-white/30 text-3xl sm:text-4xl md:text-5xl italic font-bold tracking-tight leading-[1.05] transition-colors duration-500"
-                style={{ fontFamily: "'Arima', sans-serif" }}
+                className="text-gray-900/30 dark:text-white/30 text-3xl sm:text-4xl md:text-5xl italic font-bold tracking-tight leading-[1.05] transition-colors duration-500"
                 delay={0.32} stagger={0.07}
               >
                 into products.

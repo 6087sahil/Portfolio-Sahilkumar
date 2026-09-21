@@ -26,10 +26,10 @@ const StatCard = ({
       transition={{ delay: 0.3 + index * 0.12, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
       className="flex flex-col p-5 rounded-2xl bg-white/80 dark:bg-white/[0.04] backdrop-blur-xl border border-[#DCD9D4] dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-colors duration-500"
     >
-      <span className="text-3xl sm:text-4xl font-bold text-[#111111] dark:text-white mb-1 tracking-tight transition-colors duration-500">
+      <span className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-1 tracking-tight transition-colors duration-500">
         {count}{suffix}
       </span>
-      <span className="text-purple-600/80 dark:text-purple-300/80 text-[9px] uppercase tracking-[0.15em] font-bold transition-colors duration-500">
+      <span className="text-purple-600/80 dark:text-purple-300/80 text-xs uppercase tracking-[0.15em] font-bold transition-colors duration-500">
         {label}
       </span>
     </motion.div>
@@ -47,8 +47,8 @@ const TraitCard = ({ label, desc, index }: { label: string; desc: string; index:
     className="group p-6 rounded-2xl border border-[#DCD9D4] dark:border-white/8 bg-white dark:bg-[#06000c] hover:border-purple-500/30 hover:bg-[#F5F3EF] dark:hover:bg-white/[0.02] transition-all duration-500 cursor-default"
   >
     <div className="w-6 h-px bg-purple-500/60 dark:bg-purple-400/60 mb-5 transition-all duration-500 group-hover:w-10 group-hover:bg-purple-500" />
-    <h4 className="text-[#111111] dark:text-white font-bold text-sm mb-2 transition-colors duration-500">{label}</h4>
-    <p className="text-[#686868] dark:text-white/40 text-sm leading-relaxed transition-colors duration-500">{desc}</p>
+    <h4 className="text-gray-900 dark:text-white font-bold text-sm mb-2 transition-colors duration-500">{label}</h4>
+    <p className="text-gray-500 dark:text-white/40 text-sm leading-relaxed transition-colors duration-500">{desc}</p>
   </motion.div>
 );
 
@@ -89,7 +89,7 @@ const AboutMeSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[#686868] dark:text-white/60 font-semibold tracking-[0.2em] text-[10px] sm:text-xs mb-10 block uppercase transition-colors duration-500"
+          className="text-gray-500 dark:text-white/60 font-semibold tracking-wide text-xs sm:text-sm mb-10 block uppercase transition-colors duration-500"
         >
           03 &bull; About Me
         </motion.span>
@@ -116,8 +116,8 @@ const AboutMeSection: React.FC = () => {
 
             {/* Name overlay */}
             <div className="absolute bottom-6 left-6 z-10 pointer-events-none">
-              <p className="text-white/40 text-[10px] uppercase tracking-[0.2em] font-semibold mb-1">New Delhi, India</p>
-              <h3 className="text-white font-bold text-xl tracking-tight" style={{ fontFamily: "'Arima', sans-serif" }}>
+              <p className="text-white/40 text-xs uppercase tracking-[0.2em] font-semibold mb-1">New Delhi, India</p>
+              <h3 className="text-white font-bold text-xl tracking-tight">
                 Sahil Kumar
               </h3>
             </div>
@@ -133,7 +133,7 @@ const AboutMeSection: React.FC = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
-                <span className="text-white text-[11px] font-semibold tracking-wide">Open to work</span>
+                <span className="text-white text-xs font-semibold tracking-wide">Open to work</span>
               </div>
             </motion.div>
           </motion.div>
@@ -143,23 +143,23 @@ const AboutMeSection: React.FC = () => {
 
             {/* Headline */}
             <div>
-              <h2 className="font-bold tracking-tight leading-[1.0] mb-6 flex flex-col" style={{ fontFamily: "'Arima', sans-serif" }}>
+              <h2 className="font-bold tracking-tight leading-[1.0] mb-6 flex flex-col">
                 <TextReveal as="span" className="text-purple-600 dark:text-purple-200 text-4xl sm:text-5xl md:text-6xl transition-colors duration-500 block" delay={0.1} stagger={0.07}>
                   Turning ideas
                 </TextReveal>
-                <TextReveal as="span" className="text-[#111111]/30 dark:text-white/30 text-4xl sm:text-5xl md:text-6xl italic transition-colors duration-500 block" delay={0.35} stagger={0.07}>
+                <TextReveal as="span" className="text-gray-900/30 dark:text-white/30 text-4xl sm:text-5xl md:text-6xl italic transition-colors duration-500 block" delay={0.35} stagger={0.07}>
                   into experiences.
                 </TextReveal>
               </h2>
 
               {/* Bio */}
-              <div className="space-y-4 max-w-xl" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+              <div className="space-y-4 max-w-xl">
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-[#111111] dark:text-white/80 text-base sm:text-lg leading-relaxed font-normal transition-colors duration-500"
+                  className="text-gray-900 dark:text-white/80 text-base sm:text-lg leading-relaxed font-normal transition-colors duration-500"
                 >
                   I'm Sahil Kumar, a UI/UX &amp; Product Designer based in New Delhi, India — passionate about creating digital products that are not just visually stunning but deeply functional and human-centered.
                 </motion.p>
@@ -168,7 +168,7 @@ const AboutMeSection: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.62, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-[#686868] dark:text-white/50 text-sm leading-relaxed transition-colors duration-500"
+                  className="text-gray-500 dark:text-white/50 text-sm leading-relaxed transition-colors duration-500"
                 >
                   My design philosophy centers on simplicity, clarity, and purpose. I believe the best interfaces get out of the way and let users accomplish their goals effortlessly.
                 </motion.p>
@@ -182,7 +182,7 @@ const AboutMeSection: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.55, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="text-[#686868]/80 dark:text-white/40 text-[10px] font-semibold tracking-[0.2em] uppercase block mb-4 transition-colors duration-500">
+              <span className="text-gray-500/80 dark:text-white/40 text-xs font-semibold tracking-[0.2em] uppercase block mb-4 transition-colors duration-500">
                 Education &amp; Experience
               </span>
               <div className="divide-y divide-[#DCD9D4] dark:divide-white/8 transition-colors duration-500">
@@ -197,9 +197,9 @@ const AboutMeSection: React.FC = () => {
                   >
                     <div className={`w-1.5 h-1.5 ${item.accent} rounded-full mt-1.5 flex-shrink-0 transition-colors duration-500`} />
                     <div>
-                      <span className="text-[#686868]/70 dark:text-white/30 text-[10px] font-semibold tracking-widest uppercase block mb-0.5 transition-colors duration-500">{item.period}</span>
-                      <h4 className="text-[#111111] dark:text-white font-bold text-sm transition-colors duration-500">{item.role}</h4>
-                      <p className="text-[#686868] dark:text-white/40 text-xs mt-0.5 transition-colors duration-500">{item.org}</p>
+                      <span className="text-gray-500/70 dark:text-white/30 text-xs font-semibold tracking-widest uppercase block mb-0.5 transition-colors duration-500">{item.period}</span>
+                      <h4 className="text-gray-900 dark:text-white font-bold text-sm transition-colors duration-500">{item.role}</h4>
+                      <p className="text-gray-500 dark:text-white/40 text-xs mt-0.5 transition-colors duration-500">{item.org}</p>
                     </div>
                   </motion.div>
                 ))}

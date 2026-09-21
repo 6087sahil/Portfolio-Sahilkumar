@@ -32,8 +32,8 @@ const UnderlineField = ({
       <label
         className={`absolute left-0 font-semibold tracking-wider uppercase pointer-events-none transition-all duration-400 z-10
           ${active
-            ? 'top-0 text-[9px] text-purple-600 dark:text-purple-300'
-            : 'top-5 text-[11px] text-[#686868]/70 dark:text-white/40'
+            ? 'top-0 text-[10px] text-purple-600 dark:text-purple-300'
+            : 'top-5 text-xs text-gray-500/70 dark:text-white/40'
           }`}
       >
         {label}
@@ -104,7 +104,7 @@ const ContactSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[#686868] dark:text-white/60 font-semibold tracking-[0.2em] text-[10px] sm:text-xs mb-8 block uppercase transition-colors duration-500"
+              className="text-gray-500 dark:text-white/60 font-semibold tracking-wide text-xs sm:text-sm mb-8 block uppercase transition-colors duration-500"
             >
               06 &bull; Contact
             </motion.span>
@@ -112,25 +112,24 @@ const ContactSection: React.FC = () => {
             {/* Headline with scroll-linked drift */}
             <h2
               className="text-5xl sm:text-6xl lg:text-[68px] font-bold tracking-tight leading-[1.05] mb-8 flex flex-col items-start"
-              style={{ fontFamily: "'Arima', sans-serif" }}
             >
               <motion.div style={{ y: word1Y }}>
-                <TextReveal as="span" delay={0} stagger={0.07} className="text-[#111111] dark:text-white block transition-colors duration-500">
-                  Let's create
+                <TextReveal as="span" delay={0} stagger={0.07} className="text-gray-900 dark:text-white block transition-colors duration-500">
+                  Let's create&nbsp;
                 </TextReveal>
               </motion.div>
               <motion.div style={{ y: word2Y }} className="ml-0 sm:ml-8">
-                <TextReveal as="span" delay={0.22} stagger={0.07} className="text-[#686868] dark:text-white/40 italic font-medium block transition-colors duration-500">
-                  something
+                <TextReveal as="span" delay={0.22} stagger={0.07} className="text-gray-500 dark:text-white/40 italic font-medium block transition-colors duration-500">
+                  something&nbsp;
                 </TextReveal>
               </motion.div>
               <motion.div style={{ y: word3Y }} className="ml-0 sm:ml-16">
                 <TextReveal as="span" delay={0.42} stagger={0.07} className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-600 dark:from-purple-400 dark:via-indigo-300 dark:to-blue-400 block">
-                  meaningful
+                  meaningful&nbsp;
                 </TextReveal>
               </motion.div>
               <motion.div style={{ y: word4Y }}>
-                <TextReveal as="span" delay={0.62} stagger={0.07} className="text-[#111111] dark:text-white block transition-colors duration-500">
+                <TextReveal as="span" delay={0.62} stagger={0.07} className="text-gray-900 dark:text-white block transition-colors duration-500">
                   together.
                 </TextReveal>
               </motion.div>
@@ -141,28 +140,10 @@ const ContactSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[#686868] dark:text-white/50 text-base leading-relaxed max-w-sm font-light mb-10 transition-colors duration-500"
+              className="text-gray-500 dark:text-white/50 text-base leading-relaxed max-w-sm font-light mb-10 transition-colors duration-500"
             >
               Have a project, idea, or opportunity? I'd love to hear about it and turn it into a thoughtful digital experience.
             </motion.p>
-
-            {/* Social links */}
-            <div className="flex flex-wrap gap-6">
-              {['Email', 'LinkedIn', 'Dribbble', 'GitHub'].map((social, i) => (
-                <motion.a
-                  key={social}
-                  href="#"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.9 + i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative text-[#686868] dark:text-white/50 text-sm font-medium hover:text-[#111111] dark:hover:text-white transition-colors duration-300 py-1"
-                >
-                  <span className="relative z-10 transition-transform duration-300 inline-block group-hover:-translate-y-0.5">{social}</span>
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-purple-600 dark:bg-purple-400 transition-all duration-300 group-hover:w-full" />
-                </motion.a>
-              ))}
-            </div>
           </div>
 
           {/* ── RIGHT: Scrolling form with underline inputs ── */}

@@ -48,7 +48,7 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.8 }}
-        className="relative z-10 flex justify-between items-center text-[10px] md:text-[11px] font-semibold tracking-[0.15em] uppercase w-full"
+        className="relative z-10 flex justify-between items-center text-xs font-semibold tracking-[0.15em] uppercase w-full"
       >
         <div className="flex-1 text-left tracking-tight font-extrabold text-sm md:text-base capitalize">
           Sahil Studio
@@ -71,7 +71,7 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.8 }}
-        className="relative z-10 w-full flex justify-between items-center text-[10px] font-semibold tracking-[0.2em] uppercase text-white/50"
+        className="relative z-10 w-full flex justify-between items-center text-xs font-semibold tracking-[0.2em] uppercase text-white/50"
       >
         <div className="rotate-[-90deg] origin-left translate-y-12 translate-x-4">
           LATEST
@@ -101,7 +101,7 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
 
         {/* Loader Percentage */}
         <div className="text-right flex items-end justify-end mt-8 md:mt-0 relative">
-          <div className="hidden md:block absolute right-full bottom-2 mr-6 text-[10px] uppercase tracking-[0.1em] text-white/50 text-right w-48 font-medium leading-relaxed">
+          <div className="hidden md:block absolute right-full bottom-2 mr-6 text-xs uppercase tracking-[0.1em] text-white/50 text-right w-48 font-medium leading-relaxed">
             I'm a multidisciplinary designer focused on creating bold digital experiences.
           </div>
           <div className="font-light tracking-tighter leading-none text-[15vw] sm:text-[12vw] md:text-[10vw] lg:text-[9vw]">

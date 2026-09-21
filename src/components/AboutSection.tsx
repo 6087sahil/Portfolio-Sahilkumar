@@ -68,7 +68,7 @@ const AboutSection: React.FC = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-medium tracking-tight leading-[1.05] max-w-5xl"
-            style={{ fontFamily: "'Arima', sans-serif" }}
+
           >
             Designing digital experiences that feel as <span className="text-purple-400 italic font-light">good</span> as they <span className="text-indigo-400 italic font-light">function</span>.
           </motion.h2>
@@ -134,7 +134,7 @@ const AboutSection: React.FC = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span className="text-white text-[10px] font-bold tracking-wider uppercase">Available for work</span>
+                <span className="text-white text-xs font-bold tracking-wider uppercase">Available for work</span>
               </motion.div>
 
               {/* Parallax Floating Tags */}
@@ -156,7 +156,7 @@ const AboutSection: React.FC = () => {
           <div className="w-full lg:w-1/2 flex flex-col gap-12 lg:pl-10">
             <div className="flex items-center gap-4 mb-4">
               <span className="w-12 h-px bg-white/20" />
-              <span className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase">A LITTLE ABOUT ME</span>
+              <span className="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">A LITTLE ABOUT ME</span>
             </div>
 
             {[
@@ -207,10 +207,10 @@ const AboutSection: React.FC = () => {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="flex flex-col items-center text-center gap-2"
               >
-                <span className="text-5xl md:text-6xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40" style={{ fontFamily: "'SF Pro Display', sans-serif" }}>
+                <span className="text-5xl md:text-6xl font-light tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
                   {stat.val}
                 </span>
-                <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/40 max-w-[150px]">{stat.label}</span>
+                <span className="text-xs md:text-sm font-bold tracking-widest uppercase text-white/40 max-w-[150px]">{stat.label}</span>
               </motion.div>
             ))}
           </div>
@@ -222,7 +222,7 @@ const AboutSection: React.FC = () => {
         <div className="flex flex-col gap-12">
           <div className="flex items-center gap-4">
             <span className="w-2 h-2 rounded-full bg-purple-500" />
-            <span className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase">EXPERTISE</span>
+            <span className="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">EXPERTISE</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
@@ -318,7 +318,7 @@ const AboutSection: React.FC = () => {
         <div className="relative w-full max-w-4xl mx-auto flex flex-col pt-10">
           <div className="flex items-center gap-4 mb-16 md:mb-24">
             <span className="w-2 h-2 rounded-full bg-indigo-500" />
-            <span className="text-white/40 text-[10px] font-bold tracking-[0.2em] uppercase">MY DESIGN PROCESS</span>
+            <span className="text-white/40 text-xs font-bold tracking-[0.2em] uppercase">MY DESIGN PROCESS</span>
           </div>
 
           <div className="relative flex flex-col gap-16 md:gap-24">
@@ -395,7 +395,7 @@ const AboutSection: React.FC = () => {
           </motion.div>
 
           <div className="relative z-10 w-full max-w-5xl flex flex-col gap-8 items-center">
-            <span className="text-white/40 text-[10px] font-bold tracking-[0.3em] uppercase">DESIGN PHILOSOPHY</span>
+            <span className="text-white/40 text-xs font-bold tracking-[0.3em] uppercase">DESIGN PHILOSOPHY</span>
             <div className="flex flex-col gap-2">
               <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
@@ -403,7 +403,6 @@ const AboutSection: React.FC = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90"
-                style={{ fontFamily: "'Arima', sans-serif" }}
               >
                 Good design gets attention.
               </motion.h2>
@@ -413,7 +412,6 @@ const AboutSection: React.FC = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 italic"
-                style={{ fontFamily: "'Arima', sans-serif" }}
               >
                 Great design makes things effortless.
               </motion.h2>
@@ -425,7 +423,7 @@ const AboutSection: React.FC = () => {
         {/* 8. RESUME / JOURNEY SECTION */}
         {/* ========================================================= */}
         <div className="relative w-full flex flex-col items-center text-center gap-10">
-          <span className="text-white/40 text-[10px] font-bold tracking-[0.3em] uppercase">MY JOURNEY</span>
+          <span className="text-white/40 text-xs font-bold tracking-[0.3em] uppercase">MY JOURNEY</span>
           
           <div className="flex flex-col gap-4 max-w-2xl">
             <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Want to explore my journey?</h3>

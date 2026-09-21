@@ -139,7 +139,7 @@ const NavBar: React.FC = () => {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative inline-flex items-center justify-center px-4 lg:px-5 py-2 text-[12px] font-medium tracking-[0.05em] uppercase transition-colors duration-300 ${
+                  className={`relative inline-flex items-center justify-center px-4 lg:px-5 py-2 text-xs font-medium tracking-[0.05em] uppercase transition-colors duration-300 ${
                     isActive ? 'text-[#111111] dark:text-white' : 'text-[#111111]/50 dark:text-white/50 hover:text-[#111111]/90 dark:hover:text-white/90'
                   }`}
                 >
@@ -164,7 +164,7 @@ const NavBar: React.FC = () => {
                 <a
                   href="/#contact"
                   onClick={(e) => handleNavClick(e, '/#contact')}
-                  className="group relative inline-flex items-center gap-2 bg-[#111111] dark:bg-white text-white dark:text-[#0a0a0a] px-6 py-2.5 rounded-full font-semibold text-[13px] tracking-wide hover:bg-purple-900 dark:hover:bg-purple-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+                  className="group relative inline-flex items-center gap-2 bg-[#111111] dark:bg-white text-white dark:text-[#0a0a0a] px-6 py-2.5 rounded-full font-semibold text-sm tracking-wide hover:bg-purple-900 dark:hover:bg-purple-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
                 >
                   Let's Talk
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -175,6 +175,7 @@ const NavBar: React.FC = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(true)}
+              aria-label="Toggle menu"
               className="md:hidden w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-[#111111] dark:text-white z-50 relative hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
             >
               <Menu className="w-5 h-5" />

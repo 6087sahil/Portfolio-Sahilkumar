@@ -14,7 +14,7 @@ const FigmaLogo = () => (
   </svg>
 );
 const FramerLogo = () => (
-  <svg viewBox="0 0 14 21" className="w-7 h-7 text-[#111111] dark:text-white transition-colors duration-500" fill="none">
+  <svg viewBox="0 0 14 21" className="w-7 h-7 text-gray-900 dark:text-white transition-colors duration-500" fill="none">
     <path d="M0 0h14v7H7L0 0z" fill="currentColor" />
     <path d="M0 7h14v7H7L0 7z" fill="currentColor" />
     <path d="M0 14h7v7L0 14z" fill="currentColor" />
@@ -24,7 +24,7 @@ const VSCodeLogo = () => (
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code" className="w-8 h-8" />
 );
 const GitHubLogo = () => (
-  <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#111111] dark:text-white transition-colors duration-500" fill="currentColor">
+  <svg viewBox="0 0 24 24" className="w-8 h-8 text-gray-900 dark:text-white transition-colors duration-500" fill="currentColor">
     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
   </svg>
 );
@@ -68,10 +68,10 @@ const ToolCard = ({ tool, index }: { tool: typeof featuredTools[0]; index: numbe
 
       {/* Name + role */}
       <div className="relative z-10">
-        <h4 className="text-[#111111] dark:text-white font-bold text-xl mb-0.5 group-hover:text-purple-700 dark:group-hover:text-purple-200 transition-colors duration-300">
+        <h3 className="text-gray-900 dark:text-white font-bold text-xl mb-0.5 group-hover:text-purple-700 dark:group-hover:text-purple-200 transition-colors duration-300">
           {tool.name}
-        </h4>
-        <p className="text-[#686868] dark:text-white/40 text-xs font-medium tracking-wide transition-colors duration-500">
+        </h3>
+        <p className="text-gray-500 dark:text-white/40 text-xs font-medium tracking-wide transition-colors duration-500">
           {tool.role}
         </p>
       </div>
@@ -79,8 +79,8 @@ const ToolCard = ({ tool, index }: { tool: typeof featuredTools[0]; index: numbe
       {/* Proficiency bar */}
       <div className="relative z-10">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-[9px] text-[#686868] dark:text-white/30 uppercase tracking-widest font-semibold transition-colors duration-500">Proficiency</span>
-          <span className="text-[10px] text-purple-600 dark:text-purple-400 font-bold transition-colors duration-500">{tool.prof}%</span>
+          <span className="text-xs text-gray-500 dark:text-white/30 uppercase tracking-widest font-semibold transition-colors duration-500">Proficiency</span>
+          <span className="text-xs text-purple-600 dark:text-purple-400 font-bold transition-colors duration-500">{tool.prof}%</span>
         </div>
         <div className="w-full h-1 bg-black/5 dark:bg-white/5 rounded-full overflow-hidden">
           <motion.div
@@ -131,7 +131,7 @@ const SkillsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[#686868] dark:text-white/50 font-semibold tracking-[0.2em] text-[10px] sm:text-xs mb-8 block uppercase transition-colors duration-500"
+            className="text-gray-500 dark:text-white/50 font-semibold tracking-wide text-xs sm:text-sm mb-8 block uppercase transition-colors duration-500"
           >
             04 &bull; Skills &amp; Tools
           </motion.span>
@@ -139,15 +139,13 @@ const SkillsSection: React.FC = () => {
           <TextReveal
             as="h2"
             className="text-purple-600 dark:text-purple-200 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.0] block transition-colors duration-500"
-            style={{ fontFamily: "'Arima', sans-serif" }}
             delay={0.1} stagger={0.08}
           >
             What I bring
           </TextReveal>
           <TextReveal
             as="span"
-            className="text-[#111111]/35 dark:text-white/35 text-4xl sm:text-5xl md:text-6xl lg:text-7xl italic font-bold tracking-tight leading-[1.0] block transition-colors duration-500"
-            style={{ fontFamily: "'Arima', sans-serif" }}
+            className="text-gray-900/35 dark:text-white/35 text-4xl sm:text-5xl md:text-6xl lg:text-7xl italic font-bold tracking-tight leading-[1.0] block transition-colors duration-500"
             delay={0.38} stagger={0.08}
           >
             to every project.
@@ -158,7 +156,7 @@ const SkillsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.65, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 text-[#686868] dark:text-white/50 text-base md:text-lg max-w-[600px] leading-relaxed font-light transition-colors duration-500"
+            className="mt-6 text-gray-500 dark:text-white/50 text-base md:text-lg max-w-[600px] leading-relaxed font-light transition-colors duration-500"
           >
             Combining thoughtful UX strategy, refined visual design, and modern tools to create experiences that feel intuitive and beautifully crafted.
           </motion.p>
@@ -171,7 +169,7 @@ const SkillsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[#686868]/70 dark:text-white/30 text-[10px] font-semibold tracking-[0.2em] uppercase block mb-6 transition-colors duration-500"
+            className="text-gray-500/70 dark:text-white/30 text-xs font-semibold tracking-wide uppercase block mb-6 transition-colors duration-500"
           >
             Primary Tools
           </motion.span>
@@ -193,7 +191,7 @@ const SkillsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[#686868]/70 dark:text-white/30 text-[10px] font-semibold tracking-[0.2em] uppercase block transition-colors duration-500"
+            className="text-gray-500/70 dark:text-white/30 text-xs font-semibold tracking-wide uppercase block transition-colors duration-500"
           >
             Core Skills
           </motion.span>
@@ -211,7 +209,7 @@ const SkillsSection: React.FC = () => {
             {marqueeItems.map((skill, i) => (
               <span
                 key={`${skill}-${i}`}
-                className="flex-shrink-0 px-6 py-3 rounded-full border border-[#DCD9D4] dark:border-white/8 bg-white dark:bg-white/[0.02] text-[#686868] dark:text-white/50 text-sm font-medium tracking-wide whitespace-nowrap transition-colors duration-500 hover:border-purple-400/50 hover:text-purple-700 dark:hover:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/10 cursor-default"
+                className="flex-shrink-0 px-6 py-3 rounded-full border border-[#DCD9D4] dark:border-white/8 bg-white dark:bg-white/[0.02] text-gray-500 dark:text-white/50 text-sm font-medium tracking-wide whitespace-nowrap transition-colors duration-500 hover:border-purple-400/50 hover:text-purple-700 dark:hover:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/10 cursor-default"
               >
                 {skill}
               </span>

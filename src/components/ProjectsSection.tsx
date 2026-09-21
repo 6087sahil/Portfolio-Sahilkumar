@@ -106,22 +106,21 @@ const ProjectCard = ({
       <div className="w-full lg:w-2/5 flex flex-col">
         <ScrollReveal delay={0.1} staggerChildren={0.1}>
           <motion.div variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }} className="flex items-center gap-4 mb-5">
-            <span className="text-[#111111]/25 dark:text-white/20 font-mono text-xl font-light transition-colors duration-500">{project.num}</span>
+            <span className="text-gray-900/30 dark:text-white/20 font-mono text-xl font-light transition-colors duration-500">{project.num}</span>
             <div className="h-px w-10 bg-black/10 dark:bg-white/10 transition-colors duration-500" />
-            <span className="text-purple-600 dark:text-purple-400 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-500">{project.category}</span>
+            <span className="text-purple-600 dark:text-purple-400 text-xs font-bold tracking-[0.2em] uppercase transition-colors duration-500">{project.category}</span>
           </motion.div>
 
           <motion.h3
             variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0 } }}
-            className="text-[#111111] dark:text-white font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-5 group-hover:text-purple-700 dark:group-hover:text-purple-200 transition-colors duration-300"
-            style={{ fontFamily: "'Arima', sans-serif" }}
+            className="text-gray-900 dark:text-white font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-5 group-hover:text-purple-700 dark:group-hover:text-purple-200 transition-colors duration-300"
           >
             {project.name}
           </motion.h3>
 
           <motion.p
             variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }}
-            className="text-[#686868] dark:text-white/50 text-base leading-relaxed mb-8 max-w-sm font-light transition-colors duration-500"
+            className="text-gray-500 dark:text-white/50 text-base leading-relaxed mb-8 max-w-sm font-light transition-colors duration-500"
           >
             {project.desc}
           </motion.p>
@@ -136,7 +135,7 @@ const ProjectCard = ({
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.35 + ti * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="px-4 py-1.5 rounded-full border border-black/10 dark:border-white/10 text-[#686868] dark:text-white/60 text-xs font-medium tracking-wide group-hover:border-purple-500/30 group-hover:text-purple-700 dark:group-hover:text-purple-300 bg-black/5 dark:bg-white/[0.02] transition-colors duration-300"
+                  className="px-4 py-1.5 rounded-full border border-black/10 dark:border-white/10 text-gray-500 dark:text-white/60 text-xs font-medium tracking-wide group-hover:border-purple-500/30 group-hover:text-purple-700 dark:group-hover:text-purple-300 bg-black/5 dark:bg-white/[0.02] transition-colors duration-300"
                 >
                   {tool}
                 </motion.span>
@@ -147,9 +146,14 @@ const ProjectCard = ({
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="w-11 h-11 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-[#686868] dark:text-white/50 transition-all duration-500 group-hover:bg-purple-600 group-hover:text-white group-hover:border-purple-600 group-hover:scale-110 flex-shrink-0 ml-4"
+              className="ml-4"
             >
-              <ArrowRight className="w-4 h-4 -rotate-45 transition-transform duration-500 group-hover:rotate-0" />
+              <div className="group/btn relative inline-flex items-center gap-3 bg-white text-black pl-6 pr-2 py-2 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(255,255,255,0.25)]">
+                <span className="hidden sm:inline-block pt-[2px]">View Project</span>
+                <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center transition-all duration-500 group-hover/btn:bg-purple-100 text-purple-600 drop-shadow-[0_0_12px_rgba(168,85,247,0.9)]">
+                  <ArrowRight className="w-4 h-4 -rotate-45 transition-transform duration-500 group-hover/btn:rotate-0" />
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </ScrollReveal>
@@ -178,8 +182,7 @@ const ProjectsSection: React.FC = () => {
         <div className="mb-20">
           <TextReveal
             as="h2"
-            className="text-[#111111] dark:text-white font-bold text-3xl md:text-4xl lg:text-5xl transition-colors duration-500"
-            style={{ fontFamily: "'Arima', sans-serif" }}
+            className="text-gray-900 dark:text-white font-bold text-3xl md:text-4xl lg:text-5xl transition-colors duration-500"
             delay={0.1} stagger={0.06}
           >
             Featured Projects
@@ -189,7 +192,7 @@ const ProjectsSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.35, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[#686868] dark:text-white/40 text-sm mt-3 transition-colors duration-500"
+            className="text-gray-500 dark:text-white/40 text-sm mt-3 transition-colors duration-500"
           >
             A selection of recent UI/UX design work.
           </motion.p>

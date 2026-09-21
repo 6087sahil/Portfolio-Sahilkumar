@@ -75,7 +75,7 @@ const ServicesSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[#686868] dark:text-white/60 font-semibold tracking-[0.2em] text-[10px] sm:text-xs mb-4 block uppercase transition-colors duration-500"
+              className="text-gray-500 dark:text-white/60 font-semibold tracking-wide text-xs sm:text-sm mb-4 block uppercase transition-colors duration-500"
             >
               02 &bull; Services
             </motion.span>
@@ -83,8 +83,7 @@ const ServicesSection: React.FC = () => {
             <div className="flex flex-col">
               <TextReveal
                 as="h2"
-                className="text-[#111111] dark:text-white text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.0] block transition-colors duration-500"
-                style={{ fontFamily: "'Arima', sans-serif" }}
+                className="text-gray-900 dark:text-white text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.0] block transition-colors duration-500"
                 delay={0.1}
                 stagger={0.08}
               >
@@ -95,7 +94,6 @@ const ServicesSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                style={{ fontFamily: "'Arima', sans-serif" }}
                 className="text-purple-600 dark:text-purple-300 text-4xl sm:text-5xl md:text-6xl italic font-bold tracking-tight leading-[1.0] transition-colors duration-500"
               >
                 &amp; Expertise.
@@ -109,13 +107,17 @@ const ServicesSection: React.FC = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="hidden md:flex items-center gap-2 text-[#686868] dark:text-white/30 text-xs font-medium tracking-widest uppercase"
+            className="hidden md:flex items-center gap-3 text-gray-500 dark:text-white/30 text-xs font-medium tracking-widest uppercase bg-black/5 dark:bg-white/5 px-4 py-2 rounded-full border border-black/10 dark:border-white/10"
           >
             <motion.span
-              animate={{ x: [0, 8, 0] }}
+              animate={{ x: [0, -4, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+            >←</motion.span>
+            Swipe to explore
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
               transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
             >→</motion.span>
-            Scroll to explore
           </motion.div>
         </div>
 
@@ -137,7 +139,7 @@ const ServicesSection: React.FC = () => {
                 className={`group flex-shrink-0 w-[82vw] sm:w-[60vw] md:w-[46vw] lg:w-[36vw] rounded-3xl bg-gradient-to-br ${svc.accent} border border-[#DCD9D4] dark:border-white/5 p-8 md:p-10 flex flex-col justify-between backdrop-blur-sm transition-all duration-500 hover:border-purple-500/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.4)] dark:hover:shadow-[0_0_40px_rgba(168,85,247,0.3)] cursor-default overflow-hidden relative min-h-[360px]`}
               >
                 {/* Bg number */}
-                <span className="absolute -bottom-4 -right-4 text-[120px] font-black text-[#111111]/4 dark:text-white/[0.03] leading-none select-none pointer-events-none">
+                <span className="absolute -bottom-4 -right-4 text-9xl font-black text-gray-900/4 dark:text-white/[0.03] leading-none select-none pointer-events-none">
                   {svc.num}
                 </span>
 
@@ -147,19 +149,18 @@ const ServicesSection: React.FC = () => {
                     <span className="text-4xl text-purple-600/40 dark:text-purple-400/40 transition-colors duration-500 group-hover:text-purple-500/70">
                       {svc.icon}
                     </span>
-                    <span className="text-[#686868] dark:text-white/20 font-mono text-xs tracking-widest transition-colors duration-500">
+                    <span className="text-gray-500 dark:text-white/20 font-mono text-xs tracking-widest transition-colors duration-500">
                       {svc.num}
                     </span>
                   </div>
 
                   {/* Title */}
                   <h3
-                    className="text-[#111111] dark:text-white font-bold text-2xl md:text-3xl mb-4 tracking-tight group-hover:text-purple-700 dark:group-hover:text-purple-200 transition-colors duration-500"
-                    style={{ fontFamily: "'Arima', sans-serif" }}
+                    className="text-gray-900 dark:text-white font-bold text-2xl md:text-3xl mb-4 tracking-tight group-hover:text-purple-700 dark:group-hover:text-purple-200 transition-colors duration-500"
                   >
                     {svc.title}
                   </h3>
-                  <p className="text-[#686868] dark:text-white/50 text-sm md:text-base font-light leading-relaxed transition-colors duration-500">
+                  <p className="text-gray-500 dark:text-white/50 text-sm md:text-base font-light leading-relaxed transition-colors duration-500">
                     {svc.desc}
                   </p>
                 </div>
@@ -169,7 +170,7 @@ const ServicesSection: React.FC = () => {
                   {svc.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 rounded-full bg-[#111111]/5 dark:bg-white/5 border border-[#111111]/10 dark:border-white/10 text-[#686868] dark:text-white/50 text-[10px] font-semibold tracking-wide uppercase transition-colors duration-500 group-hover:border-purple-500/30 group-hover:text-purple-700 dark:group-hover:text-purple-300"
+                      className="px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-gray-500 dark:text-white/50 text-xs font-semibold tracking-wide uppercase transition-colors duration-500 group-hover:border-purple-500/30 group-hover:text-purple-700 dark:group-hover:text-purple-300"
                     >
                       {tag}
                     </span>

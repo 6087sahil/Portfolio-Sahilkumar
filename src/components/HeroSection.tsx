@@ -1,7 +1,7 @@
 import React from 'react';
 import RevealBackground from './RevealBackground';
-
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 interface HeroSectionProps {
   isLoaded?: boolean;
@@ -24,13 +24,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
             animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ delay: 0.1, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <span className="text-white/60 font-semibold tracking-[0.2em] text-[10px] sm:text-xs mb-6 sm:mb-8 block">
-              PORTFOLIO &bull; 2026
+            <span className="text-white/60 font-semibold tracking-wide text-xs sm:text-sm mb-6 sm:mb-8 block">
+              Portfolio &bull; 2026
             </span>
           </motion.div>
           
           <div className="w-full flex flex-col mb-6">
-            <motion.h1 
+            <motion.p 
               initial="hidden"
               animate={isLoaded ? "visible" : "hidden"}
               variants={{
@@ -55,7 +55,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
                   {char}
                 </motion.span>
               ))}
-            </motion.h1>
+            </motion.p>
             
             <motion.h1 
               initial="hidden"
@@ -76,7 +76,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
                     hidden: { opacity: 0, y: 30, rotateX: -90 },
                     visible: { opacity: 1, y: 0, rotateX: 0, transition: { type: "spring", damping: 12, stiffness: 100 } }
                   }}
-                  className="text-white drop-shadow-lg text-6xl sm:text-7xl md:text-8xl lg:text-[100px]" 
+                  className="text-white drop-shadow-lg text-6xl sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px]" 
                   style={{ fontFamily: "'Arima', sans-serif", whiteSpace: char === " " ? "pre" : "normal" }}
                 >
                   {char}
@@ -109,15 +109,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
           >
             <a 
               href="#projects"
-              className="pointer-events-auto bg-white text-black px-8 py-3.5 rounded-full font-bold text-[12px] uppercase tracking-[0.1em] transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.5)] hover:shadow-[0_0_35px_rgba(255,255,255,0.8)] hover:-translate-y-1 hover:bg-gray-100"
+              className="group pointer-events-auto relative inline-flex items-center gap-2 bg-white text-black px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]"
             >
-              VIEW MY WORK
+              <span className="relative z-10 flex items-center gap-2">
+                View My Work
+                <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-indigo-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
             <a 
               href="#contact"
-              className="pointer-events-auto bg-transparent border border-white/20 text-white px-8 py-3.5 rounded-full font-bold text-[12px] uppercase tracking-[0.1em] transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.6)] hover:-translate-y-1 hover:bg-white/10"
+              className="group pointer-events-auto relative inline-flex items-center gap-2 bg-transparent text-white px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 border border-white/20 hover:border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] backdrop-blur-md"
             >
-              LET'S CONNECT
+              <span className="relative z-10 flex items-center gap-2">
+                Let's Connect
+              </span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
           </motion.div>
         </div>
@@ -137,7 +144,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           />
         </div>
-        <span className="text-white/50 text-[7px] sm:text-[8px] font-medium tracking-[0.3em] uppercase text-center pl-[0.3em]">
+        <span className="text-white/50 text-xs font-medium tracking-wider text-center">
           Scroll to explore
         </span>
       </motion.div>

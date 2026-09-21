@@ -104,7 +104,7 @@ const CustomCursor: React.FC = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
-            className="text-black text-[7px] font-bold tracking-wider uppercase pointer-events-none select-none"
+            className="text-black text-xs font-bold tracking-wider uppercase pointer-events-none select-none"
             style={{ mixBlendMode: 'normal' }}
           >
             View

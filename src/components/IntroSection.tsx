@@ -58,7 +58,7 @@ const IntroSection: React.FC = () => {
             
             {/* 1. Intro Label */}
             <ScrollReveal delay={0.1} yOffset={20} className="mb-10 sm:mb-12 block">
-              <span className="text-[#686868] dark:text-white/60 font-semibold text-[10px] sm:text-xs uppercase transition-colors duration-500" style={{ letterSpacing: "0.2em" }}>
+              <span className="text-gray-500 dark:text-white/60 font-semibold text-xs uppercase transition-colors duration-500" style={{ letterSpacing: "0.2em" }}>
                 Introduction &bull; About Me
               </span>
             </ScrollReveal>
@@ -67,7 +67,7 @@ const IntroSection: React.FC = () => {
             <div className="mb-6 flex flex-col">
               <TextReveal
                 as="span"
-                className="text-[#686868] dark:text-white/70 text-2xl sm:text-3xl md:text-4xl font-light tracking-wide mb-3 transition-colors duration-500 block"
+                className="text-gray-500 dark:text-white/70 text-2xl sm:text-3xl md:text-4xl font-light tracking-wide mb-3 transition-colors duration-500 block"
                 delay={0.15}
                 stagger={0.06}
               >
@@ -75,8 +75,7 @@ const IntroSection: React.FC = () => {
               </TextReveal>
               <TextReveal
                 as="span"
-                className="text-[#111111] dark:text-white text-5xl sm:text-6xl md:text-7xl lg:text-[90px] tracking-tight leading-[1.0] transition-colors duration-500 block"
-                style={{ fontFamily: "'Arima', sans-serif" }}
+                className="text-gray-900 dark:text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[1.0] transition-colors duration-500 block"
                 delay={0.35}
                 stagger={0.07}
               >
@@ -85,16 +84,16 @@ const IntroSection: React.FC = () => {
             </div>
 
             {/* 3. Description */}
-            <ScrollReveal delay={0.4} staggerChildren={0.15} className="mt-4 sm:mt-6 max-w-lg mb-10" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+            <ScrollReveal delay={0.4} staggerChildren={0.15} className="mt-4 sm:mt-6 max-w-lg mb-10">
               <motion.p 
                 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                className="text-[#111111]/80 dark:text-white/80 font-normal leading-relaxed text-base sm:text-lg mb-4 transition-colors duration-500"
+                className="text-gray-900/80 dark:text-white/80 font-normal leading-relaxed text-base sm:text-lg mb-4 transition-colors duration-500"
               >
                 I design digital experiences that are simple, intuitive, and memorable.
               </motion.p>
               <motion.p 
                 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                className="text-[#686868] dark:text-white/50 font-normal leading-relaxed text-sm sm:text-base transition-colors duration-500"
+                className="text-gray-500 dark:text-white/50 font-normal leading-relaxed text-sm sm:text-base transition-colors duration-500"
               >
                 Based in New Delhi, India. Open to freelance and full-time opportunities.
               </motion.p>
@@ -106,7 +105,7 @@ const IntroSection: React.FC = () => {
                 whileHover={{ y: -3, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 href="#work"
-                className="group relative bg-[#111111] dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-full font-bold text-[12px] uppercase tracking-[0.1em] transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] overflow-hidden"
+                className="group relative bg-gray-900 dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-[0.1em] transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   View My Work
@@ -116,7 +115,7 @@ const IntroSection: React.FC = () => {
                 whileHover={{ y: -3, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 href="#contact"
-                className="group relative bg-transparent border border-[#111111]/20 dark:border-white/20 text-[#111111] dark:text-white px-8 py-3.5 rounded-full font-bold text-[12px] uppercase tracking-[0.1em] transition-all duration-300 hover:bg-black/5 dark:hover:bg-white/5 shadow-[0_0_15px_rgba(0,0,0,0.02)] dark:shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                className="group relative bg-transparent border border-gray-900/20 dark:border-white/20 text-gray-900 dark:text-white px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-[0.1em] transition-all duration-300 hover:bg-black/5 dark:hover:bg-white/5 shadow-[0_0_15px_rgba(0,0,0,0.02)] dark:shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
               >
                 Let's Connect
               </motion.a>
@@ -130,10 +129,10 @@ const IntroSection: React.FC = () => {
                 { val: '99%', label: 'Satisfaction' }
               ].map((stat) => (
                 <motion.div key={stat.label} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="flex flex-col">
-                  <span className="text-[#111111] dark:text-white font-bold text-3xl sm:text-4xl block mb-1 tracking-tight transition-colors duration-500">
+                  <span className="text-gray-900 dark:text-white font-bold text-3xl sm:text-4xl block mb-1 tracking-tight transition-colors duration-500">
                     {stat.val}
                   </span>
-                  <span className="text-[#686868] dark:text-white/40 text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-semibold transition-colors duration-500">
+                  <span className="text-gray-500 dark:text-white/40 text-xs tracking-[0.2em] uppercase font-semibold transition-colors duration-500">
                     {stat.label}
                   </span>
                 </motion.div>
@@ -184,8 +183,8 @@ const IntroSection: React.FC = () => {
               >
                 <div className="bg-white/80 dark:bg-black/60 backdrop-blur-xl border border-[#DCD9D4] dark:border-white/15 rounded-xl px-5 py-4 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group transition-colors duration-500">
                   <div className="flex flex-col">
-                    <span className="text-[#111111] dark:text-white text-sm font-semibold tracking-wide transition-colors duration-500">Open to work</span>
-                    <span className="text-[#686868] dark:text-white/40 text-[11px] font-medium mt-0.5 transition-colors duration-500">New Delhi, India</span>
+                    <span className="text-gray-900 dark:text-white text-sm font-semibold tracking-wide transition-colors duration-500">Open to work</span>
+                    <span className="text-gray-500 dark:text-white/40 text-xs font-medium mt-0.5 transition-colors duration-500">New Delhi, India</span>
                   </div>
                   {/* Breathing Dot */}
                   <div className="relative flex h-3 w-3 items-center justify-center">
