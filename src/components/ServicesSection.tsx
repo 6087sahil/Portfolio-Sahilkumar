@@ -1,39 +1,30 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import TextReveal from './TextReveal';
 
 const services = [
   {
     num: '01',
     title: 'UI/UX Design',
-    accent: 'from-purple-600/10 to-indigo-600/5 dark:from-purple-900/20 dark:to-indigo-900/10',
-    icon: '✦',
-    desc: 'Crafting intuitive, visually striking interfaces that solve real problems — from research through pixel-perfect delivery.',
-    tags: ['Figma', 'Prototyping', 'Design Systems'],
+    desc: 'Crafting intuitive, human-centered interfaces that solve real problems — from field research through pixel-perfect auto-layout delivery.',
+    tags: ['Figma', 'Prototyping', 'Design Systems', 'iOS HIG'],
   },
   {
     num: '02',
-    title: 'Web Design',
-    accent: 'from-fuchsia-600/10 to-purple-600/5 dark:from-fuchsia-900/20 dark:to-purple-900/10',
-    icon: '◈',
-    desc: 'Designing responsive, performance-focused websites with a sharp eye for layout, hierarchy, and conversion.',
-    tags: ['Responsive', 'Motion', 'Typography'],
+    title: 'Web & Product Design',
+    desc: 'Designing responsive, performance-focused digital products with rigorous typography, content hierarchy, and deliberate spacing.',
+    tags: ['Information Architecture', 'Responsive', 'Typography'],
   },
   {
     num: '03',
-    title: 'Product Design',
-    accent: 'from-indigo-600/10 to-blue-600/5 dark:from-indigo-900/20 dark:to-blue-900/10',
-    icon: '⬡',
-    desc: 'End-to-end product thinking — from discovery and user research to high-fidelity screens and handoff.',
-    tags: ['User Research', 'Flows', 'Handoff'],
+    title: 'User Research & Discovery',
+    desc: 'Conducting in-depth interviews, affinity mapping, and usability audits to uncover why users hesitate and where products break down.',
+    tags: ['User Interviews', 'Usability Audits', 'Journey Mapping'],
   },
   {
     num: '04',
     title: 'Interaction & Motion',
-    accent: 'from-violet-600/10 to-purple-600/5 dark:from-violet-900/20 dark:to-purple-900/10',
-    icon: '◎',
-    desc: 'Bringing digital products to life with meaningful micro-interactions and scroll-driven motion design.',
-    tags: ['Framer Motion', 'GSAP', 'Lottie'],
+    desc: 'Bringing interfaces to life with purposeful, restrained micro-interactions that communicate state without distracting the user.',
+    tags: ['Framer Motion', 'Micro-Interactions', 'Prototyping'],
   },
 ];
 
@@ -46,156 +37,84 @@ const ServicesSection: React.FC = () => {
   });
 
   // Map scroll progress → horizontal translate of card track
-  // 4 cards, each 80vw on mobile, 48vw on desktop — we need to shift 3 card-widths
-  const x = useTransform(scrollYProgress, [0.05, 0.95], ['0%', '-75%']);
-  const glowX = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+  const x = useTransform(scrollYProgress, [0.05, 0.95], ['0%', '-65%']);
 
   return (
-    // Outer wrapper creates scroll budget: 400vh (1 screen + 3 card transitions)
     <div
       ref={outerRef}
       id="services"
-      className="relative bg-[#F5F3EF] dark:bg-[#06000c] transition-colors duration-500 border-t border-[#DCD9D4] dark:border-white/5"
-      style={{ height: '400vh' }}
+      className="relative bg-[#EDE8DE] text-[#161513] border-t border-[#161513]/10"
+      style={{ height: '350vh' }}
     >
-      {/* ── Sticky viewport ── */}
+      {/* Sticky viewport */}
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-
-        {/* Scroll-linked ambient glow */}
-        <motion.div
-          style={{ x: glowX }}
-          className="absolute top-1/2 -translate-y-1/2 left-1/4 w-[80vw] h-[80vw] max-w-[900px] max-h-[900px] rounded-full bg-purple-500/5 dark:bg-purple-900/10 blur-[150px] pointer-events-none"
-        />
-
-        {/* ── Header row ── */}
+        
+        {/* Header row */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 mb-10 flex items-end justify-between">
           <div>
-            <motion.span
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-gray-500 dark:text-white/60 font-semibold tracking-wide text-xs sm:text-sm mb-4 block uppercase transition-colors duration-500"
-            >
-              02 &bull; Services
-            </motion.span>
+            <span className="text-[#8E8980] font-mono text-xs uppercase tracking-wider mb-3 block">
+              02 / Capabilities &amp; Services
+            </span>
 
             <div className="flex flex-col">
-              <TextReveal
-                as="h2"
-                className="text-gray-900 dark:text-white text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.0] block transition-colors duration-500"
-                delay={0.1}
-                stagger={0.08}
-              >
-                Capabilities
-              </TextReveal>
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="text-purple-600 dark:text-purple-300 text-4xl sm:text-5xl md:text-6xl italic font-bold tracking-tight leading-[1.0] transition-colors duration-500"
-              >
-                &amp; Expertise.
-              </motion.span>
+              <h2 className="font-serif text-[#161513] text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-[1.05]">
+                Capabilities{' '}
+                <span className="italic text-[#D82E54] font-serif">
+                  &amp; Expertise.
+                </span>
+              </h2>
             </div>
           </div>
 
           {/* Scroll hint */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="hidden md:flex items-center gap-3 text-gray-500 dark:text-white/30 text-xs font-medium tracking-widest uppercase bg-black/5 dark:bg-white/5 px-4 py-2 rounded-full border border-black/10 dark:border-white/10"
-          >
-            <motion.span
-              animate={{ x: [0, -4, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            >←</motion.span>
-            Swipe to explore
-            <motion.span
-              animate={{ x: [0, 4, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            >→</motion.span>
-          </motion.div>
+          <div className="hidden md:flex items-center gap-2 text-[#5C5852] font-mono text-xs uppercase tracking-wider bg-[#FAF8F5] px-4 py-2 rounded-full border border-[#161513]/15">
+            <span>Scroll to explore &bull;</span>
+          </div>
         </div>
 
-        {/* ── Horizontal scroll track ── */}
+        {/* Horizontal scroll track */}
         <div className="relative z-10 w-full overflow-visible pl-6 md:pl-16 lg:pl-24">
           <motion.div
             style={{ x }}
-            className="flex gap-5 items-stretch"
-            // Prevent momentum from clobbering layout
+            className="flex gap-6 items-stretch"
           >
-            {services.map((svc, i) => (
-              <motion.div
-                key={svc.num}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: 0.1 + i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className={`group flex-shrink-0 w-[82vw] sm:w-[60vw] md:w-[46vw] lg:w-[36vw] rounded-3xl bg-gradient-to-br ${svc.accent} border border-[#DCD9D4] dark:border-white/5 p-8 md:p-10 flex flex-col justify-between backdrop-blur-sm transition-all duration-500 hover:border-purple-500/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.4)] dark:hover:shadow-[0_0_40px_rgba(168,85,247,0.3)] cursor-default overflow-hidden relative min-h-[360px]`}
+            {services.map((item) => (
+              <div
+                key={item.num}
+                className="w-[82vw] sm:w-[60vw] md:w-[42vw] lg:w-[32vw] flex-shrink-0 p-8 sm:p-10 rounded-3xl bg-[#FAF8F5] border border-[#161513]/15 flex flex-col justify-between shadow-[0_12px_36px_-6px_rgba(147,51,234,0.18),0_4px_16px_-2px_rgba(168,85,247,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(147,51,234,0.26),0_6px_20px_-2px_rgba(168,85,247,0.16)] hover:border-purple-400/40 hover:-translate-y-1 transition-all duration-500 select-none"
               >
-                {/* Bg number */}
-                <span className="absolute -bottom-4 -right-4 text-9xl font-black text-gray-900/4 dark:text-white/[0.03] leading-none select-none pointer-events-none">
-                  {svc.num}
-                </span>
-
                 <div>
-                  {/* Icon + number */}
-                  <div className="flex items-start justify-between mb-8">
-                    <span className="text-4xl text-purple-600/40 dark:text-purple-400/40 transition-colors duration-500 group-hover:text-purple-500/70">
-                      {svc.icon}
+                  <div className="flex items-center justify-between pb-6 border-b border-[#161513]/10 mb-6">
+                    <span className="font-mono text-sm text-[#D82E54] font-bold">
+                      {item.num}
                     </span>
-                    <span className="text-gray-500 dark:text-white/20 font-mono text-xs tracking-widest transition-colors duration-500">
-                      {svc.num}
+                    <span className="text-[11px] font-mono text-[#8E8980] uppercase tracking-wider">
+                      Service Offering
                     </span>
                   </div>
 
-                  {/* Title */}
-                  <h3
-                    className="text-gray-900 dark:text-white font-bold text-2xl md:text-3xl mb-4 tracking-tight group-hover:text-purple-700 dark:group-hover:text-purple-200 transition-colors duration-500"
-                  >
-                    {svc.title}
+                  <h3 className="font-serif text-2xl sm:text-3xl text-[#161513] font-normal tracking-tight mb-4">
+                    {item.title}
                   </h3>
-                  <p className="text-gray-500 dark:text-white/50 text-sm md:text-base font-light leading-relaxed transition-colors duration-500">
-                    {svc.desc}
+
+                  <p className="text-sm sm:text-base text-[#5C5852] font-light leading-relaxed">
+                    {item.desc}
                   </p>
                 </div>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mt-8 relative z-10">
-                  {svc.tags.map((tag) => (
+                <div className="flex flex-wrap gap-2 pt-8 mt-6 border-t border-[#161513]/10">
+                  {item.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-gray-500 dark:text-white/50 text-xs font-semibold tracking-wide uppercase transition-colors duration-500 group-hover:border-purple-500/30 group-hover:text-purple-700 dark:group-hover:text-purple-300"
+                      className="px-2.5 py-1 rounded-full bg-[#E5DFD4] text-[#5C5852] font-mono text-[10px]"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
-        </div>
-
-        {/* Scroll progress dots */}
-        <div className="relative z-10 flex items-center gap-2 mt-8 pl-6 md:pl-16 lg:pl-24">
-          {services.map((_, i) => {
-            const segStart = 0.05 + (i / services.length) * 0.9;
-            const segEnd = 0.05 + ((i + 1) / services.length) * 0.9;
-            const dotScale = useTransform(scrollYProgress, [segStart, segEnd], [0.7, 1.2]);
-            const dotOpacity = useTransform(scrollYProgress, [segStart - 0.1, segStart + 0.05, segEnd - 0.05, segEnd + 0.1], [0.3, 1, 1, 0.3]);
-            return (
-              <motion.div
-                key={i}
-                style={{ scale: dotScale, opacity: dotOpacity }}
-                className="w-1.5 h-1.5 rounded-full bg-purple-500 dark:bg-purple-400"
-              />
-            );
-          })}
         </div>
 
       </div>

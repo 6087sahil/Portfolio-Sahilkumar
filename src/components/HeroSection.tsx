@@ -10,102 +10,69 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
   return (
     <section className="h-screen flex flex-col overflow-x-clip relative">
+      {/* Interactive Background */}
       <div className="absolute inset-0 z-0 bg-black">
-        <div className="absolute inset-0 opacity-70">
-          <RevealBackground bottomImageSrc="/hero-bottom.png" topImageSrc="/hero-top.png" />
-        </div>
+        <RevealBackground bottomImageSrc="/hero-bottom.png" topImageSrc="/hero-top.png" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center relative z-10 px-6 md:px-16 lg:px-24 pointer-events-none">
+      <div className="flex-1 flex flex-col justify-center relative z-10 px-6 md:px-16 lg:px-24 pointer-events-none text-white">
         
         <div className="w-full flex flex-col items-start text-left max-w-2xl">
+          {/* Portfolio Year */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <span className="text-white/60 font-semibold tracking-wide text-xs sm:text-sm mb-6 sm:mb-8 block">
+            <span className="text-white/80 font-medium tracking-wide text-xs sm:text-sm mb-4 sm:mb-6 block font-sans">
               Portfolio &bull; 2026
             </span>
           </motion.div>
           
-          <div className="w-full flex flex-col mb-6">
+          {/* Main Title Group */}
+          <div className="w-full flex flex-col mb-4">
             <motion.p 
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.04, delayChildren: 0.2 }
-                }
-              }}
-              className="font-bold tracking-tight leading-[1.05] text-left mb-2 sm:mb-4 flex flex-wrap"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.2, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              className="text-white text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight mb-2 sm:mb-3 font-sans"
             >
-              {"Hi, I'm".split("").map((char, index) => (
-                <motion.span 
-                  key={index} 
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 12, stiffness: 100 } }
-                  }}
-                  className="text-white/80 text-4xl sm:text-5xl md:text-6xl font-medium" 
-                  style={{ fontFamily: "inherit", whiteSpace: char === " " ? "pre" : "normal" }}
-                >
-                  {char}
-                </motion.span>
-              ))}
+              Hi, I'm
             </motion.p>
             
             <motion.h1 
-              initial="hidden"
-              animate={isLoaded ? "visible" : "hidden"}
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.05, delayChildren: 0.5 }
-                }
-              }}
-              className="font-bold tracking-tight leading-[1.05] text-left flex flex-wrap"
+              initial={{ opacity: 0, y: 24 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ delay: 0.35, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+              className="text-white drop-shadow-md text-6xl sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px] font-bold tracking-normal leading-[1.02]" 
+              style={{ fontFamily: "'Arima', sans-serif" }}
             >
-              {"Sahil Kumar".split("").map((char, index) => (
-                <motion.span 
-                  key={index} 
-                  variants={{
-                    hidden: { opacity: 0, y: 30, rotateX: -90 },
-                    visible: { opacity: 1, y: 0, rotateX: 0, transition: { type: "spring", damping: 12, stiffness: 100 } }
-                  }}
-                  className="text-white drop-shadow-lg text-6xl sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px]" 
-                  style={{ fontFamily: "'Arima', sans-serif", whiteSpace: char === " " ? "pre" : "normal" }}
-                >
-                  {char}
-                </motion.span>
-              ))}
+              Sahil Kumar
             </motion.h1>
           </div>
 
+          {/* Subtitle & Role */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.35, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            className="mt-4 sm:mt-6" 
-            style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.45, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mt-2"
           >
-            <h2 className="text-xl sm:text-2xl font-bold tracking-wide text-white mb-4">
-              UI/UX & Product Designer
+            <h2 className="text-xl sm:text-2xl md:text-[26px] font-bold tracking-tight text-white mb-3 font-sans">
+              UI/UX &amp; Product Designer
             </h2>
-            <p className="text-white/80 font-normal leading-relaxed text-base sm:text-lg max-w-md">
+            <p className="text-white/80 font-normal leading-relaxed text-base sm:text-lg max-w-md font-sans">
               I design digital experiences that are <br className="hidden sm:block"/>
               simple, intuitive, and memorable.
             </p>
           </motion.div>
           
+          {/* Action Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.5, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4 sm:gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.55, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4"
           >
             <a 
               href="#projects"
@@ -131,6 +98,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
 
       </div>
 
+      {/* Scroll Prompt */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}

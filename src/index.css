@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Caveat:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
 @tailwind base;
@@ -16,9 +17,9 @@
 }
 
 html, body, #root {
-  background-color: #0C0C0C;
+  background-color: #F4F1EA;
   font-family: 'Satoshi', 'Manrope', sans-serif;
-  color: #D7E2EA;
+  color: #161513;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -85,7 +86,7 @@ html.lenis {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(to right, #7c3aed, #a855f7, #c084fc);
+  background: #D82E54;
   transform-origin: left;
   z-index: 9999;
   pointer-events: none;
@@ -141,3 +142,32 @@ html.lenis {
   }
 }
 
+/* ─── Premium Purple Glowing Shadow Utilities ─────────────────────── */
+.shadow-purple-sm {
+  box-shadow: 0 4px 20px -2px rgba(147, 51, 234, 0.2), 0 2px 8px -1px rgba(168, 85, 247, 0.12);
+}
+
+.shadow-purple-card {
+  box-shadow: 0 12px 36px -6px rgba(147, 51, 234, 0.22), 0 4px 16px -2px rgba(168, 85, 247, 0.14);
+}
+
+.shadow-purple-lg {
+  box-shadow: 0 20px 50px -8px rgba(147, 51, 234, 0.28), 0 8px 24px -3px rgba(168, 85, 247, 0.18);
+}
+
+.shadow-purple-glow {
+  box-shadow: 0 0 35px 2px rgba(168, 85, 247, 0.35), 0 12px 35px -6px rgba(147, 51, 234, 0.25);
+}
+
+.shadow-purple-glow-lg {
+  box-shadow: 0 0 50px 4px rgba(168, 85, 247, 0.45), 0 20px 60px -8px rgba(147, 51, 234, 0.35);
+}
+
+.shadow-purple-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shadow-purple-hover:hover {
+  box-shadow: 0 24px 56px -6px rgba(147, 51, 234, 0.32), 0 0 30px 2px rgba(168, 85, 247, 0.24);
+  border-color: rgba(147, 51, 234, 0.45) !important;
+}

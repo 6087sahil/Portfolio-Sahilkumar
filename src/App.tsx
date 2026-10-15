@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import CustomCursor from './components/CustomCursor';
@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
+import RoomlyCaseStudy from './pages/RoomlyCaseStudy';
 
 function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,23 +62,32 @@ function AppContent() {
     }
   }, [location]);
 
+  const isAboutPage = location.pathname === '/about';
+  const isCaseStudy = location.pathname.startsWith('/case-study/');
+
   return (
     <>
       <AnimatePresence mode="wait">
         {isLoading && <LoadingScreen key="loader" onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      <div className={`main-wrapper relative min-h-screen bg-[#F5F3EF] dark:bg-[#06000c] transition-colors duration-500 ${isLoading ? 'h-screen overflow-hidden' : ''}`}>
+      <div
+        className={`main-wrapper relative min-h-screen bg-[#F4F1EA] text-[#161513] transition-colors duration-500 ${
+          isLoading ? 'h-screen overflow-hidden' : ''
+        }`}
+      >
         <ScrollProgressBar />
         <CustomCursor />
-        {!isLoading && <NavBar />}
+        {!isLoading && !isCaseStudy && <NavBar />}
         
         <Routes>
           <Route path="/" element={<HomePage isLoading={isLoading} />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/case-study/roomly" element={<RoomlyCaseStudy />} />
+          <Route path="/case-study/pet-adoption" element={<Navigate to="/case-study/roomly" replace />} />
         </Routes>
         
-        <Footer />
+        {!isCaseStudy && <Footer isAboutPage={isAboutPage} />}
       </div>
     </>
   );

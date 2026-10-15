@@ -24,8 +24,8 @@ const images = [
   "https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif"
 ];
 
-const row1 = [...images.slice(0, 11), ...images.slice(0, 11), ...images.slice(0, 11)];
-const row2 = [...images.slice(11), ...images.slice(11), ...images.slice(11)];
+const row1 = [...images.slice(0, 11), ...images.slice(0, 11)];
+const row2 = [...images.slice(11), ...images.slice(11)];
 
 const MarqueeSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -35,13 +35,13 @@ const MarqueeSection: React.FC = () => {
     const handleScroll = () => {
       if (sectionRef.current) {
         const sectionTop = sectionRef.current.offsetTop;
-        const offset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+        const offset = (window.scrollY - sectionTop + window.innerHeight) * 0.25;
         setScrollOffset(offset);
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // init
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -49,32 +49,35 @@ const MarqueeSection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#F5F3EF] dark:bg-[#0a0212] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden flex flex-col gap-3 border-t border-[#DCD9D4] dark:border-white/5 relative transition-colors duration-500">
+    <section
+      ref={sectionRef}
+      className="bg-[#F4F1EA] py-16 overflow-hidden flex flex-col gap-6 border-t border-[#161513]/10 relative select-none"
+    >
       <div 
-        className="flex gap-3 will-change-transform whitespace-nowrap relative z-10"
-        style={{ transform: `translateX(${scrollOffset - 200}px)` }}
+        className="flex gap-5 will-change-transform whitespace-nowrap relative z-10 py-2"
+        style={{ transform: `translateX(${scrollOffset - 120}px)` }}
       >
         {row1.map((src, i) => (
           <img 
             key={`row1-${i}`}
             src={src} 
-            alt="Marquee preview"
+            alt="Design visual sample"
             loading="lazy"
-            className="w-[420px] h-[270px] rounded-2xl object-cover shrink-0 border border-purple-500/20 shadow-[0_0_30px_rgba(147,51,234,0.1)] dark:shadow-[0_0_30px_rgba(147,51,234,0.3)] hover:shadow-[0_0_50px_rgba(147,51,234,0.2)] dark:hover:shadow-[0_0_50px_rgba(147,51,234,0.6)] transition-all duration-300"
+            className="w-[380px] h-[240px] rounded-2xl object-cover shrink-0 border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(147,51,234,0.18),0_4px_16px_-2px_rgba(168,85,247,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(147,51,234,0.28),0_6px_20px_-2px_rgba(168,85,247,0.16)] hover:border-purple-400/40 hover:-translate-y-1 transition-all duration-300"
           />
         ))}
       </div>
       <div 
-        className="flex gap-3 will-change-transform whitespace-nowrap relative z-10"
-        style={{ transform: `translateX(${-(scrollOffset) - 400}px)` }}
+        className="flex gap-5 will-change-transform whitespace-nowrap relative z-10 py-2"
+        style={{ transform: `translateX(${-(scrollOffset) - 250}px)` }}
       >
         {row2.map((src, i) => (
           <img 
             key={`row2-${i}`}
             src={src} 
-            alt="Marquee preview"
+            alt="Design visual sample"
             loading="lazy"
-            className="w-[420px] h-[270px] rounded-2xl object-cover shrink-0 border border-purple-500/20 shadow-[0_0_30px_rgba(147,51,234,0.1)] dark:shadow-[0_0_30px_rgba(147,51,234,0.3)] hover:shadow-[0_0_50px_rgba(147,51,234,0.2)] dark:hover:shadow-[0_0_50px_rgba(147,51,234,0.6)] transition-all duration-300"
+            className="w-[380px] h-[240px] rounded-2xl object-cover shrink-0 border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(147,51,234,0.18),0_4px_16px_-2px_rgba(168,85,247,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(147,51,234,0.28),0_6px_20px_-2px_rgba(168,85,247,0.16)] hover:border-purple-400/40 hover:-translate-y-1 transition-all duration-300"
           />
         ))}
       </div>
