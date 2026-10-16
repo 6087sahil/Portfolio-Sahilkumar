@@ -115,7 +115,7 @@ const NavBar: React.FC = () => {
         <div 
           className={`mx-auto flex items-center w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             isScrolledStyle 
-              ? 'max-w-4xl bg-white/60 dark:bg-[#06000c]/60 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full py-3 px-6 sm:px-8 shadow-[0_4px_30px_rgba(168,85,247,0.06)]' 
+              ? 'max-w-4xl bg-white/60 dark:bg-[#06000c]/60 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full py-3 px-6 sm:px-8 shadow-[0_4px_30px_rgba(156,102,68,0.08)]' 
               : 'max-w-7xl bg-transparent border-transparent py-0 px-0 shadow-none'
           }`}
         >
@@ -164,7 +164,7 @@ const NavBar: React.FC = () => {
                 <a
                   href="/#contact"
                   onClick={(e) => handleNavClick(e, '/#contact')}
-                  className="group relative inline-flex items-center gap-2 bg-[#111111] dark:bg-white text-white dark:text-[#0a0a0a] px-6 py-2.5 rounded-full font-semibold text-sm tracking-wide hover:bg-purple-900 dark:hover:bg-purple-50 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+                  className="group relative inline-flex items-center gap-2 bg-[#111111] dark:bg-white text-white dark:text-[#0a0a0a] px-6 py-2.5 rounded-full font-semibold text-sm tracking-wide hover:bg-stone-800 dark:hover:bg-stone-100 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(156,102,68,0.4)]"
                 >
                   Let's Talk
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

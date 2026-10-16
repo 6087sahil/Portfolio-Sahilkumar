@@ -370,12 +370,14 @@ const AboutSection: React.FC = () => {
           {/* Background Image & Overlays */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="/philosophy-bg.jpg" 
+              src="/image.png" 
               alt="Design Philosophy Statue"
-              className="w-full h-full object-cover opacity-10 mix-blend-multiply"
+              className="w-full h-full object-cover object-center opacity-40"
             />
-            {/* Top and bottom gradient fades */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#F4F1EA] via-transparent to-[#F4F1EA]" />
+            {/* Subtle warm overlay to soften while preserving colors and details */}
+            <div className="absolute inset-0 bg-[#FAF8F5]/30" />
+            {/* Smooth top and bottom seamless fades into adjacent sections */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] via-transparent to-[#FAF8F5]" />
           </div>
 
           {/* Ambient Glow */}

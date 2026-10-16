@@ -91,7 +91,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
   return (
     <div
       ref={cardRef}
-      className={`group relative rounded-3xl p-7 sm:p-10 md:p-12 lg:p-14 bg-[#FAF8F5] border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(147,51,234,0.18),0_4px_16px_-2px_rgba(168,85,247,0.10)] transition-all duration-500 hover:border-purple-400/40 hover:shadow-[0_24px_50px_-6px_rgba(147,51,234,0.26),0_6px_20px_-2px_rgba(168,85,247,0.16)]`}
+      className={`group relative rounded-3xl p-7 sm:p-10 md:p-12 lg:p-14 bg-[#FAF8F5] border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(110,61,30,0.18),0_4px_16px_-2px_rgba(156,102,68,0.10)] transition-all duration-500 hover:border-[#9c6644]/40 hover:shadow-[0_24px_50px_-6px_rgba(110,61,30,0.26),0_6px_20px_-2px_rgba(156,102,68,0.16)]`}
     >
       <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-10 lg:gap-14 items-center`}>
         

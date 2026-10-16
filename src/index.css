@@ -86,7 +86,8 @@ html.lenis {
   left: 0;
   right: 0;
   height: 3px;
-  background: #D82E54;
+  background: linear-gradient(90deg, #6e3d1e, #8f5431);
+  box-shadow: 0 0 10px rgba(142, 84, 49, 0.5);
   transform-origin: left;
   z-index: 9999;
   pointer-events: none;
@@ -142,32 +143,39 @@ html.lenis {
   }
 }
 
-/* ─── Premium Purple Glowing Shadow Utilities ─────────────────────── */
+/* ─── Premium Warm Brown Glowing Shadow Utilities ─────────────────────── */
+.shadow-brown-sm,
 .shadow-purple-sm {
-  box-shadow: 0 4px 20px -2px rgba(147, 51, 234, 0.2), 0 2px 8px -1px rgba(168, 85, 247, 0.12);
+  box-shadow: 0 4px 20px -2px rgba(110, 61, 30, 0.2), 0 2px 8px -1px rgba(156, 102, 68, 0.12);
 }
 
+.shadow-brown-card,
 .shadow-purple-card {
-  box-shadow: 0 12px 36px -6px rgba(147, 51, 234, 0.22), 0 4px 16px -2px rgba(168, 85, 247, 0.14);
+  box-shadow: 0 12px 36px -6px rgba(110, 61, 30, 0.22), 0 4px 16px -2px rgba(156, 102, 68, 0.14);
 }
 
+.shadow-brown-lg,
 .shadow-purple-lg {
-  box-shadow: 0 20px 50px -8px rgba(147, 51, 234, 0.28), 0 8px 24px -3px rgba(168, 85, 247, 0.18);
+  box-shadow: 0 20px 50px -8px rgba(110, 61, 30, 0.28), 0 8px 24px -3px rgba(156, 102, 68, 0.18);
 }
 
+.shadow-brown-glow,
 .shadow-purple-glow {
-  box-shadow: 0 0 35px 2px rgba(168, 85, 247, 0.35), 0 12px 35px -6px rgba(147, 51, 234, 0.25);
+  box-shadow: 0 0 35px 2px rgba(156, 102, 68, 0.35), 0 12px 35px -6px rgba(110, 61, 30, 0.25);
 }
 
+.shadow-brown-glow-lg,
 .shadow-purple-glow-lg {
-  box-shadow: 0 0 50px 4px rgba(168, 85, 247, 0.45), 0 20px 60px -8px rgba(147, 51, 234, 0.35);
+  box-shadow: 0 0 50px 4px rgba(156, 102, 68, 0.45), 0 20px 60px -8px rgba(110, 61, 30, 0.35);
 }
 
+.shadow-brown-hover,
 .shadow-purple-hover {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.shadow-brown-hover:hover,
 .shadow-purple-hover:hover {
-  box-shadow: 0 24px 56px -6px rgba(147, 51, 234, 0.32), 0 0 30px 2px rgba(168, 85, 247, 0.24);
-  border-color: rgba(147, 51, 234, 0.45) !important;
+  box-shadow: 0 24px 56px -6px rgba(110, 61, 30, 0.32), 0 0 30px 2px rgba(156, 102, 68, 0.24);
+  border-color: rgba(142, 84, 49, 0.45) !important;
 }

@@ -63,7 +63,7 @@ const MarqueeSection: React.FC = () => {
             src={src} 
             alt="Design visual sample"
             loading="lazy"
-            className="w-[380px] h-[240px] rounded-2xl object-cover shrink-0 border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(147,51,234,0.18),0_4px_16px_-2px_rgba(168,85,247,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(147,51,234,0.28),0_6px_20px_-2px_rgba(168,85,247,0.16)] hover:border-purple-400/40 hover:-translate-y-1 transition-all duration-300"
+            className="w-[380px] h-[240px] rounded-2xl object-cover shrink-0 border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(110,61,30,0.18),0_4px_16px_-2px_rgba(156,102,68,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(110,61,30,0.28),0_6px_20px_-2px_rgba(156,102,68,0.16)] hover:border-[#9c6644]/40 hover:-translate-y-1 transition-all duration-300"
           />
         ))}
       </div>
@@ -77,7 +77,7 @@ const MarqueeSection: React.FC = () => {
             src={src} 
             alt="Design visual sample"
             loading="lazy"
-            className="w-[380px] h-[240px] rounded-2xl object-cover shrink-0 border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(147,51,234,0.18),0_4px_16px_-2px_rgba(168,85,247,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(147,51,234,0.28),0_6px_20px_-2px_rgba(168,85,247,0.16)] hover:border-purple-400/40 hover:-translate-y-1 transition-all duration-300"
+            className="w-[380px] h-[240px] rounded-2xl object-cover shrink-0 border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(110,61,30,0.18),0_4px_16px_-2px_rgba(156,102,68,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(110,61,30,0.28),0_6px_20px_-2px_rgba(156,102,68,0.16)] hover:border-[#9c6644]/40 hover:-translate-y-1 transition-all duration-300"
           />
         ))}
       </div>

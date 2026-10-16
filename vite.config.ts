@@ -9,4 +9,4 @@ export default defineConfig({
       ignored: ['**/public/**/*.mp4'],
     },
   },
-})
+}) // restart

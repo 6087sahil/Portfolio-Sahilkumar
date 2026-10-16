@@ -12,7 +12,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
     <section className="h-screen flex flex-col overflow-x-clip relative">
       {/* Interactive Background */}
       <div className="absolute inset-0 z-0 bg-black">
-        <RevealBackground bottomImageSrc="/hero-bottom.png" topImageSrc="/hero-top.png" />
+        <div className="absolute inset-0 opacity-75 brightness-90">
+          <RevealBackground bottomImageSrc="/3'4.png" topImageSrc="/1,2.png" />
+        </div>
       </div>
 
       <div className="flex-1 flex flex-col justify-center relative z-10 px-6 md:px-16 lg:px-24 pointer-events-none text-white">
@@ -30,24 +32,59 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
           </motion.div>
           
           {/* Main Title Group */}
-          <div className="w-full flex flex-col mb-4">
+          <div className="w-full flex flex-col mb-6">
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.2, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-white text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight mb-2 sm:mb-3 font-sans"
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.04, delayChildren: 0.2 }
+                }
+              }}
+              className="font-bold tracking-tight leading-[1.05] text-left mb-2 sm:mb-4 flex flex-wrap"
             >
-              Hi, I'm
+              {"Hi, I'm".split("").map((char, index) => (
+                <motion.span 
+                  key={index} 
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 12, stiffness: 100 } }
+                  }}
+                  className="text-white/80 text-4xl sm:text-5xl md:text-6xl font-medium" 
+                  style={{ fontFamily: "inherit", whiteSpace: char === " " ? "pre" : "normal" }}
+                >
+                  {char}
+                </motion.span>
+              ))}
             </motion.p>
             
             <motion.h1 
-              initial={{ opacity: 0, y: 24 }}
-              animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ delay: 0.35, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-white drop-shadow-md text-6xl sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px] font-bold tracking-normal leading-[1.02]" 
-              style={{ fontFamily: "'Arima', sans-serif" }}
+              initial="hidden"
+              animate={isLoaded ? "visible" : "hidden"}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.05, delayChildren: 0.5 }
+                }
+              }}
+              className="font-bold tracking-tight leading-[1.05] text-left flex flex-wrap"
             >
-              Sahil Kumar
+              {"Sahil Kumar".split("").map((char, index) => (
+                <motion.span 
+                  key={index} 
+                  variants={{
+                    hidden: { opacity: 0, y: 30, rotateX: -90 },
+                    visible: { opacity: 1, y: 0, rotateX: 0, transition: { type: "spring", damping: 12, stiffness: 100 } }
+                  }}
+                  className="text-white drop-shadow-lg text-6xl sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px]" 
+                  style={{ fontFamily: "'Arima', sans-serif", whiteSpace: char === " " ? "pre" : "normal" }}
+                >
+                  {char}
+                </motion.span>
+              ))}
             </motion.h1>
           </div>
 

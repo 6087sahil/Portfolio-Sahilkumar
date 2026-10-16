@@ -275,7 +275,7 @@ const StepVisualPanel: React.FC<{ activeStep: number }> = ({ activeStep }) => {
   const step = steps[activeStep];
 
   return (
-    <div className="relative w-full h-[400px] rounded-3xl bg-[#FAF8F5] border border-[#161513]/15 overflow-hidden flex flex-col shadow-[0_12px_36px_-6px_rgba(147,51,234,0.18),0_4px_16px_-2px_rgba(168,85,247,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(147,51,234,0.26),0_6px_20px_-2px_rgba(168,85,247,0.16)] hover:border-purple-400/40 transition-all duration-500 select-none">
+    <div className="relative w-full h-[400px] rounded-3xl bg-[#FAF8F5] border border-[#161513]/15 overflow-hidden flex flex-col shadow-[0_12px_36px_-6px_rgba(110,61,30,0.18),0_4px_16px_-2px_rgba(156,102,68,0.10)] hover:shadow-[0_20px_45px_-6px_rgba(110,61,30,0.26),0_6px_20px_-2px_rgba(156,102,68,0.16)] hover:border-[#9c6644]/40 transition-all duration-500 select-none">
       
       {/* Top Figma/Studio Window Bar */}
       <div className="h-10 px-4 bg-[#F2EFE8] border-b border-[#161513]/10 flex items-center justify-between flex-shrink-0">

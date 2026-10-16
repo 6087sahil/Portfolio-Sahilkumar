@@ -71,7 +71,7 @@ const ContactSection: React.FC = () => {
             </p>
 
             {/* Direct Email Card */}
-            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(147,51,234,0.16),0_4px_16px_-2px_rgba(168,85,247,0.10)] hover:border-purple-400/40 hover:shadow-[0_20px_45px_-6px_rgba(147,51,234,0.24)] transition-all duration-500 max-w-xl mb-8">
+            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 shadow-[0_12px_36px_-6px_rgba(110,61,30,0.16),0_4px_16px_-2px_rgba(156,102,68,0.10)] hover:border-[#9c6644]/40 hover:shadow-[0_20px_45px_-6px_rgba(110,61,30,0.24)] transition-all duration-500 max-w-xl mb-8">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-[#8E8980] font-semibold">
                   Direct Email
@@ -156,7 +156,7 @@ const ContactSection: React.FC = () => {
 
           {/* ── RIGHT COLUMN: Editorial Contact Form (5 cols) ── */}
           <div className="lg:col-span-5 w-full">
-            <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#161513]/15 shadow-[0_16px_40px_-6px_rgba(147,51,234,0.18),0_6px_20px_-2px_rgba(168,85,247,0.10)] hover:border-purple-400/40 hover:shadow-[0_24px_50px_-6px_rgba(147,51,234,0.26)] transition-all duration-500">
+            <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#161513]/15 shadow-[0_16px_40px_-6px_rgba(110,61,30,0.18),0_6px_20px_-2px_rgba(156,102,68,0.10)] hover:border-[#9c6644]/40 hover:shadow-[0_24px_50px_-6px_rgba(110,61,30,0.26)] transition-all duration-500">
               
               <AnimatePresence mode="wait">
                 {submitted ? (

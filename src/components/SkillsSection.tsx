@@ -52,7 +52,7 @@ const ToolCard = ({ tool, index }: { tool: typeof featuredTools[0]; index: numbe
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: 0.1 + index * 0.08, duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-      className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 flex flex-col gap-4 shadow-[0_8px_24px_-4px_rgba(147,51,234,0.14)] hover:border-purple-400/40 hover:shadow-[0_16px_36px_-4px_rgba(147,51,234,0.24)] transition-all duration-300"
+      className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 flex flex-col gap-4 shadow-[0_8px_24px_-4px_rgba(110,61,30,0.14)] hover:border-[#9c6644]/40 hover:shadow-[0_16px_36px_-4px_rgba(110,61,30,0.24)] transition-all duration-300"
     >
       {/* Logo + tag */}
       <div className="flex items-start justify-between">

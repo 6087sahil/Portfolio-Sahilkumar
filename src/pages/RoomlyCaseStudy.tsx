@@ -95,10 +95,10 @@ const EditorialPhone: React.FC<PhoneProps> = ({
   return (
     <figure className={`flex flex-col items-center w-full select-none ${className}`}>
       <div
-        className="relative rounded-[36px] sm:rounded-[40px] p-[6px] sm:p-[7px] bg-[#1A1918] border border-purple-500/25 select-none w-full max-w-[280px] sm:max-w-[305px] md:max-w-[320px] shadow-purple-card hover:shadow-purple-glow transition-all duration-500"
+        className="relative rounded-[36px] sm:rounded-[40px] p-[6px] sm:p-[7px] bg-[#1A1918] border border-[#9c6644]/30 select-none w-full max-w-[280px] sm:max-w-[305px] md:max-w-[320px] shadow-brown-card hover:shadow-brown-glow transition-all duration-500"
         style={{
           boxShadow:
-            '0 20px 48px -10px rgba(147, 51, 234, 0.28), 0 8px 20px -4px rgba(168, 85, 247, 0.18), 0 0 0 1px rgba(147, 51, 234, 0.2)',
+            '0 20px 48px -10px rgba(110, 61, 30, 0.28), 0 8px 20px -4px rgba(156, 102, 68, 0.18), 0 0 0 1px rgba(110, 61, 30, 0.2)',
         }}
       >
         {/* Screen Bezel */}

@@ -40,7 +40,7 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-40 pointer-events-none"
       >
-        <source src="/1.mp4" type="video/mp4" />
+        <source src="/Boy_walking_no_watermark.mp4" type="video/mp4" />
       </video>
 
       {/* Top Bar */}
