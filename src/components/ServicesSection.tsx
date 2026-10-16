@@ -59,7 +59,7 @@ const ServicesSection: React.FC = () => {
             <div className="flex flex-col">
               <h2 className="font-serif text-[#161513] text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-[1.05]">
                 Capabilities{' '}
-                <span className="italic text-[#D82E54] font-serif">
+                <span className="italic text-[#8F5431] font-serif">
                   &amp; Expertise.
                 </span>
               </h2>
@@ -85,7 +85,7 @@ const ServicesSection: React.FC = () => {
               >
                 <div>
                   <div className="flex items-center justify-between pb-6 border-b border-[#161513]/10 mb-6">
-                    <span className="font-mono text-sm text-[#D82E54] font-bold">
+                    <span className="font-mono text-sm text-[#8F5431] font-bold">
                       {item.num}
                     </span>
                     <span className="text-[11px] font-mono text-[#8E8980] uppercase tracking-wider">

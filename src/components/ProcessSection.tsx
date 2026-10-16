@@ -78,7 +78,7 @@ const Step01Visual: React.FC = () => (
     </div>
     <div className="bg-white p-3.5 rounded-xl border border-[#161513]/10 shadow-xs flex items-center justify-between">
       <div className="flex items-center gap-2.5">
-        <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#161513]/10 flex items-center justify-center text-[#D82E54]">
+        <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#161513]/10 flex items-center justify-center text-[#8F5431]">
           <Search className="w-4 h-4" />
         </div>
         <div>
@@ -97,7 +97,7 @@ const Step02Visual: React.FC = () => (
   <div className="flex flex-col h-full justify-between gap-3">
     <div className="bg-white p-4 rounded-xl border border-[#161513]/10 shadow-xs">
       <div className="flex items-center gap-2 mb-2">
-        <span className="w-2 h-2 rounded-full bg-[#D82E54]" />
+        <span className="w-2 h-2 rounded-full bg-[#8F5431]" />
         <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E8980] font-semibold">Problem Statement</span>
       </div>
       <p className="font-serif text-sm sm:text-base text-[#161513] leading-snug italic">
@@ -126,15 +126,15 @@ const Step03Visual: React.FC = () => (
         <div className="mt-auto w-full h-5 bg-[#161513]/15 rounded" />
       </div>
       {/* Low-Fi Wireframe Screen 2 */}
-      <div className="w-32 h-44 rounded-xl border-2 border-dashed border-[#D82E54]/40 bg-white p-2 flex flex-col gap-1.5 shadow-2xs">
-        <div className="w-12 h-2 bg-[#D82E54]/25 rounded-full" />
+      <div className="w-32 h-44 rounded-xl border-2 border-dashed border-[#8F5431]/40 bg-white p-2 flex flex-col gap-1.5 shadow-2xs">
+        <div className="w-12 h-2 bg-[#8F5431]/25 rounded-full" />
         <div className="grid grid-cols-2 gap-1 my-1">
           <div className="h-10 bg-[#161513]/10 rounded" />
           <div className="h-10 bg-[#161513]/10 rounded" />
         </div>
         <div className="w-full h-2 bg-[#161513]/15 rounded" />
         <div className="w-4/5 h-2 bg-[#161513]/10 rounded" />
-        <div className="mt-auto w-full h-5 bg-[#D82E54] rounded text-[8px] font-mono text-white flex items-center justify-center">
+        <div className="mt-auto w-full h-5 bg-[#8F5431] rounded text-[8px] font-mono text-white flex items-center justify-center">
           Inquire
         </div>
       </div>
@@ -155,7 +155,7 @@ const Step04Visual: React.FC = () => (
       </div>
       <div className="grid grid-cols-4 gap-2">
         {[
-          { name: 'Crimson', hex: '#D82E54', bg: 'bg-[#D82E54]', text: 'text-white' },
+          { name: 'Cognac', hex: '#8F5431', bg: 'bg-[#8F5431]', text: 'text-white' },
           { name: 'Charcoal', hex: '#161513', bg: 'bg-[#161513]', text: 'text-white' },
           { name: 'Cream', hex: '#FAF8F5', bg: 'bg-[#FAF8F5]', text: 'text-[#161513] border border-[#161513]/15' },
           { name: 'Sage', hex: '#4FA765', bg: 'bg-[#4FA765]', text: 'text-white' },
@@ -171,7 +171,7 @@ const Step04Visual: React.FC = () => (
     {/* Component Buttons Showcase */}
     <div className="bg-white p-3 rounded-xl border border-[#161513]/10 shadow-2xs flex items-center justify-between gap-3">
       <div className="flex items-center gap-2">
-        <button type="button" className="px-4 py-2 rounded-full bg-[#161513] text-white text-[11px] font-mono font-semibold tracking-wider uppercase hover:bg-[#D82E54] transition-colors">
+        <button type="button" className="px-4 py-2 rounded-full bg-[#161513] text-white text-[11px] font-mono font-semibold tracking-wider uppercase hover:bg-[#8F5431] transition-colors">
           Reserve Room
         </button>
         <button type="button" className="px-3.5 py-2 rounded-full border border-[#161513]/20 text-[#161513] text-[11px] font-mono font-semibold tracking-wider uppercase">
@@ -190,7 +190,7 @@ const Step05Visual: React.FC = () => (
     <div className="bg-white p-4 rounded-xl border border-[#161513]/10 shadow-xs">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#D82E54] animate-ping" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#8F5431] animate-ping" />
           <span className="text-[11px] font-mono font-semibold text-[#161513]">Figma Interaction Node</span>
         </div>
         <span className="text-[10px] font-mono text-[#8E8980]">Smart Animate · 300ms</span>
@@ -203,7 +203,7 @@ const Step05Visual: React.FC = () => (
           </div>
           <span className="text-xs font-medium text-[#161513]">On Tap / Drag</span>
         </div>
-        <div className="flex items-center gap-1.5 text-[#D82E54]">
+        <div className="flex items-center gap-1.5 text-[#8F5431]">
           <span className="text-[11px] font-mono">Navigate to Sheet</span>
           <Play className="w-3 h-3 fill-current" />
         </div>
@@ -250,11 +250,11 @@ const Step07Visual: React.FC = () => (
           <Check className="w-3 h-3" /> Ready
         </span>
       </div>
-      <p className="text-[#D82E54]">"theme": &#123;</p>
+      <p className="text-[#8F5431]">"theme": &#123;</p>
       <p className="pl-3 text-white/80">"borderRadius": "16px",</p>
       <p className="pl-3 text-white/80">"fontFamily": "Fraunces, serif",</p>
       <p className="pl-3 text-white/80">"contrastChecked": true</p>
-      <p className="text-[#D82E54]">&#125;</p>
+      <p className="text-[#8F5431]">&#125;</p>
     </div>
 
     <div className="flex items-center justify-between bg-white px-3.5 py-2.5 rounded-xl border border-[#161513]/10 text-xs">
@@ -288,7 +288,7 @@ const StepVisualPanel: React.FC<{ activeStep: number }> = ({ activeStep }) => {
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-[#D82E54] font-semibold bg-white/70 px-2 py-0.5 rounded border border-[#161513]/10">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#8F5431] font-semibold bg-white/70 px-2 py-0.5 rounded border border-[#161513]/10">
             {step.category}
           </span>
           <span className="text-[11px] font-mono text-[#8E8980] hidden sm:inline">100%</span>
@@ -309,7 +309,7 @@ const StepVisualPanel: React.FC<{ activeStep: number }> = ({ activeStep }) => {
             {/* Header with Title and Deliverable Badge */}
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
-                <span className="text-xs font-mono font-bold text-[#D82E54] tracking-wider uppercase block mb-0.5">
+                <span className="text-xs font-mono font-bold text-[#8F5431] tracking-wider uppercase block mb-0.5">
                   Phase {step.num}
                 </span>
                 <h3 className="font-serif text-[#161513] text-2xl font-semibold tracking-tight">
@@ -384,7 +384,7 @@ const ProcessSection: React.FC = () => {
             </span>
             <h2 className="font-serif text-[#161513] text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight leading-[1.05]">
               How I turn ideas{' '}
-              <span className="italic text-[#D82E54] font-serif">
+              <span className="italic text-[#8F5431] font-serif">
                 into products.
               </span>
             </h2>
@@ -399,7 +399,7 @@ const ProcessSection: React.FC = () => {
               <div className="relative flex-shrink-0 flex flex-col items-center pt-2">
                 <div className="w-px bg-[#161513]/10 flex-1" />
                 <motion.div
-                  className="absolute top-0 left-0 w-full bg-[#D82E54] origin-top"
+                  className="absolute top-0 left-0 w-full bg-[#8F5431] origin-top"
                   style={{ scaleY: lineScaleY, height: '100%' }}
                 />
               </div>
@@ -415,13 +415,13 @@ const ProcessSection: React.FC = () => {
                       onClick={() => setActiveStep(i)}
                       className={`text-left flex items-start gap-4 py-3 px-2 rounded-xl transition-all duration-200 cursor-pointer ${
                         isActive
-                          ? 'bg-[#FAF8F5] border border-[#D82E54]/40 shadow-sm'
+                          ? 'bg-[#FAF8F5] border border-[#8F5431]/40 shadow-sm'
                           : 'hover:bg-black/[0.02] border border-transparent opacity-65 hover:opacity-100'
                       }`}
                     >
                       <span
                         className={`font-mono text-xs font-bold tracking-wider flex-shrink-0 w-6 pt-0.5 transition-colors ${
-                          isActive ? 'text-[#D82E54]' : 'text-[#8E8980]'
+                          isActive ? 'text-[#8F5431]' : 'text-[#8E8980]'
                         }`}
                       >
                         {step.num}
@@ -436,7 +436,7 @@ const ProcessSection: React.FC = () => {
                             {step.title}
                           </h3>
                           {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#D82E54]" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#8F5431]" />
                           )}
                         </div>
                         <p className="text-[#5C5852] text-xs sm:text-sm leading-relaxed font-light line-clamp-2">

@@ -53,7 +53,7 @@ const AboutSection: React.FC = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="flex items-center gap-4"
           >
-            <span className="w-2 h-2 rounded-full bg-[#D82E54] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#8F5431] animate-pulse" />
             <span className="text-[#8E8980] font-mono text-xs uppercase tracking-wider">
               ABOUT ME / PRODUCT DESIGNER
             </span>
@@ -67,7 +67,7 @@ const AboutSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="font-serif text-[#161513] text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-normal tracking-tight leading-[1.05] max-w-5xl"
           >
-            Designing digital experiences that feel as <span className="italic text-[#D82E54] font-serif">good</span> as they <span className="italic text-[#560E22] font-serif">function</span>.
+            Designing digital experiences that feel as <span className="italic text-[#8F5431] font-serif">good</span> as they <span className="italic text-[#6E3D1E] font-serif">function</span>.
           </motion.h2>
 
           {/* Subtext */}
@@ -87,7 +87,7 @@ const AboutSection: React.FC = () => {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1.5, delay: 0.4, ease: "easeInOut" }}
-            className="w-full h-px bg-gradient-to-r from-[#D82E54]/40 via-[#161513]/15 to-transparent origin-left mt-8"
+            className="w-full h-px bg-gradient-to-r from-[#8F5431]/40 via-[#161513]/15 to-transparent origin-left mt-8"
           />
         </div>
 
@@ -101,11 +101,11 @@ const AboutSection: React.FC = () => {
               <div className="w-full lg:w-1/2 relative flex justify-center lg:justify-start">
                 <div className="relative w-[300px] sm:w-[400px]">
                   {/* Soft Editorial Ambient Rose Glow */}
-                  <div className="absolute inset-0 bg-[#D82E54]/5 blur-[50px] rounded-full pointer-events-none" />
+                  <div className="absolute inset-0 bg-[#8F5431]/5 blur-[50px] rounded-full pointer-events-none" />
                   
                   <motion.div 
                     style={{ y: yImage }}
-                    className="relative rounded-[2rem] overflow-hidden border border-[#161513]/15 hover:border-[#D82E54]/40 aspect-[3/4] bg-[#FAF8F5] shadow-[0_20px_50px_-10px_rgba(216,46,84,0.12),0_8px_24px_-4px_rgba(22,21,19,0.08)] transition-colors duration-500"
+                    className="relative rounded-[2rem] overflow-hidden border border-[#161513]/15 hover:border-[#8F5431]/40 aspect-[3/4] bg-[#FAF8F5] shadow-[0_20px_50px_-10px_rgba(110,61,30,0.18),0_8px_24px_-4px_rgba(22,21,19,0.08)] transition-colors duration-500"
                   >
                     <div className="absolute inset-0 bg-gradient-to-t from-[#161513]/85 via-transparent to-transparent z-10" />
                     <img 
@@ -137,15 +137,15 @@ const AboutSection: React.FC = () => {
                   </motion.div>
 
                   {/* Parallax Floating Tags */}
-                  <motion.div style={{ y: yBadge1 }} className="absolute top-[20%] -left-8 sm:-left-16 z-20 px-5 py-2.5 rounded-full border border-[#161513]/15 bg-white/95 backdrop-blur-xl shadow-sm hover:border-[#D82E54] hover:text-[#D82E54] transition-colors">
+                  <motion.div style={{ y: yBadge1 }} className="absolute top-[20%] -left-8 sm:-left-16 z-20 px-5 py-2.5 rounded-full border border-[#161513]/15 bg-white/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors">
                     <span className="text-[#161513] text-xs font-mono font-semibold tracking-widest uppercase">DESIGN</span>
                   </motion.div>
                   
-                  <motion.div style={{ y: yBadge2 }} className="absolute top-[60%] -right-8 sm:-right-12 z-20 px-5 py-2.5 rounded-full border border-[#161513]/15 bg-white/95 backdrop-blur-xl shadow-sm hover:border-[#D82E54] hover:text-[#D82E54] transition-colors">
+                  <motion.div style={{ y: yBadge2 }} className="absolute top-[60%] -right-8 sm:-right-12 z-20 px-5 py-2.5 rounded-full border border-[#161513]/15 bg-white/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors">
                     <span className="text-[#161513] text-xs font-mono font-semibold tracking-widest uppercase">RESEARCH</span>
                   </motion.div>
                   
-                  <motion.div style={{ y: yBadge3 }} className="absolute bottom-1/4 -left-6 sm:-left-12 z-20 px-5 py-2.5 rounded-full border border-[#161513]/15 bg-white/95 backdrop-blur-xl shadow-sm hover:border-[#D82E54] hover:text-[#D82E54] transition-colors">
+                  <motion.div style={{ y: yBadge3 }} className="absolute bottom-1/4 -left-6 sm:-left-12 z-20 px-5 py-2.5 rounded-full border border-[#161513]/15 bg-white/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors">
                     <span className="text-[#161513] text-xs font-mono font-semibold tracking-widest uppercase">INTERACTION</span>
                   </motion.div>
                 </div>
@@ -178,9 +178,9 @@ const AboutSection: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: i * 0.15 }}
-                    className="group border-l border-[#161513]/15 pl-6 hover:border-[#D82E54] transition-colors duration-500"
+                    className="group border-l border-[#161513]/15 pl-6 hover:border-[#8F5431] transition-colors duration-500"
                   >
-                    <h4 className="text-[#8E8980] text-xs font-mono uppercase tracking-wider mb-2 group-hover:text-[#D82E54] transition-colors duration-500">{block.title}</h4>
+                    <h4 className="text-[#8E8980] text-xs font-mono uppercase tracking-wider mb-2 group-hover:text-[#8F5431] transition-colors duration-500">{block.title}</h4>
                     <p className="font-serif text-2xl md:text-3xl font-normal tracking-tight text-[#161513] leading-snug">{block.desc}</p>
                   </motion.div>
                 ))}
@@ -221,7 +221,7 @@ const AboutSection: React.FC = () => {
         {/* ========================================================= */}
         <div className="flex flex-col gap-12">
           <div className="flex items-center gap-4">
-            <span className="w-2 h-2 rounded-full bg-[#D82E54]" />
+            <span className="w-2 h-2 rounded-full bg-[#8F5431]" />
             <span className="text-[#8E8980] text-xs font-mono uppercase tracking-wider">EXPERTISE</span>
           </div>
 
@@ -279,7 +279,7 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative overflow-hidden rounded-[2rem] border border-[#161513]/15 bg-[#FAF8F5] hover:-translate-y-2 transition-all duration-700 ease-out cursor-default shadow-sm hover:border-[#D82E54]/40 min-h-[400px]`}
+                className={`group relative overflow-hidden rounded-[2rem] border border-[#161513]/15 bg-[#FAF8F5] hover:-translate-y-2 transition-all duration-700 ease-out cursor-default shadow-sm hover:border-[#8F5431]/40 min-h-[400px]`}
               >
                 {/* Background Visual */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -290,16 +290,16 @@ const AboutSection: React.FC = () => {
                 <div className="absolute inset-0 opacity-[0.05] mix-blend-multiply pointer-events-none z-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
                 
                 {/* Top Highlight Line */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-[#161513]/10 group-hover:via-[#D82E54]/40 to-transparent transition-colors duration-700 z-10" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-[#161513]/10 group-hover:via-[#8F5431]/40 to-transparent transition-colors duration-700 z-10" />
                 
                 <div className="relative z-10 flex flex-col h-full p-6 sm:p-8">
                   <div className="flex justify-between items-start mb-auto">
-                    <span className="text-[#8E8980] font-mono text-sm tracking-widest group-hover:text-[#D82E54] transition-colors duration-700">{card.num}</span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#161513]/20 group-hover:bg-[#D82E54] transition-all duration-700" />
+                    <span className="text-[#8E8980] font-mono text-sm tracking-widest group-hover:text-[#8F5431] transition-colors duration-700">{card.num}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#161513]/20 group-hover:bg-[#8F5431] transition-all duration-700" />
                   </div>
                   
                   <div className="flex flex-col gap-3 mt-48">
-                    <h4 className="font-serif text-2xl sm:text-3xl font-normal text-[#161513] tracking-tight group-hover:text-[#D82E54] group-hover:-translate-y-1 transition-all duration-700">{card.title}</h4>
+                    <h4 className="font-serif text-2xl sm:text-3xl font-normal text-[#161513] tracking-tight group-hover:text-[#8F5431] group-hover:-translate-y-1 transition-all duration-700">{card.title}</h4>
                     <p className="text-[#5C5852] text-xs sm:text-sm font-mono tracking-wider uppercase leading-relaxed max-w-sm">{card.desc}</p>
                   </div>
                 </div>
@@ -313,7 +313,7 @@ const AboutSection: React.FC = () => {
         {/* ========================================================= */}
         <div className="relative w-full max-w-4xl mx-auto flex flex-col pt-10">
           <div className="flex items-center gap-4 mb-16 md:mb-24">
-            <span className="w-2 h-2 rounded-full bg-[#D82E54]" />
+            <span className="w-2 h-2 rounded-full bg-[#8F5431]" />
             <span className="text-[#8E8980] text-xs font-mono uppercase tracking-wider">MY DESIGN PROCESS</span>
           </div>
 
@@ -340,21 +340,21 @@ const AboutSection: React.FC = () => {
                 <div className={`hidden md:flex flex-1 justify-end pr-16 ${i % 2 === 0 ? 'invisible' : ''}`}>
                   <div className="flex flex-col gap-2 group cursor-default text-right">
                     <span className="text-[#8E8980] font-mono text-xs">{step.num}</span>
-                    <h4 className="font-serif text-2xl md:text-3xl font-normal tracking-tight text-[#161513] group-hover:text-[#D82E54] transition-colors duration-300">{step.title}</h4>
+                    <h4 className="font-serif text-2xl md:text-3xl font-normal tracking-tight text-[#161513] group-hover:text-[#8F5431] transition-colors duration-300">{step.title}</h4>
                     <p className="text-[#5C5852] text-sm md:text-base font-light tracking-wide uppercase font-mono">{step.desc}</p>
                   </div>
                 </div>
 
                 {/* Center Node */}
                 <div className="absolute left-0 md:relative md:left-auto w-10 h-10 rounded-full bg-[#FAF8F5] border border-[#161513]/20 z-10 flex shrink-0 items-center justify-center shadow-sm">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#D82E54] transition-colors duration-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#8F5431] transition-colors duration-500" />
                 </div>
                 
                 {/* Right Text Space (Mobile Always, Desktop Alternate) */}
                 <div className={`w-full md:w-auto md:flex-1 pl-16 md:pl-16 ${i % 2 !== 0 ? 'md:invisible' : ''}`}>
                   <div className="flex flex-col gap-2 group cursor-default text-left">
                     <span className="text-[#8E8980] font-mono text-xs">{step.num}</span>
-                    <h4 className="font-serif text-2xl md:text-3xl font-normal tracking-tight text-[#161513] group-hover:text-[#D82E54] transition-colors duration-300">{step.title}</h4>
+                    <h4 className="font-serif text-2xl md:text-3xl font-normal tracking-tight text-[#161513] group-hover:text-[#8F5431] transition-colors duration-300">{step.title}</h4>
                     <p className="text-[#5C5852] text-sm md:text-base font-light tracking-wide uppercase font-mono">{step.desc}</p>
                   </div>
                 </div>
@@ -387,7 +387,7 @@ const AboutSection: React.FC = () => {
             transition={{ duration: 2, ease: "easeOut" }}
             className="absolute inset-0 flex justify-center items-center opacity-30 pointer-events-none z-0"
           >
-            <div className="w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] bg-[#D82E54]/10 blur-[120px] rounded-full mix-blend-multiply" />
+            <div className="w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] bg-[#8F5431]/10 blur-[120px] rounded-full mix-blend-multiply" />
           </motion.div>
 
           <div className="relative z-10 w-full max-w-5xl flex flex-col gap-8 items-center px-6">
@@ -407,7 +407,7 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#D82E54] italic"
+                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#8F5431] italic"
               >
                 Great design makes things effortless.
               </motion.h2>
@@ -433,7 +433,7 @@ const AboutSection: React.FC = () => {
               <a 
                 href="/resume.pdf" 
                 download
-                className="group relative flex items-center justify-center gap-3 px-10 py-5 bg-[#161513] text-white rounded-full font-mono font-semibold text-xs sm:text-sm tracking-wider uppercase hover:bg-[#D82E54] hover:scale-105 transition-all duration-300 shadow-sm"
+                className="group relative flex items-center justify-center gap-3 px-10 py-5 bg-[#161513] text-white rounded-full font-mono font-semibold text-xs sm:text-sm tracking-wider uppercase hover:bg-[#8F5431] hover:scale-105 transition-all duration-300 shadow-sm"
               >
                 <span>DOWNLOAD RESUME</span>
                 <Download className="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
@@ -443,7 +443,7 @@ const AboutSection: React.FC = () => {
             <Magnet strength={10} padding={20}>
               <a 
                 href="/#projects" 
-                className="group relative flex items-center justify-center gap-2 px-8 py-4 rounded-full font-mono font-semibold text-xs sm:text-sm tracking-wider uppercase text-[#161513] border border-[#161513]/20 hover:border-[#D82E54] hover:text-[#D82E54] transition-colors duration-300"
+                className="group relative flex items-center justify-center gap-2 px-8 py-4 rounded-full font-mono font-semibold text-xs sm:text-sm tracking-wider uppercase text-[#161513] border border-[#161513]/20 hover:border-[#8F5431] hover:text-[#8F5431] transition-colors duration-300"
               >
                 <span>VIEW PROJECTS</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

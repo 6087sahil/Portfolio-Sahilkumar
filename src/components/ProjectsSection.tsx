@@ -100,7 +100,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
           
           {/* Header Metadata */}
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="font-mono text-xs font-bold tracking-widest text-[#D82E54]">
+            <span className="font-mono text-xs font-bold tracking-widest text-[#8F5431]">
               {project.num}
             </span>
             <div className="h-px w-8 bg-[#161513]/15" />
@@ -145,7 +145,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
             {project.tools.map((tool) => (
               <span
                 key={tool}
-                className="px-3 py-1 rounded-full text-xs font-mono border border-[#161513]/10 text-[#5C5852] bg-[#EDE8DE]/70 transition-colors group-hover:border-[#D82E54]/30 group-hover:text-[#D82E54]"
+                className="px-3 py-1 rounded-full text-xs font-mono border border-[#161513]/10 text-[#5C5852] bg-[#EDE8DE]/70 transition-colors group-hover:border-[#8F5431]/30 group-hover:text-[#8F5431]"
               >
                 {tool}
               </span>
@@ -157,20 +157,20 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
             {project.link.startsWith('#') ? (
               <a
                 href={project.link}
-                className="group/btn inline-flex items-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#161513] text-white hover:bg-[#D82E54] transition-all duration-300 font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:-translate-y-0.5"
+                className="group/btn inline-flex items-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#161513] text-white hover:bg-[#8F5431] transition-all duration-300 font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:-translate-y-0.5"
               >
                 <span>{project.ctaText || 'Explore Case Study'}</span>
-                <div className="w-8 h-8 rounded-full bg-white/10 group-hover/btn:bg-white text-white group-hover/btn:text-[#D82E54] flex items-center justify-center transition-all duration-300">
+                <div className="w-8 h-8 rounded-full bg-white/10 group-hover/btn:bg-white text-white group-hover/btn:text-[#8F5431] flex items-center justify-center transition-all duration-300">
                   <ArrowRight className="w-4 h-4 -rotate-45 transition-transform duration-300 group-hover/btn:rotate-0" />
                 </div>
               </a>
             ) : (
               <Link
                 to={project.link}
-                className="group/btn inline-flex items-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#161513] text-white hover:bg-[#D82E54] transition-all duration-300 font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:-translate-y-0.5"
+                className="group/btn inline-flex items-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#161513] text-white hover:bg-[#8F5431] transition-all duration-300 font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:-translate-y-0.5"
               >
                 <span>{project.ctaText || 'Explore Case Study'}</span>
-                <div className="w-8 h-8 rounded-full bg-white/10 group-hover/btn:bg-white text-white group-hover/btn:text-[#D82E54] flex items-center justify-center transition-all duration-300">
+                <div className="w-8 h-8 rounded-full bg-white/10 group-hover/btn:bg-white text-white group-hover/btn:text-[#8F5431] flex items-center justify-center transition-all duration-300">
                   <ArrowRight className="w-4 h-4 -rotate-45 transition-transform duration-300 group-hover/btn:rotate-0" />
                 </div>
               </Link>
@@ -189,7 +189,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
               rotateY: sRotY,
               transformStyle: 'preserve-3d',
             }}
-            className="relative w-full rounded-2xl overflow-hidden border border-[#161513]/15 shadow-sm transition-all duration-500 hover:shadow-md hover:border-[#D82E54]/40"
+            className="relative w-full rounded-2xl overflow-hidden border border-[#161513]/15 shadow-sm transition-all duration-500 hover:shadow-md hover:border-[#8F5431]/40"
           >
             <div className="w-full aspect-[16/10] bg-[#161513] overflow-hidden relative">
               {project.video ? (
@@ -213,7 +213,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
               {/* Status Badge overlay */}
               <div className="absolute top-4 left-4 z-10 pointer-events-none">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#161513]/70 backdrop-blur-md border border-white/20 text-white text-[10px] font-mono uppercase tracking-wider shadow-sm">
-                  <Sparkles className="w-3 h-3 text-[#D82E54]" />
+                  <Sparkles className="w-3 h-3 text-[#8F5431]" />
                   {project.video ? 'Interactive Prototype' : 'High-Fi Showcase'}
                 </span>
               </div>
@@ -241,7 +241,7 @@ const ProjectsSection: React.FC = () => {
 
           <h2 className="font-serif text-[#161513] text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-[1.05]">
             Featured{' '}
-            <span className="italic text-[#D82E54] font-serif">
+            <span className="italic text-[#8F5431] font-serif">
               Projects.
             </span>
           </h2>

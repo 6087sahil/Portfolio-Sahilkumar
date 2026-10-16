@@ -36,7 +36,7 @@ const HandDrawnUnderline: React.FC<{ className?: string }> = ({ className = '' }
     viewBox="0 0 240 14"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={`absolute left-0 -bottom-2 w-full h-[10px] pointer-events-none text-[#D82E54] ${className}`}
+    className={`absolute left-0 -bottom-2 w-full h-[10px] pointer-events-none text-[#8F5431] ${className}`}
     preserveAspectRatio="none"
   >
     <path
@@ -54,7 +54,7 @@ const HandDrawnCircle: React.FC<{ className?: string }> = ({ className = '' }) =
     viewBox="0 0 120 48"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={`absolute -inset-x-2 -inset-y-1.5 w-[calc(100%+16px)] h-[calc(100%+12px)] pointer-events-none text-[#D82E54] ${className}`}
+    className={`absolute -inset-x-2 -inset-y-1.5 w-[calc(100%+16px)] h-[calc(100%+12px)] pointer-events-none text-[#8F5431] ${className}`}
     preserveAspectRatio="none"
   >
     <path
@@ -215,7 +215,7 @@ const WireframeHiFiSlider = () => {
             </div>
             <div className="pt-2 border-t border-[#161513]/10 flex items-center justify-between text-[11px] text-[#5C5852]">
               <span>Rule tags: Non-smoker · Quiet</span>
-              <span className="text-[#D82E54] font-semibold">₹15,000/mo</span>
+              <span className="text-[#8F5431] font-semibold">₹15,000/mo</span>
             </div>
           </div>
         </div>
@@ -236,7 +236,7 @@ const WireframeHiFiSlider = () => {
               </div>
               <div className="h-9 rounded-xl bg-white border border-[#560E22]/15 flex items-center justify-between px-3 text-xs shadow-sm">
                 <span className="text-[#161513]">DLF Phase 5, Gurgaon</span>
-                <span className="text-[#D82E54] font-medium text-[11px]">Filters (3)</span>
+                <span className="text-[#8F5431] font-medium text-[11px]">Filters (3)</span>
               </div>
               <div className="grid grid-cols-2 gap-3 items-center">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-sm relative">
@@ -272,10 +272,10 @@ const WireframeHiFiSlider = () => {
 
         {/* Draggable Divider Line */}
         <div
-          className="absolute inset-y-0 w-[2px] bg-[#D82E54] pointer-events-none z-20 shadow-sm"
+          className="absolute inset-y-0 w-[2px] bg-[#8F5431] pointer-events-none z-20 shadow-sm"
           style={{ left: `${sliderPos}%` }}
         >
-          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white border border-[#D82E54] flex items-center justify-center shadow-md text-[#D82E54] text-xs font-mono font-bold">
+          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white border border-[#8F5431] flex items-center justify-center shadow-md text-[#8F5431] text-xs font-mono font-bold">
             ↔
           </div>
         </div>
@@ -322,7 +322,7 @@ export default function RoomlyCaseStudy() {
   ];
 
   return (
-    <article className="min-h-screen bg-[#F4F1EA] text-[#161513] font-sans antialiased selection:bg-[#D82E54]/15 selection:text-[#161513]">
+    <article className="min-h-screen bg-[#F4F1EA] text-[#161513] font-sans antialiased selection:bg-[#8F5431]/15 selection:text-[#161513]">
       {/* ─────────────────────────────────────────────────────────────
          00 — MINIMAL EDITORIAL TOP BAR
          Clean back link and quiet project title, no floating pills.
@@ -338,7 +338,7 @@ export default function RoomlyCaseStudy() {
           </Link>
           <div className="flex items-center gap-4 text-[#8E8980]">
             <span className="hidden sm:inline">Case Study · 01</span>
-            <span className="w-1 h-1 rounded-full bg-[#D82E54]" />
+            <span className="w-1 h-1 rounded-full bg-[#8F5431]" />
             <span className="text-[#161513] font-medium">Roomly App</span>
           </div>
         </div>
@@ -360,7 +360,7 @@ export default function RoomlyCaseStudy() {
                   <span className="inline-block px-2.5 py-0.5 rounded bg-[#FAF8F5] border border-[#161513]/15 text-[11px] font-mono uppercase tracking-wider text-[#5C5852]">
                     Mobile UX Design · 2024
                   </span>
-                  <span className="text-xs font-mono text-[#D82E54] font-medium">
+                  <span className="text-xs font-mono text-[#8F5431] font-medium">
                     Self-Initiated Case Study
                   </span>
                 </div>
@@ -405,7 +405,7 @@ export default function RoomlyCaseStudy() {
                         href="https://www.figma.com/proto/B3oFSh9ObaTE5YMCLYamwa/Roommate---Rooms-app?node-id=243-2171&t=iD2BAYVWj3NWawEU-1"
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[#D82E54] hover:underline font-semibold"
+                        className="inline-flex items-center gap-1.5 text-[#8F5431] hover:underline font-semibold"
                       >
                         <span>Live Figma Prototype</span>
                         <ArrowUpRight className="w-3.5 h-3.5" />
@@ -461,7 +461,7 @@ export default function RoomlyCaseStudy() {
                 {/* Real Inline Stat Callout */}
                 <div className="mt-8 p-5 bg-[#FAF8F5] border border-[#161513]/10 rounded-xl space-y-2">
                   <div className="pt-1 pb-1">
-                    <span className="relative inline-block font-serif text-4xl text-[#D82E54] font-normal">
+                    <span className="relative inline-block font-serif text-4xl text-[#8F5431] font-normal">
                       7 of 10
                       <HandDrawnCircle />
                     </span>
@@ -504,7 +504,7 @@ export default function RoomlyCaseStudy() {
 
               {/* Oversized Editorial Pull Quote */}
               <FadeUp delay={0.22}>
-                <blockquote className="my-6 pl-6 border-l-2 border-[#D82E54] py-2">
+                <blockquote className="my-6 pl-6 border-l-2 border-[#8F5431] py-2">
                   <p className="font-serif italic text-2xl sm:text-3xl text-[#161513] leading-snug">
                     “I don’t care if the living room has Italian marble. If the person across from me throws parties on Tuesday nights when I have a 9 AM standup, I'm miserable.”
                   </p>
@@ -553,7 +553,7 @@ export default function RoomlyCaseStudy() {
                 <span className="font-mono text-xs uppercase tracking-wider text-[#5C5852]">
                   Process Artifact · Early Ideation
                 </span>
-                <span className="px-2 py-0.5 rounded bg-[#FAF8F5] border border-[#161513]/15 font-mono text-[10px] text-[#D82E54] font-semibold">
+                <span className="px-2 py-0.5 rounded bg-[#FAF8F5] border border-[#161513]/15 font-mono text-[10px] text-[#8F5431] font-semibold">
                   Field Artifact Slot
                 </span>
               </div>
@@ -572,7 +572,7 @@ export default function RoomlyCaseStudy() {
                 <div className="relative z-10 space-y-3 font-mono text-xs">
                   <div className="flex items-center justify-between text-[#8E8980] text-[11px]">
                     <span>[NOTEBOOK PAGE 14 · DEC 18]</span>
-                    <span className="font-handwriting text-base text-[#D82E54]">"Room vs Person toggle"</span>
+                    <span className="font-handwriting text-base text-[#8F5431]">"Room vs Person toggle"</span>
                   </div>
                   
                   {/* Rough sketch representation */}
@@ -584,7 +584,7 @@ export default function RoomlyCaseStudy() {
                       <div className="h-20 border border-dashed border-[#161513]/25 rounded p-2 text-[10px]">
                         Draft Card A: Photo on top, price below. (Users ignored roommate info)
                       </div>
-                      <div className="h-20 border border-solid border-[#D82E54]/40 bg-[#D82E54]/5 rounded p-2 text-[10px]">
+                      <div className="h-20 border border-solid border-[#8F5431]/40 bg-[#8F5431]/5 rounded p-2 text-[10px]">
                         Draft Card B: Split tile showing flatmate avatar + habit chips. Winner!
                       </div>
                     </div>
@@ -605,11 +605,11 @@ export default function RoomlyCaseStudy() {
             {/* Artifact 2: The Crossed-Out Idea (Cols 8-12) */}
             <div className="lg:col-span-5 bg-[#FAF8F5] border border-[#161513]/15 rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
               <div>
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#D82E54]/10 text-[#D82E54] font-mono text-xs font-semibold mb-4">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#8F5431]/10 text-[#8F5431] font-mono text-xs font-semibold mb-4">
                   <span>✕ Killed Feature</span>
                 </div>
 
-                <h3 className="font-serif text-2xl text-[#161513] tracking-tight line-through decoration-[#D82E54] decoration-2 mb-3">
+                <h3 className="font-serif text-2xl text-[#161513] tracking-tight line-through decoration-[#8F5431] decoration-2 mb-3">
                   The 20-Question Personality Matchmaker Quiz
                 </h3>
 
@@ -618,7 +618,7 @@ export default function RoomlyCaseStudy() {
                     <strong className="font-medium text-[#161513]">What I tried first:</strong> In version 0.1, I built a mandatory onboarding quiz asking tenants about introversion scores, cleaning frequency on a 1–5 scale, and cooking habits.
                   </p>
                   <p>
-                    <strong className="font-medium text-[#D82E54]">Why it died:</strong> 8 of 10 user testing participants abandoned the flow by question four. People told me it felt patronizing, intrusive, and uncomfortably similar to a dating app.
+                    <strong className="font-medium text-[#8F5431]">Why it died:</strong> 8 of 10 user testing participants abandoned the flow by question four. People told me it felt patronizing, intrusive, and uncomfortably similar to a dating app.
                   </p>
                   <p>
                     <strong className="font-medium text-[#161513]">What I replaced it with:</strong> Four non-negotiable lifestyle pills right on the property card (Non-Smoker, Pet Friendly, Quiet Hours, WFH). Clean, factual, zero pseudo-psychology.
@@ -626,7 +626,7 @@ export default function RoomlyCaseStudy() {
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-[#161513]/10 font-handwriting text-lg text-[#D82E54]">
+              <div className="pt-6 mt-6 border-t border-[#161513]/10 font-handwriting text-lg text-[#8F5431]">
                 “Don't over-engineer trust. Give people the facts and let them message each other.”
               </div>
             </div>
@@ -660,21 +660,21 @@ export default function RoomlyCaseStudy() {
               <div className="md:col-span-7 flex flex-col gap-6 font-mono text-xs">
                 
                 <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#161513]/10 relative">
-                  <span className="text-[#D82E54] font-bold block mb-1">Callout 01 · Hero Balcony View</span>
+                  <span className="text-[#8F5431] font-bold block mb-1">Callout 01 · Hero Balcony View</span>
                   <p className="text-[#5C5852] font-sans text-sm leading-relaxed">
                     Renters told me they fear dark, windowless rooms in Gurgaon builder floors. The full-bleed natural light header immediately answers whether the room feels claustrophobic.
                   </p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#161513]/10 relative">
-                  <span className="text-[#D82E54] font-bold block mb-1">Callout 02 · Factual Inventory, Not Prose</span>
+                  <span className="text-[#8F5431] font-bold block mb-1">Callout 02 · Factual Inventory, Not Prose</span>
                   <p className="text-[#5C5852] font-sans text-sm leading-relaxed">
                     Replaced lengthy paragraphs with standardized icons (Bed, AC, Attached Bath, Dining). Users can verify essentials in 2 seconds during a lunch break scroll.
                   </p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#161513]/10 relative">
-                  <span className="text-[#D82E54] font-bold block mb-1">Callout 03 · Persistent "Message Mike" CTA</span>
+                  <span className="text-[#8F5431] font-bold block mb-1">Callout 03 · Persistent "Message Mike" CTA</span>
                   <p className="text-[#5C5852] font-sans text-sm leading-relaxed">
                     Instead of a generic "Schedule Visit" that pings an unresponsive broker, the button connects directly to the current tenant living in the flat.
                   </p>
@@ -739,7 +739,7 @@ export default function RoomlyCaseStudy() {
                   </div>
                   <div className="flex justify-between py-1">
                     <span className="text-[#8E8980]">Move-in Window:</span>
-                    <span className="text-[#D82E54] font-medium">Under 2 Weeks</span>
+                    <span className="text-[#8F5431] font-medium">Under 2 Weeks</span>
                   </div>
                 </div>
               </div>
@@ -748,7 +748,7 @@ export default function RoomlyCaseStudy() {
               <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
                 
                 <div className="p-5 rounded-xl bg-[#F4F1EA] border border-[#161513]/10 space-y-2">
-                  <h4 className="font-mono text-xs uppercase tracking-wider text-[#D82E54] font-bold">
+                  <h4 className="font-mono text-xs uppercase tracking-wider text-[#8F5431] font-bold">
                     Primary Goals
                   </h4>
                   <ul className="space-y-1.5 text-[#5C5852] font-light leading-relaxed list-disc list-inside">
@@ -856,7 +856,7 @@ export default function RoomlyCaseStudy() {
                   I split the feed into two equal browsing lanes—available rooms and recommended flatmates—so users don’t have to choose between searching for a space or searching for a person.
                 </p>
                 <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#161513]/10 text-xs font-mono text-[#5C5852] space-y-1">
-                  <span className="text-[#D82E54] font-bold block uppercase tracking-wider">What I tried first:</span>
+                  <span className="text-[#8F5431] font-bold block uppercase tracking-wider">What I tried first:</span>
                   <p className="font-sans text-sm text-[#5C5852] font-light">
                     I initially placed flatmate profiles behind a separate bottom navigation tab. Testing showed 80% of users never opened that tab—they expected to see who lived in the neighborhood directly within their room feed.
                   </p>
@@ -877,7 +877,7 @@ export default function RoomlyCaseStudy() {
                   I consolidated budget ranges, room types, and non-negotiable lifestyle rules into a single bottom sheet with instant live result counts.
                 </p>
                 <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#161513]/10 text-xs font-mono text-[#5C5852] space-y-1">
-                  <span className="text-[#D82E54] font-bold block uppercase tracking-wider">What I tried first:</span>
+                  <span className="text-[#8F5431] font-bold block uppercase tracking-wider">What I tried first:</span>
                   <p className="font-sans text-sm text-[#5C5852] font-light">
                     I first designed a multi-step modal wizard. Participants disliked having to tap "Next" three times just to see if any rooms met their budget in Sector 54. A single scrollable sheet with immediate feedback reduced filter abandonment.
                   </p>
@@ -916,7 +916,7 @@ export default function RoomlyCaseStudy() {
                   I placed the existing flatmate's profile and verified inventory right below the hero photo, before legal and lease terms.
                 </p>
                 <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#161513]/10 text-xs font-mono text-[#5C5852] space-y-1">
-                  <span className="text-[#D82E54] font-bold block uppercase tracking-wider">What I tried first:</span>
+                  <span className="text-[#8F5431] font-bold block uppercase tracking-wider">What I tried first:</span>
                   <p className="font-sans text-sm text-[#5C5852] font-light">
                     Earlier mockups had the security deposit terms taking up the first screenful. Testers scrolled straight past the numbers to see who was living in the flat. Prioritizing human context mirrored real user behavior.
                   </p>
@@ -937,7 +937,7 @@ export default function RoomlyCaseStudy() {
                   I replaced vague "compatibility scores" with concrete habit badges (Cleanliness, Sleep Schedule, Dietary preference) so users can make an informed choice on their own terms.
                 </p>
                 <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#161513]/10 text-xs font-mono text-[#5C5852] space-y-1">
-                  <span className="text-[#D82E54] font-bold block uppercase tracking-wider">What I tried first:</span>
+                  <span className="text-[#8F5431] font-bold block uppercase tracking-wider">What I tried first:</span>
                   <p className="font-sans text-sm text-[#5C5852] font-light">
                     My v1 design featured an animated "94% Match" badge. Every single interview subject asked what that number meant: "94% of what?" Replacing the score with factual tags built far greater trust.
                   </p>
@@ -968,7 +968,7 @@ export default function RoomlyCaseStudy() {
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
           
           <div className="max-w-2xl mb-16 text-left">
-            <span className="font-mono text-xs text-[#D82E54] uppercase tracking-widest block mb-2 font-semibold">
+            <span className="font-mono text-xs text-[#8F5431] uppercase tracking-widest block mb-2 font-semibold">
               Final UI Gallery · Exhibition
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-white tracking-tight leading-tight">
@@ -1013,7 +1013,7 @@ export default function RoomlyCaseStudy() {
               href="https://www.figma.com/proto/B3oFSh9ObaTE5YMCLYamwa/Roommate---Rooms-app?node-id=243-2171&t=iD2BAYVWj3NWawEU-1"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#121110] font-semibold text-xs hover:bg-[#D82E54] hover:text-white transition-all shadow-md font-mono uppercase tracking-wider"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#121110] font-semibold text-xs hover:bg-[#8F5431] hover:text-white transition-all shadow-md font-mono uppercase tracking-wider"
             >
               <span>Inspect Full Figma Flow</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -1058,7 +1058,7 @@ export default function RoomlyCaseStudy() {
                 <button
                   key={swatch.name}
                   onClick={() => handleCopyHex(swatch.hex)}
-                  className="flex flex-col text-left p-3 rounded-xl border border-[#161513]/10 bg-white hover:border-[#D82E54] transition-colors group cursor-pointer"
+                  className="flex flex-col text-left p-3 rounded-xl border border-[#161513]/10 bg-white hover:border-[#8F5431] transition-colors group cursor-pointer"
                 >
                   <div
                     className={`w-full aspect-square rounded-lg mb-2.5 ${
@@ -1067,7 +1067,7 @@ export default function RoomlyCaseStudy() {
                     style={{ backgroundColor: swatch.hex }}
                   />
                   <span className="text-xs font-semibold text-[#161513] truncate">{swatch.name}</span>
-                  <span className="text-[11px] font-mono text-[#8E8980] group-hover:text-[#D82E54] transition-colors">
+                  <span className="text-[11px] font-mono text-[#8E8980] group-hover:text-[#8F5431] transition-colors">
                     {swatch.hex}
                   </span>
                   <span className="text-[10px] text-[#5C5852] font-light mt-1 truncate">
@@ -1212,7 +1212,7 @@ export default function RoomlyCaseStudy() {
             </div>
 
             <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 space-y-2">
-              <span className="font-mono text-xs text-[#D82E54] font-semibold uppercase tracking-wider block">
+              <span className="font-mono text-xs text-[#8F5431] font-semibold uppercase tracking-wider block">
                 03 · What Failed & Got Scrapped
               </span>
               <h3 className="font-serif text-xl text-[#161513] font-semibold">
@@ -1252,7 +1252,7 @@ export default function RoomlyCaseStudy() {
             </span>
             <Link
               to="/#contact"
-              className="group inline-flex items-center gap-3 font-serif text-3xl sm:text-4xl text-[#161513] hover:text-[#D82E54] transition-colors"
+              className="group inline-flex items-center gap-3 font-serif text-3xl sm:text-4xl text-[#161513] hover:text-[#8F5431] transition-colors"
             >
               <span>Let's Build Something Memorable</span>
               <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

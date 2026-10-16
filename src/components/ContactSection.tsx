@@ -61,7 +61,7 @@ const ContactSection: React.FC = () => {
           <div className="lg:col-span-7 flex flex-col">
             <h2 className="font-serif text-[#161513] text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-normal tracking-tight leading-[1.04] mb-6">
               Let's create something{' '}
-              <span className="italic text-[#D82E54] font-serif block sm:inline">
+              <span className="italic text-[#8F5431] font-serif block sm:inline">
                 meaningful.
               </span>
             </h2>
@@ -85,9 +85,9 @@ const ContactSection: React.FC = () => {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
                 <a
                   href={`mailto:${email}`}
-                  className="font-mono text-sm sm:text-base font-semibold text-[#161513] hover:text-[#D82E54] transition-colors break-all flex items-center gap-2"
+                  className="font-mono text-sm sm:text-base font-semibold text-[#161513] hover:text-[#8F5431] transition-colors break-all flex items-center gap-2"
                 >
-                  <Mail className="w-4 h-4 text-[#D82E54] flex-shrink-0" />
+                  <Mail className="w-4 h-4 text-[#8F5431] flex-shrink-0" />
                   {email}
                 </a>
 
@@ -130,7 +130,7 @@ const ContactSection: React.FC = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#D82E54] transition-colors"
+                className="hover:text-[#8F5431] transition-colors"
               >
                 LinkedIn
               </a>
@@ -138,7 +138,7 @@ const ContactSection: React.FC = () => {
                 href="https://dribbble.com"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#D82E54] transition-colors"
+                className="hover:text-[#8F5431] transition-colors"
               >
                 Dribbble
               </a>
@@ -146,7 +146,7 @@ const ContactSection: React.FC = () => {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-[#D82E54] transition-colors"
+                className="hover:text-[#8F5431] transition-colors"
               >
                 GitHub
               </a>
@@ -268,7 +268,7 @@ const ContactSection: React.FC = () => {
                     {/* Submit Button */}
                     <button
                       type="submit"
-                      className="group w-full mt-2 py-3.5 px-6 rounded-full bg-[#161513] text-white hover:bg-[#D82E54] transition-all font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                      className="group w-full mt-2 py-3.5 px-6 rounded-full bg-[#161513] text-white hover:bg-[#8F5431] transition-all font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <span>Send Message</span>
                       <Send className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

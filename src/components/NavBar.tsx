@@ -124,7 +124,7 @@ const NavBar: React.FC = () => {
             <Link 
               to="/" 
               style={{ fontFamily: "'Ysabeau SC', sans-serif" }}
-              className="text-[#111111] dark:text-white font-extrabold text-2xl sm:text-3xl tracking-tighter hover:text-purple-600 dark:hover:text-purple-300 transition-colors duration-300 z-50 relative block"
+              className="text-[#111111] dark:text-white font-extrabold text-2xl sm:text-3xl tracking-tighter hover:text-[#8F5431] dark:hover:text-[#9c6644] transition-colors duration-300 z-50 relative block"
             >
               SK.
             </Link>
@@ -221,7 +221,7 @@ const NavBar: React.FC = () => {
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
                   }}
-                  className="text-[#111111] dark:text-white text-4xl sm:text-5xl font-light tracking-wide hover:text-purple-600 dark:hover:text-purple-300 transition-colors duration-300"
+                  className="text-[#111111] dark:text-white text-4xl sm:text-5xl font-light tracking-wide hover:text-[#8F5431] dark:hover:text-[#9c6644] transition-colors duration-300"
                   style={{ fontFamily: "'Arima', sans-serif" }}
                 >
                   {link.label}

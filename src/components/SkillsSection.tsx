@@ -78,7 +78,7 @@ const ToolCard = ({ tool, index }: { tool: typeof featuredTools[0]; index: numbe
           whileInView={{ width: `${tool.prof}%` }}
           viewport={{ once: true }}
           transition={{ delay: 0.25 + index * 0.08, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-          className="h-full bg-[#D82E54] rounded-full"
+          className="h-full bg-[#8F5431] rounded-full"
         />
       </div>
     </motion.div>
@@ -111,7 +111,7 @@ const SkillsSection: React.FC = () => {
 
           <h2 className="font-serif text-[#161513] text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-[1.05]">
             What I bring{' '}
-            <span className="italic text-[#D82E54] font-serif">
+            <span className="italic text-[#8F5431] font-serif">
               to every project.
             </span>
           </h2>
@@ -144,7 +144,7 @@ const SkillsSection: React.FC = () => {
             {skills.map((skill) => (
               <span
                 key={skill}
-                className="px-4 py-2 rounded-full border border-[#161513]/15 bg-[#FAF8F5] text-[#161513] hover:border-[#D82E54] hover:text-[#D82E54] hover:shadow-sm transition-all duration-300 font-mono text-xs cursor-default"
+                className="px-4 py-2 rounded-full border border-[#161513]/15 bg-[#FAF8F5] text-[#161513] hover:border-[#8F5431] hover:text-[#8F5431] hover:shadow-sm transition-all duration-300 font-mono text-xs cursor-default"
               >
                 {skill}
               </span>
