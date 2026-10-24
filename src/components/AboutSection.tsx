@@ -372,10 +372,10 @@ const AboutSection: React.FC = () => {
             <img 
               src="/image.png" 
               alt="Design Philosophy Statue"
-              className="w-full h-full object-cover object-center opacity-40 dark:opacity-50 transition-opacity duration-500"
+              className="w-full h-full object-cover object-center opacity-40 dark:opacity-85 transition-opacity duration-500"
             />
-            {/* Subtle warm overlay in light mode, soft dark wash in dark mode */}
-            <div className="absolute inset-0 bg-[#FAF8F5]/30 dark:bg-black/40 transition-colors duration-500" />
+            {/* Subtle warm overlay in light mode only */}
+            <div className="absolute inset-0 bg-[#FAF8F5]/30 dark:hidden transition-colors duration-500" />
             {/* Smooth top and bottom seamless fades matching background in both themes */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] via-transparent to-[#FAF8F5] dark:from-[#29251F] dark:via-transparent dark:to-[#29251F] transition-colors duration-500" />
           </div>
