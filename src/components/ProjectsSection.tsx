@@ -141,13 +141,13 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
       transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
       className="group relative rounded-[2.5rem] p-8 sm:p-12 md:p-14 lg:p-16 bg-[#FAF8F5] border border-[#161513]/12 shadow-[0_16px_40px_-8px_rgba(110,61,30,0.14),0_4px_16px_-2px_rgba(22,21,19,0.06)] hover:shadow-[0_28px_60px_-10px_rgba(110,61,30,0.22),0_10px_26px_-4px_rgba(156,102,68,0.14)] hover:border-[#8F5431]/35 transition-all duration-700 will-change-transform"
     >
-      {/* Decorative Index Watermark in Background */}
+      {/* Decorative Index Watermark in Background - Kept faint & non-overlapping */}
       <motion.span
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.9, delay: 0.3 }}
-        className="absolute top-6 right-8 sm:right-12 font-serif text-7xl sm:text-8xl md:text-9xl text-[#161513]/[0.03] select-none pointer-events-none transition-transform duration-700 group-hover:scale-105 group-hover:text-[#8F5431]/[0.06]"
+        className="absolute top-6 right-8 sm:right-12 font-serif text-7xl sm:text-8xl md:text-9xl select-none pointer-events-none transition-all duration-700 group-hover:scale-105 z-0 text-black/[0.04] dark:text-white/[0.05] group-hover:text-black/[0.08] dark:group-hover:text-white/[0.09]"
       >
         {project.num}
       </motion.span>
