@@ -1,130 +1,287 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 
+/**
+ * Upgraded High-Performance Custom Cursor
+ * - Instant follow dot with lerped smooth trailing ring (~0.15 lag)
+ * - Pure translate3d GPU transforms for 60fps
+ * - Velocity stretch in direction of motion (max ~1.15x)
+ * - Magnetic pull on buttons & nav links (max ~8px)
+ * - Dynamic hover states: links/cards (~1.6x + fill), text (vertical bar), media/drag (label)
+ * - Click feedback (0.85x scale on mousedown + ripple on mouseup)
+ * - Dark section adaptation (lighter ring on dark backgrounds)
+ * - Respects (hover: hover) & prefers-reduced-motion
+ */
 const CustomCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [cursorState, setCursorState] = useState<'default' | 'hover' | 'project'>('default');
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+  const [showRipple, setShowRipple] = useState(false);
+  const [cursorState, setCursorState] = useState<'default' | 'hover' | 'text' | 'media'>('default');
+  const [cursorLabel, setCursorLabel] = useState<string | null>(null);
+  const [isDarkBg, setIsDarkBg] = useState(false);
+  const [isOverInput, setIsOverInput] = useState(false);
 
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
 
-  // Ring trails with spring — the dot is raw (instant)
-  const ringConfig = { damping: 28, stiffness: 120, mass: 0.6 };
-  const ringX = useSpring(cursorX, ringConfig);
-  const ringY = useSpring(cursorY, ringConfig);
+  // Position & physics tracking
+  const mousePos = useRef({ x: -100, y: -100 });
+  const prevMousePos = useRef({ x: -100, y: -100 });
+  const ringPos = useRef({ x: -100, y: -100 });
+  const stretchRef = useRef(1);
+  const angleRef = useRef(0);
+  const activeMagneticEl = useRef<HTMLElement | null>(null);
+  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
-    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    // 1. Accessibility & device capability check: only enable on hoverable fine-pointer devices
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!isFinePointer) return;
 
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
-    };
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
+    // Read lag from CSS variable if available, default to 0.15
+    const computedLag = parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue('--cursor-ring-lag')
+    );
+    const ringLag = prefersReduced ? 1 : isNaN(computedLag) ? 0.15 : computedLag;
 
-    const handleHoverStart = (e: Event) => {
-      const target = e.currentTarget as HTMLElement;
-      if (target.dataset.cursor === 'project') {
-        setCursorState('project');
+    // Add active class to body for custom cursor styling
+    document.body.classList.add('custom-cursor-active');
+
+    // 2. Mouse Move Listener
+    const handleMouseMove = (e: MouseEvent) => {
+      mousePos.current = { x: e.clientX, y: e.clientY };
+
+      if (!hasMoved) {
+        setHasMoved(true);
+        setIsVisible(true);
+        ringPos.current = { x: e.clientX, y: e.clientY };
+      }
+
+      // Detect hovered element and context
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      // Check if over form inputs where native cursor should take precedence
+      const isInput = !!target.closest('input, textarea, select, [contenteditable="true"]');
+      setIsOverInput(isInput);
+
+      // Detect dark sections to invert ring color
+      const isDark = !!target.closest(
+        '#exhibition-gallery, .dark, [data-theme="dark"], .bg-\\[\\#121110\\], .bg-\\[\\#161513\\], .bg-\\[\\#0d0d10\\], .bg-black, .bg-\\[\\#1A1918\\], [data-dark="true"]'
+      );
+      setIsDarkBg(isDark);
+
+      // Check for custom label via data-cursor attribute
+      const labelEl = target.closest<HTMLElement>('[data-cursor]');
+      const customLabel = labelEl ? labelEl.dataset.cursor : null;
+
+      // Check for media / phone mockups
+      const isMedia =
+        !customLabel &&
+        !!target.closest('figure, [data-phone], .aspect-\\[9\\/19\\.5\\], img, video');
+
+      // Check for draggable areas
+      const isDragArea =
+        !customLabel &&
+        !!(
+          target.closest('.cursor-ew-resize, [data-draggable="true"]') ||
+          window.getComputedStyle(target).cursor === 'ew-resize'
+        );
+
+      if (customLabel) {
+        setCursorState('media');
+        setCursorLabel(customLabel);
+      } else if (isMedia) {
+        setCursorState('media');
+        setCursorLabel('View');
+      } else if (isDragArea) {
+        setCursorState('media');
+        setCursorLabel('Drag');
       } else {
-        setCursorState('hover');
+        setCursorLabel(null);
+
+        // Check for links, buttons, cards
+        const isInteractive = !!target.closest(
+          'a, button, [role="button"], .cursor-pointer, .rounded-xl.border, .rounded-2xl.border, .group.cursor-pointer'
+        );
+
+        if (isInteractive) {
+          setCursorState('hover');
+        } else {
+          // Check for text / paragraphs
+          const isText = !!(
+            target.closest('p, h1, h2, h3, h4, blockquote') &&
+            !target.closest('a, button, [role="button"]')
+          );
+
+          if (isText) {
+            setCursorState('text');
+          } else {
+            setCursorState('default');
+          }
+        }
+      }
+
+      // 3. Magnetic pull calculation for buttons and nav links
+      if (!prefersReduced) {
+        const magneticTarget = target.closest<HTMLElement>(
+          'header a, header button, a.rounded-full, button.rounded-full, [data-magnetic="true"]'
+        );
+
+        if (magneticTarget) {
+          activeMagneticEl.current = magneticTarget;
+          const rect = magneticTarget.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const deltaX = e.clientX - centerX;
+          const deltaY = e.clientY - centerY;
+
+          // Clamped magnetic pull (max ~8px)
+          const pullX = Math.max(-8, Math.min(8, deltaX * 0.22));
+          const pullY = Math.max(-8, Math.min(8, deltaY * 0.22));
+          magneticTarget.style.transform = `translate3d(${pullX.toFixed(1)}px, ${pullY.toFixed(1)}px, 0)`;
+        } else if (activeMagneticEl.current) {
+          // Smooth snap back when leaving magnetic zone
+          const prevEl = activeMagneticEl.current;
+          prevEl.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
+          prevEl.style.transform = 'translate3d(0, 0, 0)';
+          setTimeout(() => {
+            prevEl.style.transition = '';
+          }, 350);
+          activeMagneticEl.current = null;
+        }
       }
     };
-    const handleHoverEnd = () => setCursorState('default');
 
-    window.addEventListener('mousemove', moveCursor);
-    document.body.addEventListener('mouseleave', handleMouseLeave);
-    document.body.addEventListener('mouseenter', handleMouseEnter);
-
-    const setupInteractiveElements = () => {
-      const interactiveElements = document.querySelectorAll('a, button, [role="button"], input, select, textarea, [data-cursor]');
-      interactiveElements.forEach((el) => {
-        el.addEventListener('mouseenter', handleHoverStart);
-        el.addEventListener('mouseleave', handleHoverEnd);
-      });
-      return interactiveElements;
+    // 4. Mouse Window Edge Listeners
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => {
+      if (hasMoved) setIsVisible(true);
     };
 
-    let elements = setupInteractiveElements();
+    // 5. Click Feedback Listeners
+    const handleMouseDown = () => {
+      setIsClicking(true);
+      setShowRipple(false);
+    };
 
-    const observer = new MutationObserver(() => {
-      elements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleHoverStart);
-        el.removeEventListener('mouseleave', handleHoverEnd);
-      });
-      elements = setupInteractiveElements();
-    });
+    const handleMouseUp = () => {
+      setIsClicking(false);
+      setShowRipple(true);
+      setTimeout(() => setShowRipple(false), 450);
+    };
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+    document.documentElement.addEventListener('mouseenter', handleMouseEnter);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    // 6. 60fps Animation Loop with lerp and velocity stretch
+    const renderLoop = () => {
+      // Instant follow for dot
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) translate3d(-50%, -50%, 0)`;
+      }
+
+      // Soft lag for ring using lerp
+      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * ringLag;
+      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * ringLag;
+
+      // Velocity stretch calculation
+      const vx = mousePos.current.x - prevMousePos.current.x;
+      const vy = mousePos.current.y - prevMousePos.current.y;
+      prevMousePos.current = { ...mousePos.current };
+
+      const speed = Math.hypot(vx, vy);
+      const targetStretch = prefersReduced ? 1 : Math.min(1.15, 1 + speed * 0.0035);
+      stretchRef.current += (targetStretch - stretchRef.current) * 0.25;
+
+      if (speed > 1.2 && !prefersReduced) {
+        angleRef.current = Math.atan2(vy, vx) * (180 / Math.PI);
+      }
+
+      if (ringRef.current) {
+        const stretch = stretchRef.current;
+        const squash = 1 / Math.sqrt(stretch);
+        const angle = angleRef.current;
+
+        ringRef.current.style.transform = `translate3d(${ringPos.current.x.toFixed(1)}px, ${ringPos.current.y.toFixed(1)}px, 0) translate3d(-50%, -50%, 0) rotate(${angle.toFixed(1)}deg) scale(${stretch.toFixed(3)}, ${squash.toFixed(3)}) rotate(${-angle.toFixed(1)}deg)`;
+      }
+
+      rafId.current = requestAnimationFrame(renderLoop);
+    };
+
+    rafId.current = requestAnimationFrame(renderLoop);
 
     return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      document.body.removeEventListener('mouseleave', handleMouseLeave);
-      document.body.removeEventListener('mouseenter', handleMouseEnter);
-      elements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleHoverStart);
-        el.removeEventListener('mouseleave', handleHoverEnd);
-      });
-      observer.disconnect();
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
+      document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      document.body.classList.remove('custom-cursor-active');
+
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      if (activeMagneticEl.current) {
+        activeMagneticEl.current.style.transform = '';
+      }
     };
-  }, [cursorX, cursorY, isVisible]);
+  }, [hasMoved]);
 
-  if (isTouchDevice || typeof window === 'undefined') return null;
+  if (!hasMoved) return null;
 
-  const ringScale = cursorState === 'project' ? 3.5 : cursorState === 'hover' ? 2.2 : 1;
-  const ringFill = cursorState !== 'default';
-  const dotVisible = cursorState === 'default';
+  // Scale calculations for different states
+  const isMediaState = cursorState === 'media';
+  const isTextState = cursorState === 'text';
+  const isHoverState = cursorState === 'hover';
+
+  let ringScaleClass = 'scale-100';
+  if (isClicking) {
+    ringScaleClass = 'scale-[0.85]';
+  } else if (isMediaState) {
+    ringScaleClass = 'scale-[2.4]';
+  } else if (isHoverState) {
+    ringScaleClass = 'scale-[1.6]';
+  }
+
+  const dotHidden = isTextState || isMediaState || isOverInput;
+  const cursorOpacity = isVisible && !isOverInput ? 1 : 0;
 
   return (
-    <>
-      {/* Trailing ring — mix-blend-difference inverts colors on bg */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full border border-white pointer-events-none z-[9999] mix-blend-difference hidden md:flex items-center justify-center"
-        style={{
-          x: ringX,
-          y: ringY,
-          translateX: '-50%',
-          translateY: '-50%',
-          opacity: isVisible ? 1 : 0,
-          width: 36,
-          height: 36,
-        }}
-        animate={{
-          scale: ringScale,
-          backgroundColor: ringFill ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
-        }}
-        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      className="custom-cursor-container"
+      style={{ opacity: cursorOpacity }}
+      aria-hidden="true"
+    >
+      {/* ── Ring Element ── */}
+      <div
+        ref={ringRef}
+        className={`cursor-ring ${ringScaleClass} ${
+          isDarkBg ? 'is-dark' : ''
+        } ${isHoverState ? 'is-hovered' : ''} ${isTextState ? 'is-text' : ''}`}
       >
-        {cursorState === 'project' && (
-          <motion.span
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            className="text-black text-xs font-bold tracking-wider uppercase pointer-events-none select-none"
-            style={{ mixBlendMode: 'normal' }}
-          >
-            View
-          </motion.span>
+        {/* Label for Images / Drag / Custom attributes */}
+        {isMediaState && cursorLabel && (
+          <span className="cursor-label animate-fade-in">{cursorLabel}</span>
         )}
-      </motion.div>
 
-      {/* Dot — instant, no spring, disappears on hover */}
-      <motion.div
-        className="fixed top-0 left-0 w-[6px] h-[6px] bg-white rounded-full pointer-events-none z-[10000] mix-blend-difference hidden md:block"
+        {/* Click ripple feedback */}
+        {showRipple && <span className="cursor-ripple" />}
+      </div>
+
+      {/* ── Dot Element (Instant follow, small blue dot) ── */}
+      <div
+        ref={dotRef}
+        className="cursor-dot"
         style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
-          opacity: isVisible && dotVisible ? 1 : 0,
+          opacity: dotHidden ? 0 : 1,
+          transform: isHoverState ? 'scale(0.5)' : 'scale(1)',
         }}
-        transition={{ duration: 0.1 }}
       />
-    </>
+    </div>
   );
 };
 

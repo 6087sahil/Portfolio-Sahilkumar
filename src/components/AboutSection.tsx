@@ -111,7 +111,7 @@ const AboutSection: React.FC = () => {
                     <img 
                       src={imageUrl} 
                       alt="Sahil Kumar" 
-                      className="w-full h-full object-cover filter grayscale opacity-90 mix-blend-luminosity hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out" 
+                      className="w-full h-full object-cover transition-all duration-700 ease-out" 
                     />
                     
                     {/* Embedded details */}

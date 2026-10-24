@@ -179,3 +179,157 @@ html.lenis {
   box-shadow: 0 24px 56px -6px rgba(110, 61, 30, 0.32), 0 0 30px 2px rgba(156, 102, 68, 0.24);
   border-color: rgba(142, 84, 49, 0.45) !important;
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CUSTOM CURSOR CONFIGURATION & STYLES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --cursor-dot-size: 6px;
+  --cursor-ring-size: 34px;
+  --cursor-ring-lag: 0.15;
+  --cursor-accent: #8F5431;                          /* Warm brown dot & subtle hover accent fill */
+  --cursor-ring-color: rgba(143, 84, 49, 0.5);      /* Thin light-grey ring on light background */
+  --cursor-ring-color-dark: rgba(255, 255, 255, 0.7);/* Lighter ring on dark sections */
+}
+
+/* Hide native cursor only when custom cursor is active on fine-pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active [role="button"],
+  body.custom-cursor-active .cursor-pointer {
+    cursor: none !important;
+  }
+
+  /* Keep native cursor on form inputs and textareas */
+  body.custom-cursor-active input,
+  body.custom-cursor-active textarea,
+  body.custom-cursor-active select,
+  body.custom-cursor-active [contenteditable="true"] {
+    cursor: auto !important;
+  }
+}
+
+/* Custom Cursor Root Container */
+.custom-cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999;
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+}
+
+/* Cursor Dot: Instant follow, warm brown dot */
+.cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cursor-dot-size);
+  height: var(--cursor-dot-size);
+  border-radius: 9999px;
+  background-color: var(--cursor-accent);
+  pointer-events: none;
+  will-change: transform;
+  transform: translate3d(-100px, -100px, 0) translate3d(-50%, -50%, 0);
+  transition: opacity 0.2s ease;
+}
+
+/* Cursor Ring: Smooth trailing with lerp and hover transformations */
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cursor-ring-size);
+  height: var(--cursor-ring-size);
+  border-radius: 9999px;
+  border: 1.5px solid var(--cursor-ring-color);
+  background-color: transparent;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  transform: translate3d(-100px, -100px, 0) translate3d(-50%, -50%, 0);
+  transition: border-color 0.2s ease,
+              background-color 0.25s ease,
+              width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              border-radius 0.25s ease;
+}
+
+/* Dark mode ring adaptation */
+.cursor-ring.is-dark {
+  border-color: var(--cursor-ring-color-dark);
+}
+
+/* Hover state: links, buttons, cards */
+.cursor-ring.is-hovered {
+  background-color: rgba(143, 84, 49, 0.12);
+  border-color: var(--cursor-accent);
+}
+
+.cursor-ring.is-hovered.is-dark {
+  background-color: rgba(143, 84, 49, 0.24);
+  border-color: rgba(220, 168, 137, 0.85);
+}
+
+/* Text hover state: sleek vertical text cursor bar */
+.cursor-ring.is-text {
+  width: 3px !important;
+  height: 22px !important;
+  border-radius: 2px !important;
+  border: none !important;
+  background-color: var(--cursor-accent) !important;
+}
+
+/* Label inside expanded ring (View / Drag / Custom) */
+.cursor-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #161513;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cursor-ring.is-dark .cursor-label {
+  color: #FAF8F5;
+}
+
+/* Click ripple feedback */
+.cursor-ripple {
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--cursor-accent);
+  pointer-events: none;
+  animation: cursorRippleAnim 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cursorRippleAnim {
+  0% { transform: scale(0.85); opacity: 0.8; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+
+/* Accessibility: prefers-reduced-motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --cursor-ring-lag: 1;
+  }
+  .cursor-ring,
+  .cursor-dot {
+    transition: none !important;
+  }
+  .cursor-ripple {
+    display: none !important;
+  }
+}
