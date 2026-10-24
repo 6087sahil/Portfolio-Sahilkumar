@@ -446,7 +446,7 @@ const AboutSection: React.FC = () => {
             
             <Magnet strength={10} padding={20}>
               <a 
-                href="/#work" 
+                href="/#projects" 
                 className="group relative flex items-center justify-center gap-2 px-8 py-4 rounded-full font-mono font-semibold text-xs sm:text-sm tracking-wider uppercase text-[#161513] border border-[#161513]/20 hover:border-[#8F5431] hover:text-[#8F5431] transition-colors duration-300"
               >
                 <span>VIEW PROJECTS</span>

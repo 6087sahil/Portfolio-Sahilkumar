@@ -362,7 +362,7 @@ const ProjectsSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      id="work"
+      id="projects"
       className="relative bg-[#F4F1EA] text-[#161513] py-28 md:py-36 border-t border-[#161513]/10 overflow-hidden"
     >
       {/* Background Subtle Ambient Glow */}
