@@ -378,6 +378,8 @@ const AboutSection: React.FC = () => {
             <div className="absolute inset-0 bg-[#FAF8F5]/30 dark:hidden transition-colors duration-500" />
             {/* Smooth top and bottom seamless fades matching background in both themes */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] via-transparent to-[#FAF8F5] dark:from-[#29251F] dark:via-transparent dark:to-[#29251F] transition-colors duration-500" />
+            {/* Subtle center scrim in dark mode to ensure text stands out over the statue */}
+            <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(23,21,18,0.75)_0%,rgba(23,21,18,0.35)_55%,transparent_85%)] pointer-events-none" />
           </div>
 
           {/* Ambient Glow */}
@@ -391,14 +393,16 @@ const AboutSection: React.FC = () => {
           </motion.div>
 
           <div className="relative z-10 w-full max-w-5xl flex flex-col gap-8 items-center px-6">
-            <span className="text-[#8E8980] font-mono text-xs uppercase tracking-wider">DESIGN PHILOSOPHY</span>
+            <span className="text-[#8E8980] dark:text-[#F4F1EA] dark:bg-[#171512]/70 dark:border dark:border-[#403830]/60 dark:px-3.5 dark:py-1 dark:rounded-full font-mono text-xs uppercase tracking-wider backdrop-blur-xs">
+              DESIGN PHILOSOPHY
+            </span>
             <div className="flex flex-col gap-2">
               <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#161513]"
+                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#161513] dark:text-[#FFFFFF] [text-shadow:0_2px_24px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]"
               >
                 Good design gets attention.
               </motion.h2>
@@ -407,7 +411,7 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#8F5431] italic"
+                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#8F5431] dark:text-[#E8AF8B] italic [text-shadow:0_2px_24px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]"
               >
                 Great design makes things effortless.
               </motion.h2>
