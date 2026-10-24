@@ -1,4 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap');
+﻿@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
@@ -47,7 +47,7 @@ html.lenis {
   background-clip: text;
 }
 
-/* ─── Fluid Type Scale ─────────────────────────────── */
+/* â”€â”€â”€ Fluid Type Scale â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 :root {
   --text-xs:      clamp(0.625rem, 0.5vw + 0.5rem,   0.75rem);
   --text-sm:      clamp(0.8125rem, 0.6vw + 0.65rem,  0.9375rem);
@@ -61,7 +61,7 @@ html.lenis {
   --text-display: clamp(3rem,      7vw + 0.5rem,     6.5rem);
 }
 
-/* ─── Word-mask base styles (used by TextReveal) ─── */
+/* â”€â”€â”€ Word-mask base styles (used by TextReveal) â”€â”€â”€ */
 .word-mask-wrapper {
   display: inline-block;
   overflow: hidden;
@@ -73,13 +73,13 @@ html.lenis {
   will-change: transform;
 }
 
-/* ─── Clip path reveal base (GPU-only) ──────────── */
+/* â”€â”€â”€ Clip path reveal base (GPU-only) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .clip-reveal {
   clip-path: inset(0 0 100% 0);
   will-change: clip-path, opacity;
 }
 
-/* ─── Scroll progress bar ─────────────────────────── */
+/* â”€â”€â”€ Scroll progress bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 #scroll-progress {
   position: fixed;
   top: 0;
@@ -93,7 +93,7 @@ html.lenis {
   pointer-events: none;
 }
 
-/* ── Custom Utilities ── */
+/* â”€â”€ Custom Utilities â”€â”€ */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -102,7 +102,7 @@ html.lenis {
   scrollbar-width: none;
 }
 
-/* ── Continuous Marquee ── */
+/* â”€â”€ Continuous Marquee â”€â”€ */
 .marquee-track {
   animation: marquee 35s linear infinite;
 }
@@ -118,7 +118,7 @@ html.lenis {
   100% { transform: translateX(calc(-50% - 0.5rem)); } /* -50% of the duplicated content width minus gap */
 }
 
-/* ─── Reduced motion override ─────────────────────── */
+/* â”€â”€â”€ Reduced motion override â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -143,7 +143,7 @@ html.lenis {
   }
 }
 
-/* ─── Premium Warm Brown Glowing Shadow Utilities ─────────────────────── */
+/* â”€â”€â”€ Premium Warm Brown Glowing Shadow Utilities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .shadow-brown-sm,
 .shadow-purple-sm {
   box-shadow: 0 4px 20px -2px rgba(110, 61, 30, 0.2), 0 2px 8px -1px rgba(156, 102, 68, 0.12);
@@ -181,9 +181,9 @@ html.lenis {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CUSTOM CURSOR CONFIGURATION & STYLES
-   ═══════════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 :root {
   --cursor-dot-size: 6px;
   --cursor-ring-size: 34px;
@@ -332,4 +332,171 @@ html.lenis {
   .cursor-ripple {
     display: none !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   PREMIUM EDITORIAL DARK THEME SYSTEM
+   Seamless dual-theme mapping without structural changes
+   ═══════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --theme-transition: background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+                      border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+                      color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+                      box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html, body, #root, .main-wrapper {
+  transition: var(--theme-transition);
+}
+
+/* Dark mode root variables */
+html.dark {
+  background-color: #171512 !important;
+  color: #F4F1EA !important;
+}
+
+html.dark body {
+  background-color: #171512 !important;
+  color: #F4F1EA !important;
+}
+
+html.dark .main-wrapper {
+  background-color: #171512 !important;
+  color: #F4F1EA !important;
+}
+
+/* 1. Main Backgrounds: #F4F1EA -> #171512 */
+html.dark .bg-\[\#F4F1EA\] {
+  background-color: #171512 !important;
+}
+
+html.dark [class*="bg-[#F4F1EA]"] {
+  background-color: #171512 !important;
+}
+
+/* 2. Secondary Backgrounds: #EDE8DE -> #211E1A */
+html.dark .bg-\[\#EDE8DE\] {
+  background-color: #211E1A !important;
+}
+
+html.dark [class*="bg-[#EDE8DE]"] {
+  background-color: #211E1A !important;
+}
+
+html.dark .bg-\[\#E5DFD4\] {
+  background-color: #39332D !important;
+  color: #B8AFA4 !important;
+}
+
+/* 3. Card Backgrounds: #FAF8F5 -> #29251F */
+html.dark .bg-\[\#FAF8F5\],
+html.dark [class*="bg-[#FAF8F5]"] {
+  background-color: #29251F !important;
+}
+
+/* 4. Text Inversion: Dark Ink -> Editorial Light Cream */
+html.dark .text-\[\#161513\],
+html.dark [class*="text-[#161513]"] {
+  color: #F4F1EA !important;
+}
+
+html.dark .text-\[\#111111\] {
+  color: #F4F1EA !important;
+}
+
+html.dark .text-\[\#5C5852\],
+html.dark [class*="text-[#5C5852]"] {
+  color: #B8AFA4 !important;
+}
+
+html.dark .text-\[\#8E8980\],
+html.dark [class*="text-[#8E8980]"] {
+  color: #8E8980 !important;
+}
+
+/* 5. Accent Brown readability on dark: #8F5431 -> #C58B65 */
+html.dark .text-\[\#8F5431\],
+html.dark [class*="text-[#8F5431]"] {
+  color: #C58B65 !important;
+}
+
+html.dark .bg-\[\#8F5431\] {
+  background-color: #C58B65 !important;
+}
+
+/* 6. Subtle Borders: #161513/10..15 -> #403830 */
+html.dark .border-\[\#161513\]\/10,
+html.dark .border-\[\#161513\]\/12,
+html.dark .border-\[\#161513\]\/15,
+html.dark .border-\[\#161513\]\/20,
+html.dark .border-\[\#161513\]\/25,
+html.dark [class*="border-[#161513]"] {
+  border-color: #403830 !important;
+}
+
+html.dark .divide-\[\#161513\]\/10 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #403830 !important;
+}
+
+/* 7. Card Elevation Shadows for dark mode (subtle warm depth) */
+html.dark .shadow-\[0_16px_40px_-8px_rgba\(110\,61\,30\,0\.14\)\,0_4px_16px_-2px_rgba\(22\,21\,19\,0\.06\)\],
+html.dark .shadow-\[0_12px_36px_-6px_rgba\(110\,61\,30\,0\.16\)\,0_4px_16px_-2px_rgba\(156\,102\,68\,0\.08\)\],
+html.dark .shadow-\[0_12px_36px_-6px_rgba\(110\,61\,30\,0\.18\)\,0_4px_16px_-2px_rgba\(156\,102\,68\,0\.10\)\] {
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.55), 0 4px 16px -2px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.dark .shadow-brown-sm,
+html.dark .shadow-purple-sm {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5) !important;
+}
+
+html.dark .shadow-brown-card,
+html.dark .shadow-purple-card {
+  box-shadow: 0 12px 36px -6px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 8. White elements in dark mode */
+html.dark .bg-white\/95,
+html.dark .bg-white\/90 {
+  background-color: rgba(41, 37, 31, 0.95) !important;
+  color: #F4F1EA !important;
+}
+
+html.dark button.bg-\[\#161513\],
+html.dark a.bg-\[\#161513\] {
+  background-color: #C58B65 !important;
+  color: #171512 !important;
+}
+
+html.dark button.bg-\[\#161513\]:hover,
+html.dark a.bg-\[\#161513\]:hover {
+  background-color: #d49a75 !important;
+}
+
+/* 9. Cursor Adaptation in Dark Mode */
+html.dark {
+  --cursor-accent: #C58B65;
+  --cursor-ring-color: rgba(197, 139, 101, 0.5);
+}
+
+html.dark .cursor-ring {
+  border-color: rgba(197, 139, 101, 0.5) !important;
+}
+
+html.dark .cursor-dot {
+  background-color: #C58B65 !important;
+}
+
+/* Smooth transition for themeable properties */
+.transition-colors,
+.transition-all,
+section,
+div[class*="rounded-"],
+article,
+header,
+footer,
+nav {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 350ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
