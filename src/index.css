@@ -600,8 +600,7 @@ section,
 div[class*="rounded-"],
 article,
 header,
-footer,
-nav {
+footer {
   transition-property: background-color, border-color, color, box-shadow;
   transition-duration: 350ms;
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
