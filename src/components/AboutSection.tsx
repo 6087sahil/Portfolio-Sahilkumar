@@ -402,7 +402,7 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#161513] dark:text-[#FFFFFF] [text-shadow:0_2px_24px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]"
+                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#161513] dark:text-[#FFFFFF] dark:[text-shadow:0_2px_24px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]"
               >
                 Good design gets attention.
               </motion.h2>
@@ -411,7 +411,7 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#8F5431] dark:text-[#E8AF8B] italic [text-shadow:0_2px_24px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]"
+                className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#8F5431] dark:text-[#E8AF8B] italic dark:[text-shadow:0_2px_24px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]"
               >
                 Great design makes things effortless.
               </motion.h2>
