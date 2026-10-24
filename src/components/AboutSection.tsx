@@ -367,17 +367,15 @@ const AboutSection: React.FC = () => {
         {/* 7. PHILOSOPHY MOMENT */}
         {/* ========================================================= */}
         <div className="relative w-[100vw] left-1/2 -translate-x-1/2 py-32 md:py-48 flex flex-col items-center justify-center text-center overflow-hidden bg-[#FAF8F5] dark:bg-[#171512] border-y border-[#161513]/10 dark:border-[#403830]">
-          {/* Background Image & Overlays */}
+          {/* Background Image & Overlays - Dark Mode Only */}
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
             <img 
               src="/image.png" 
               alt="Design Philosophy Statue" 
-              className="w-full h-full object-cover object-center opacity-40 dark:opacity-65 transition-opacity duration-500"
+              className="hidden dark:block w-full h-full object-cover object-center opacity-75 transition-opacity duration-500"
             />
-            {/* Subtle warm overlay in light mode, transparent in dark mode */}
-            <div className="absolute inset-0 bg-[#FAF8F5]/30 dark:bg-transparent transition-colors duration-500" />
-            {/* Smooth top and bottom seamless edge fades */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] dark:from-[#171512] via-transparent to-[#FAF8F5] dark:to-[#171512]" />
+            {/* Smooth top and bottom seamless edge fades in dark mode */}
+            <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-[#171512] via-transparent to-[#171512]" />
           </div>
 
           {/* Ambient Glow */}
