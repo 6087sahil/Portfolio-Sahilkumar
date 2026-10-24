@@ -206,14 +206,15 @@ const NavBar: React.FC = () => {
 
             {/* Desktop CTA */}
             <div className="hidden md:block">
-              <Magnet strength={5} padding={50}>
+              <Magnet strength={4} padding={40}>
                 <a
                   href="/#contact"
+                  data-no-cursor-magnet="true"
                   onClick={(e) => handleNavClick(e, '/#contact')}
-                  className="group relative inline-flex items-center gap-2 bg-[#111111] dark:bg-[#C58B65] text-white dark:text-[#171512] px-6 py-2.5 rounded-full font-semibold text-sm tracking-wide hover:bg-stone-800 dark:hover:bg-[#d49a75] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(156,102,68,0.4)]"
+                  className="group relative inline-flex items-center gap-2 overflow-hidden bg-[#111111] dark:bg-[#C58B65] text-white dark:text-[#171512] px-6 py-2.5 rounded-full font-semibold text-sm tracking-wide transition-[background-color,color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-stone-800 dark:hover:bg-[#d49a75] hover:shadow-[0_4px_20px_rgba(197,139,101,0.35)] active:scale-[0.97]"
                 >
-                  Let's Talk
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <span className="relative z-10">Let's Talk</span>
+                  <ArrowRight className="w-4 h-4 relative z-10 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />
                 </a>
               </Magnet>
             </div>

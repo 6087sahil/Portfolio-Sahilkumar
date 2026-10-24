@@ -127,7 +127,7 @@ const CustomCursor: React.FC = () => {
       // 3. Magnetic pull calculation for buttons and nav links
       if (!prefersReduced) {
         const magneticTarget = target.closest<HTMLElement>(
-          'header a, header button, a.rounded-full, button.rounded-full, [data-magnetic="true"]'
+          'header a:not([data-no-cursor-magnet]), header button:not([data-no-cursor-magnet]), a.rounded-full:not([data-no-cursor-magnet]), button.rounded-full:not([data-no-cursor-magnet]), [data-magnetic="true"]'
         );
 
         if (magneticTarget) {
@@ -247,7 +247,7 @@ const CustomCursor: React.FC = () => {
     ringScaleClass = 'scale-[1.6]';
   }
 
-  const dotHidden = isTextState || isMediaState || isOverInput;
+  const dotHidden = isHoverState || isTextState || isMediaState || isOverInput;
   const cursorOpacity = isVisible && !isOverInput ? 1 : 0;
 
   return (
