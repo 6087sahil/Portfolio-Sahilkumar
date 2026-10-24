@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, Sun, Moon } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -15,50 +15,109 @@ const navLinks = [
 const NavBar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Scroll logic for navbar background
+  const isScrolledRef = useRef(false);
+  const isClickNavigatingRef = useRef(false);
+
+  // Stable scroll listener with hysteresis & requestAnimationFrame
+  // Activate scrolled state at > 65px; deactivate only when scrolling back above < 30px
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+    let rafId: number | null = null;
+
+    const onScroll = () => {
+      if (rafId !== null) return;
+
+      rafId = window.requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const currentScrolled = isScrolledRef.current;
+
+        if (!currentScrolled && y > 65) {
+          isScrolledRef.current = true;
+          setScrolled(true);
+        } else if (currentScrolled && y < 30) {
+          isScrolledRef.current = false;
+          setScrolled(false);
+        }
+
+        rafId = null;
+      });
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Initial sync
+    onScroll();
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  // Intersection Observer for active section (only on home page)
+  // Intersection Observer for active section on home page
   useEffect(() => {
     if (location.pathname !== '/') {
       setActiveSection(location.pathname);
       return;
     }
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-30% 0px -70% 0px',
-      threshold: 0
+    // Map section IDs to their corresponding nav href
+    const sectionToNavMap: Record<string, string> = {
+      services: '/#services',
+      skills: '/#skills',
+      work: '/#work',
+      projects: '/#work',
     };
 
+    const observerOptions: IntersectionObserverInit = {
+      root: null,
+      // Focus on the upper center of the viewport for natural reading position
+      rootMargin: '-25% 0px -55% 0px',
+      threshold: [0, 0.2, 0.5],
+    };
+
+    const intersectingMap = new Map<string, number>();
+
     const observerCallback: IntersectionObserverCallback = (entries) => {
+      if (isClickNavigatingRef.current) return;
+
       entries.forEach((entry) => {
+        const id = entry.target.id;
         if (entry.isIntersecting) {
-          const id = entry.target.id;
-          setActiveSection(`/#${id}`);
+          intersectingMap.set(id, entry.intersectionRatio);
+        } else {
+          intersectingMap.delete(id);
         }
       });
+
+      // Find the section with the highest intersection ratio
+      let bestId = '';
+      let highestRatio = -1;
+      intersectingMap.forEach((ratio, id) => {
+        if (ratio > highestRatio) {
+          highestRatio = ratio;
+          bestId = id;
+        }
+      });
+
+      if (bestId && sectionToNavMap[bestId]) {
+        setActiveSection(sectionToNavMap[bestId]);
+      } else if (window.scrollY < 180) {
+        // At the top of hero, clear active section
+        setActiveSection('');
+      }
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    navLinks.forEach((link) => {
-      if (link.href.startsWith('/#')) {
-        const id = link.href.substring(2);
-        const element = document.getElementById(id);
-        if (element) observer.observe(element);
-      }
+    const observeIds = ['services', 'skills', 'work', 'projects'];
+    observeIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
@@ -79,26 +138,30 @@ const NavBar: React.FC = () => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    
+
     if (href.startsWith('/#')) {
       const hash = href.substring(1); // e.g. '#services'
+      setActiveSection(href);
+      isClickNavigatingRef.current = true;
+      setTimeout(() => {
+        isClickNavigatingRef.current = false;
+      }, 800);
+
       if (location.pathname === '/') {
-        // We are already on home, just scroll
+        // We are already on home, scroll to target element
         const id = hash.substring(1);
-        const element = document.getElementById(id);
+        const element = document.getElementById(id) || (id === 'work' ? document.getElementById('projects') : null);
         if (element) {
-          const offsetTop = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 90;
           window.scrollTo({
-            top: offsetTop,
+            top: Math.max(0, offsetTop),
             behavior: 'smooth'
           });
         }
       } else {
-        // Navigate to home with hash
         navigate(`/${hash}`);
       }
     } else {
-      // Just navigate to the page
       navigate(href);
     }
   };
@@ -110,13 +173,13 @@ const NavBar: React.FC = () => {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[100] w-full transition-[padding,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[padding,transform] ${
-          isScrolledStyle ? 'py-4 px-4 sm:px-8' : 'py-8 px-6 lg:px-12'
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-[100] w-full transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isScrolledStyle ? 'py-3.5 px-4 sm:px-8' : 'py-7 px-6 lg:px-12'
         }`}
       >
         <div 
-          className={`mx-auto flex items-center w-full transition-[max-width,padding,background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[max-width,padding,box-shadow] ${
+          className={`mx-auto flex items-center w-full transition-[max-width,padding,background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             isScrolledStyle 
               ? 'max-w-4xl bg-white/70 dark:bg-[#211E1A]/80 backdrop-blur-xl border border-black/10 dark:border-[#403830] rounded-full py-3 px-6 sm:px-8 shadow-[0_4px_30px_rgba(156,102,68,0.08)]' 
               : 'max-w-7xl bg-transparent border-transparent py-0 px-0 shadow-none'
@@ -133,25 +196,52 @@ const NavBar: React.FC = () => {
             </Link>
           </div>
 
-          {/* CENTER: Desktop Links */}
-          <div className="hidden md:flex flex-shrink-0 items-center gap-1 lg:gap-2">
+          {/* CENTER: Desktop Links with Smooth LayoutId Pill Motion */}
+          <div 
+            className="hidden md:flex flex-shrink-0 items-center gap-1 lg:gap-2"
+            onMouseLeave={() => setHoveredLink(null)}
+          >
             {navLinks.map((link) => {
               const isActive = activeSection === link.href || (location.pathname === link.href);
+              const isHovered = hoveredLink === link.href;
+
               return (
                 <a
                   key={link.label}
                   href={link.href}
+                  onMouseEnter={() => setHoveredLink(link.href)}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative inline-flex items-center justify-center px-4 lg:px-5 py-2 text-xs font-medium tracking-[0.05em] uppercase transition-colors duration-300 ${
-                    isActive ? 'text-[#111111] dark:text-[#F4F1EA]' : 'text-[#111111]/50 dark:text-[#B8AFA4] hover:text-[#111111]/90 dark:hover:text-[#F4F1EA]'
+                  className={`relative inline-flex items-center justify-center px-4 lg:px-5 py-2 text-xs font-medium tracking-[0.05em] uppercase transition-colors duration-300 select-none ${
+                    isActive 
+                      ? 'text-[#111111] dark:text-[#F4F1EA]' 
+                      : 'text-[#111111]/55 dark:text-[#B8AFA4] hover:text-[#111111] dark:hover:text-[#F4F1EA]'
                   }`}
                 >
-                  <span className="relative z-10 pt-[1px]">{link.label}</span>
+                  <span className="relative z-10 pt-[1px] pointer-events-none">{link.label}</span>
+
+                  {/* Refined Active Indicator Spring */}
                   {isActive && (
                     <motion.div
                       layoutId="activeNavBackground"
-                      className="absolute inset-0 bg-black/5 dark:bg-white/10 rounded-full"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      className="absolute inset-0 bg-black/[0.06] dark:bg-white/[0.12] rounded-full pointer-events-none"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 32,
+                        mass: 0.8
+                      }}
+                    />
+                  )}
+
+                  {/* Subtle Gentle Hover Background (when not active) */}
+                  {isHovered && !isActive && (
+                    <motion.div
+                      layoutId="hoverNavBackground"
+                      className="absolute inset-0 bg-black/[0.03] dark:bg-white/[0.05] rounded-full pointer-events-none"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
                     />
                   )}
                 </a>
