@@ -111,12 +111,12 @@ const NavBar: React.FC = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[100] w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed top-0 left-0 right-0 z-[100] w-full transition-[padding,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[padding,transform] ${
           isScrolledStyle ? 'py-4 px-4 sm:px-8' : 'py-8 px-6 lg:px-12'
         }`}
       >
         <div 
-          className={`mx-auto flex items-center w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`mx-auto flex items-center w-full transition-[max-width,padding,background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[max-width,padding,box-shadow] ${
             isScrolledStyle 
               ? 'max-w-4xl bg-white/70 dark:bg-[#211E1A]/80 backdrop-blur-xl border border-black/10 dark:border-[#403830] rounded-full py-3 px-6 sm:px-8 shadow-[0_4px_30px_rgba(156,102,68,0.08)]' 
               : 'max-w-7xl bg-transparent border-transparent py-0 px-0 shadow-none'
