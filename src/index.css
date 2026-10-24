@@ -400,7 +400,7 @@ html.dark [class*="text-[#161513]"] {
   color: #F4F1EA !important;
 }
 
-html.dark .text-\[\#111111\] {
+html.dark .text-\[\#111111\]:not(.hero-cta-btn):not(.hero-cta-btn *) {
   color: #F4F1EA !important;
 }
 
@@ -597,7 +597,16 @@ html.dark .cursor-dot {
   background-color: #C58B65 !important;
 }
 
-/* 11. Subtle selection color */
+/* 11. Hero CTA Button Dark Mode Protection */
+html.dark .hero-cta-btn {
+  background-color: #FFFFFF !important;
+  color: #111111 !important;
+}
+html.dark .hero-cta-btn * {
+  color: #111111 !important;
+}
+
+/* 12. Subtle selection color */
 html.dark ::selection {
   background-color: rgba(197, 139, 101, 0.3) !important;
   color: #F4F1EA !important;
