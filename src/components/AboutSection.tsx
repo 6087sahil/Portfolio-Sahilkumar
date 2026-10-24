@@ -368,16 +368,16 @@ const AboutSection: React.FC = () => {
         {/* ========================================================= */}
         <div className="relative w-[100vw] left-1/2 -translate-x-1/2 py-32 md:py-48 flex flex-col items-center justify-center text-center overflow-hidden bg-[#FAF8F5] border-y border-[#161513]/10">
           {/* Background Image & Overlays */}
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 pointer-events-none">
             <img 
               src="/image.png" 
               alt="Design Philosophy Statue"
-              className="w-full h-full object-cover object-center opacity-40"
+              className="w-full h-full object-cover object-center opacity-40 dark:opacity-50 transition-opacity duration-500"
             />
-            {/* Subtle warm overlay to soften while preserving colors and details */}
-            <div className="absolute inset-0 bg-[#FAF8F5]/30" />
-            {/* Smooth top and bottom seamless fades into adjacent sections */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] via-transparent to-[#FAF8F5]" />
+            {/* Subtle warm overlay in light mode, soft dark wash in dark mode */}
+            <div className="absolute inset-0 bg-[#FAF8F5]/30 dark:bg-black/40 transition-colors duration-500" />
+            {/* Smooth top and bottom seamless fades matching background in both themes */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] via-transparent to-[#FAF8F5] dark:from-[#29251F] dark:via-transparent dark:to-[#29251F] transition-colors duration-500" />
           </div>
 
           {/* Ambient Glow */}
