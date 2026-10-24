@@ -573,13 +573,13 @@ html.dark a.bg-\[\#161513\]:hover {
 }
 
 /* Video overlay gradients on About Section */
-html.dark .from-\[\#FAF8F5\] {
+html.dark .group .from-\[\#FAF8F5\] {
   --tw-gradient-from: #29251F var(--tw-gradient-from-position) !important;
   --tw-gradient-to: rgba(41, 37, 31, 0) var(--tw-gradient-to-position) !important;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
 
-html.dark .via-\[\#FAF8F5\]\/85 {
+html.dark .group .via-\[\#FAF8F5\]\/85 {
   --tw-gradient-stops: var(--tw-gradient-from), rgba(41, 37, 31, 0.85) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
 }
 
