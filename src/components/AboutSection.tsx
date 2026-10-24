@@ -366,18 +366,18 @@ const AboutSection: React.FC = () => {
         {/* ========================================================= */}
         {/* 7. PHILOSOPHY MOMENT */}
         {/* ========================================================= */}
-        <div className="relative w-[100vw] left-1/2 -translate-x-1/2 py-32 md:py-48 flex flex-col items-center justify-center text-center overflow-hidden bg-[#FAF8F5] dark:bg-[#171512] border-y border-[#161513]/10 dark:border-[#403830]">
+        <div className="relative w-[100vw] left-1/2 -translate-x-1/2 py-32 md:py-48 flex flex-col items-center justify-center text-center overflow-hidden bg-[#FAF8F5] border-y border-[#161513]/10">
           {/* Background Image & Overlays */}
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
             <img 
               src="/image.png" 
               alt="Design Philosophy Statue" 
-              className="w-full h-full object-cover object-center opacity-40 dark:opacity-75 transition-opacity duration-500"
+              className="w-full h-full object-cover object-center opacity-40 dark:opacity-45 transition-opacity duration-500 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,black_35%,transparent_80%)] [-webkit-mask-image:radial-gradient(ellipse_75%_65%_at_50%_50%,black_35%,transparent_80%)]"
             />
-            {/* Subtle warm overlay in light mode, clear in dark mode to keep statue visible */}
-            <div className="absolute inset-0 bg-[#FAF8F5]/30 dark:bg-transparent pointer-events-none transition-colors duration-500" />
+            {/* Subtle warm overlay in light mode, soft dark blend in dark mode */}
+            <div className="absolute inset-0 bg-[#FAF8F5]/30 dark:bg-[#29251F]/40 transition-colors duration-500" />
             {/* Smooth top and bottom seamless fades into adjacent sections */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] dark:from-[#171512] via-transparent to-[#FAF8F5] dark:to-[#171512] pointer-events-none transition-colors duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5] via-transparent to-[#FAF8F5]" />
           </div>
 
           {/* Ambient Glow */}
@@ -385,9 +385,9 @@ const AboutSection: React.FC = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 2, ease: "easeOut" }}
-            className="absolute inset-0 flex justify-center items-center opacity-30 dark:opacity-20 pointer-events-none z-0"
+            className="absolute inset-0 flex justify-center items-center opacity-25 dark:opacity-20 pointer-events-none z-0"
           >
-            <div className="w-[60vw] h-[60vw] max-w-[600px] max-h-[600px] bg-[#8F5431]/10 dark:bg-[#C58B65]/20 blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-screen" />
+            <div className="w-[50vw] h-[50vw] max-w-[500px] max-h-[500px] bg-[#8F5431]/10 dark:bg-[#C58B65]/15 blur-[140px] rounded-full mix-blend-multiply dark:mix-blend-screen" />
           </motion.div>
 
           <div className="relative z-10 w-full max-w-5xl flex flex-col gap-8 items-center px-6">
