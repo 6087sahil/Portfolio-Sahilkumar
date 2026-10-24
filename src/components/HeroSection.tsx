@@ -112,7 +112,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
             className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4"
           >
             <a 
-              href="#projects"
+              href="#work"
               className="group pointer-events-auto relative inline-flex items-center gap-2 bg-white text-black px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]"
             >
               <span className="relative z-10 flex items-center gap-2">

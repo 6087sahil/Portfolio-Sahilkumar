@@ -111,30 +111,43 @@ const NavBar: React.FC = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[100] w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          isScrolledStyle ? 'py-4 px-4 sm:px-8' : 'py-8 px-6 lg:px-12'
+        className={`fixed top-0 left-0 right-0 z-[100] w-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isScrolledStyle ? 'py-3.5 px-4 sm:px-8' : 'py-6 px-6 lg:px-12'
         }`}
       >
         <div 
-          className={`mx-auto flex items-center w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`mx-auto flex items-center justify-between w-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             isScrolledStyle 
-              ? 'max-w-4xl bg-white/70 dark:bg-[#211E1A]/80 backdrop-blur-xl border border-black/10 dark:border-[#403830] rounded-full py-3 px-6 sm:px-8 shadow-[0_4px_30px_rgba(156,102,68,0.08)]' 
+              ? 'max-w-4xl bg-[#FAF8F5]/85 dark:bg-[#1E1B17]/90 backdrop-blur-2xl border border-[#161513]/10 dark:border-[#403830] rounded-full py-2.5 px-5 sm:px-7 shadow-[0_10px_35px_-4px_rgba(22,21,19,0.08)] dark:shadow-[0_12px_40px_-6px_rgba(0,0,0,0.65)]' 
               : 'max-w-7xl bg-transparent border-transparent py-0 px-0 shadow-none'
           }`}
         >
-          {/* LEFT: Logo */}
-          <div className="flex-1 flex justify-start">
+          {/* LEFT: Logo with Gentle Scale & Smooth Scroll to Top */}
+          <div className="flex-1 flex justify-start items-center">
             <Link 
               to="/" 
+              onClick={(e) => {
+                if (location.pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
               style={{ fontFamily: "'Ysabeau SC', sans-serif" }}
-              className="text-[#111111] dark:text-[#F4F1EA] font-extrabold text-2xl sm:text-3xl tracking-tighter hover:text-[#8F5431] dark:hover:text-[#C58B65] transition-colors duration-300 z-50 relative block"
+              className="group text-[#111111] dark:text-[#F4F1EA] font-extrabold text-2xl sm:text-[28px] tracking-tight hover:text-[#8F5431] dark:hover:text-[#C58B65] transition-colors duration-300 z-50 relative inline-flex items-center"
             >
-              SK.
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-block"
+              >
+                SK.
+              </motion.span>
             </Link>
           </div>
 
-          {/* CENTER: Desktop Links */}
-          <div className="hidden md:flex flex-shrink-0 items-center gap-1 lg:gap-2">
+          {/* CENTER: Desktop Editorial Links with Gliding Pill Indicator */}
+          <div className="hidden md:flex flex-shrink-0 items-center gap-1 p-1 rounded-full bg-black/[0.02] dark:bg-white/[0.02] border border-black/[0.04] dark:border-white/[0.04]">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href || (location.pathname === link.href);
               return (
@@ -142,16 +155,18 @@ const NavBar: React.FC = () => {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative inline-flex items-center justify-center px-4 lg:px-5 py-2 text-xs font-medium tracking-[0.05em] uppercase transition-colors duration-300 ${
-                    isActive ? 'text-[#111111] dark:text-[#F4F1EA]' : 'text-[#111111]/50 dark:text-[#B8AFA4] hover:text-[#111111]/90 dark:hover:text-[#F4F1EA]'
+                  className={`relative inline-flex items-center justify-center px-4 py-1.5 text-xs font-mono font-medium tracking-[0.06em] uppercase transition-colors duration-300 rounded-full select-none ${
+                    isActive 
+                      ? 'text-[#161513] dark:text-[#F4F1EA] font-semibold' 
+                      : 'text-[#161513]/60 dark:text-[#B8AFA4] hover:text-[#161513] dark:hover:text-[#F4F1EA]'
                   }`}
                 >
-                  <span className="relative z-10 pt-[1px]">{link.label}</span>
+                  <span className="relative z-10">{link.label}</span>
                   {isActive && (
                     <motion.div
                       layoutId="activeNavBackground"
-                      className="absolute inset-0 bg-black/5 dark:bg-white/10 rounded-full"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      className="absolute inset-0 bg-white/90 dark:bg-white/10 rounded-full border border-black/[0.06] dark:border-white/[0.08] shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
                 </a>
@@ -167,9 +182,9 @@ const NavBar: React.FC = () => {
               onClick={toggleTheme}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center cursor-pointer select-none overflow-hidden backdrop-blur-xl bg-white/75 dark:bg-[#29251F]/75 border border-[#8F5431]/20 dark:border-[#C58B65]/30 shadow-[0_2px_8px_rgba(143,84,49,0.06)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.35)] hover:border-[#8F5431]/50 dark:hover:border-[#C58B65]/60 hover:shadow-[0_0_14px_rgba(197,139,101,0.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8F5431] dark:focus-visible:ring-[#C58B65] group transition-colors duration-450"
+              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center cursor-pointer select-none overflow-hidden backdrop-blur-xl bg-white/80 dark:bg-[#29251F]/80 border border-[#8F5431]/20 dark:border-[#C58B65]/30 shadow-[0_2px_8px_rgba(143,84,49,0.06)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.35)] hover:border-[#8F5431]/50 dark:hover:border-[#C58B65]/60 hover:shadow-[0_0_14px_rgba(197,139,101,0.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8F5431] dark:focus-visible:ring-[#C58B65] group transition-colors duration-450"
             >
               {/* Soft inner radial highlight sheen */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#8F5431]/0 via-white/10 dark:via-white/5 to-white/30 dark:to-white/10 opacity-60 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -183,7 +198,7 @@ const NavBar: React.FC = () => {
                     scale: theme === 'dark' ? 1 : 0.6,
                     rotate: theme === 'dark' ? 0 : -90,
                   }}
-                  transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute inset-0 flex items-center justify-center text-[#C58B65] pointer-events-none"
                 >
                   <Sun className="w-4 h-4 stroke-[2.2]" />
@@ -196,7 +211,7 @@ const NavBar: React.FC = () => {
                     scale: theme === 'dark' ? 0.6 : 1,
                     rotate: theme === 'dark' ? 90 : 0,
                   }}
-                  transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute inset-0 flex items-center justify-center text-[#8F5431] pointer-events-none"
                 >
                   <Moon className="w-4 h-4 stroke-[2.2]" />
@@ -204,17 +219,20 @@ const NavBar: React.FC = () => {
               </div>
             </motion.button>
 
-            {/* Desktop CTA */}
+            {/* Desktop CTA: Refined Editorial Let's Talk */}
             <div className="hidden md:block">
               <Magnet strength={5} padding={50}>
-                <a
+                <motion.a
                   href="/#contact"
                   onClick={(e) => handleNavClick(e, '/#contact')}
-                  className="group relative inline-flex items-center gap-2 bg-[#111111] dark:bg-[#C58B65] text-white dark:text-[#171512] px-6 py-2.5 rounded-full font-semibold text-sm tracking-wide hover:bg-stone-800 dark:hover:bg-[#d49a75] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(156,102,68,0.4)]"
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative inline-flex items-center gap-2 bg-[#161513] dark:bg-[#C58B65] text-white dark:text-[#171512] px-5 py-2.5 rounded-full font-mono font-medium text-xs tracking-wider uppercase shadow-[0_2px_10px_rgba(22,21,19,0.08)] hover:shadow-[0_4px_18px_rgba(143,84,49,0.22)] hover:bg-[#8F5431] dark:hover:bg-[#d49a75] transition-colors duration-300"
                 >
-                  Let's Talk
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
+                  <span>Let's Talk</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                </motion.a>
               </Magnet>
             </div>
 
