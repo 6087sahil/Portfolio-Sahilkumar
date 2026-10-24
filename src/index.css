@@ -424,7 +424,7 @@ html.dark .bg-\[\#8F5431\] {
   background-color: #C58B65 !important;
 }
 
-/* 6. Subtle Borders: #161513/10..15 -> #403830 */
+/* 6. Subtle Borders & Divider Lines: #161513/10..25 -> #403830 */
 html.dark .border-\[\#161513\]\/10,
 html.dark .border-\[\#161513\]\/12,
 html.dark .border-\[\#161513\]\/15,
@@ -432,6 +432,16 @@ html.dark .border-\[\#161513\]\/20,
 html.dark .border-\[\#161513\]\/25,
 html.dark [class*="border-[#161513]"] {
   border-color: #403830 !important;
+}
+
+/* Hairline divider lines created with bg-[#161513]/10 (e.g. Design Process timeline track) */
+html.dark .bg-\[\#161513\]\/10,
+html.dark .bg-\[\#161513\]\/15,
+html.dark .bg-\[\#161513\]\/20,
+html.dark [class*="bg-[#161513]/10"],
+html.dark [class*="bg-[#161513]/15"],
+html.dark [class*="bg-[#161513]/20"] {
+  background-color: #403830 !important;
 }
 
 html.dark .divide-\[\#161513\]\/10 > :not([hidden]) ~ :not([hidden]) {
