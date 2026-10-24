@@ -165,41 +165,43 @@ const NavBar: React.FC = () => {
             <motion.button
               type="button"
               onClick={toggleTheme}
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.92 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center cursor-pointer select-none overflow-hidden transition-all duration-300 backdrop-blur-xl bg-white/70 dark:bg-[#29251F]/70 border border-[#8F5431]/25 dark:border-[#C58B65]/35 shadow-[0_2px_10px_rgba(143,84,49,0.08)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.4)] hover:border-[#8F5431]/60 dark:hover:border-[#C58B65]/70 hover:shadow-[0_0_18px_rgba(197,139,101,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8F5431] dark:focus-visible:ring-[#C58B65] group"
+              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center cursor-pointer select-none overflow-hidden backdrop-blur-xl bg-white/75 dark:bg-[#29251F]/75 border border-[#8F5431]/20 dark:border-[#C58B65]/30 shadow-[0_2px_8px_rgba(143,84,49,0.06)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.35)] hover:border-[#8F5431]/50 dark:hover:border-[#C58B65]/60 hover:shadow-[0_0_14px_rgba(197,139,101,0.22)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8F5431] dark:focus-visible:ring-[#C58B65] group transition-colors duration-450"
             >
-              {/* Subtle inner radial highlight sheen */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#8F5431]/0 via-white/10 dark:via-white/5 to-white/40 dark:to-white/10 opacity-70 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              {/* Soft inner radial highlight sheen */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#8F5431]/0 via-white/10 dark:via-white/5 to-white/30 dark:to-white/10 opacity-60 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-              {/* Smooth 180-deg Rotating Sun / Moon Icon Transition */}
-              <AnimatePresence mode="wait" initial={false}>
-                {theme === 'dark' ? (
-                  <motion.div
-                    key="sun"
-                    initial={{ rotate: -180, scale: 0.5, opacity: 0 }}
-                    animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                    exit={{ rotate: 180, scale: 0.5, opacity: 0 }}
-                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative z-10 flex items-center justify-center text-[#C58B65] group-hover:rotate-45 transition-transform duration-500"
-                  >
-                    <Sun className="w-4 h-4 stroke-[2.2]" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="moon"
-                    initial={{ rotate: 180, scale: 0.5, opacity: 0 }}
-                    animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                    exit={{ rotate: -180, scale: 0.5, opacity: 0 }}
-                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative z-10 flex items-center justify-center text-[#8F5431] group-hover:-rotate-12 transition-transform duration-500"
-                  >
-                    <Moon className="w-4 h-4 stroke-[2.2]" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Seamless Stacked Icon Animation - Zero Stutter, Perfectly Centered */}
+              <div className="relative w-4 h-4 flex items-center justify-center">
+                <motion.div
+                  initial={false}
+                  animate={{
+                    opacity: theme === 'dark' ? 1 : 0,
+                    scale: theme === 'dark' ? 1 : 0.6,
+                    rotate: theme === 'dark' ? 0 : -90,
+                  }}
+                  transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0 flex items-center justify-center text-[#C58B65] pointer-events-none"
+                >
+                  <Sun className="w-4 h-4 stroke-[2.2]" />
+                </motion.div>
+
+                <motion.div
+                  initial={false}
+                  animate={{
+                    opacity: theme === 'dark' ? 0 : 1,
+                    scale: theme === 'dark' ? 0.6 : 1,
+                    rotate: theme === 'dark' ? 90 : 0,
+                  }}
+                  transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0 flex items-center justify-center text-[#8F5431] pointer-events-none"
+                >
+                  <Moon className="w-4 h-4 stroke-[2.2]" />
+                </motion.div>
+              </div>
             </motion.button>
 
             {/* Desktop CTA */}

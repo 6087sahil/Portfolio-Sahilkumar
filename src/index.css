@@ -593,15 +593,21 @@ html.dark ::selection {
   color: #F4F1EA !important;
 }
 
-/* Smooth transition for themeable properties */
+/* Smooth transition for themeable properties synchronized with toggle animation */
 .transition-colors,
 .transition-all,
+body,
+#root,
+main,
 section,
 div[class*="rounded-"],
 article,
 header,
-footer {
-  transition-property: background-color, border-color, color, box-shadow;
-  transition-duration: 350ms;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+footer,
+input,
+textarea,
+button {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 450ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
