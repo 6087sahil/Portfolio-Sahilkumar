@@ -476,7 +476,7 @@ html.dark .bg-white\/60 {
   border-color: #403830 !important;
 }
 
-html.dark .bg-white {
+html.dark .bg-white:not(.hero-cta-btn) {
   background-color: #29251F !important;
   color: #F4F1EA !important;
   border-color: #403830 !important;
