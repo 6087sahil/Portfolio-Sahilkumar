@@ -1,424 +1,387 @@
 import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useScroll, useTransform, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Sparkles, Eye } from 'lucide-react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-/* ── Project Type & Data ────────────────────────────────── */
-interface Project {
+/* ── Project Data ─────────────────────────────────────────────────── */
+
+interface ProjectItem {
+  id: string;
   num: string;
   category: string;
-  name: string;
+  title: string;
+  subtitle: string;
   role: string;
-  timeline: string;
-  desc: string;
+  year: string;
+  description: string;
   metrics: { label: string; value: string }[];
-  tools: string[];
+  deliverables: string[];
+  link: string;
+  ctaText: string;
   image: string;
   video?: string;
-  link: string;
-  ctaText?: string;
-  accent: string;
+  badge: string;
 }
 
-const PROJECTS: Project[] = [
+const PROJECTS: ProjectItem[] = [
   {
+    id: 'roomly',
     num: '01',
-    category: 'Mobile App — UI/UX Design & Research',
-    name: 'Roomly',
+    category: 'Mobile Application · Product Architecture',
+    title: 'Roomly',
+    subtitle: 'The Co-Living Interface',
     role: 'Lead Product Designer',
-    timeline: '8 Weeks · 2026',
-    desc: 'Re-architecting urban apartment discovery around roommate lifestyle compatibility rather than just square footage and broker listings.',
+    year: '2026',
+    description:
+      'Re-architecting urban apartment discovery around roommate lifestyle compatibility rather than just square footage and broker listings. Built from first-principles user research into an end-to-end iOS application architecture.',
     metrics: [
       { label: 'Task Success Rate', value: '94%' },
-      { label: 'Discovery Speed', value: '3.2×' },
-      { label: 'Screen Architecture', value: '24+ UI Screens' },
+      { label: 'Discovery Velocity', value: '3.2×' },
+      { label: 'System Deliverables', value: '24+ Screens' },
     ],
-    tools: ['UI/UX', 'User Research', 'Design Systems', 'iOS HIG', 'Figma'],
+    deliverables: ['Product Strategy', 'User Research', 'Design Systems', 'iOS HIG'],
+    link: '/case-study/roomly',
+    ctaText: 'Explore Case Study',
     image: '/roomly/home_screen.png',
     video: '/Mockup-1791278724467.mp4',
-    link: '/case-study/roomly',
-    accent: '#8F5431',
+    badge: 'Interactive Prototype',
   },
   {
+    id: 'grocery',
     num: '02',
-    category: 'Mobile App — UI/UX Design & Quick-Commerce',
-    name: 'Grocery Delivery App',
+    category: 'Quick-Commerce · Cart Architecture',
+    title: 'Grocery',
+    subtitle: 'High-Velocity Ordering',
     role: 'Lead UX/UI Designer',
-    timeline: '6 Weeks · 2026',
-    desc: 'A rapid, minimal grocery ordering experience designed around speed and ease. Streamlined cart architecture with smart recommendations and fresh produce categorization.',
+    year: '2026',
+    description:
+      'A stripped-down, ultra-rapid grocery commerce experience designed around cognitive friction reduction. Streamlined checkout architecture with predictive re-orders and tactile fresh-produce taxonomy.',
     metrics: [
       { label: 'Checkout Duration', value: '45s' },
-      { label: 'Cart Drop-off', value: '-38%' },
-      { label: 'Order Satisfaction', value: '4.9/5' },
+      { label: 'Cart Drop-Off', value: '−38%' },
+      { label: 'Order Rating', value: '4.9 / 5' },
     ],
-    tools: ['UI/UX', 'User Research', 'Cart Architecture', 'Design Systems', 'Figma'],
-    image: '/grocery-mockup.jpg',
+    deliverables: ['Cart Architecture', 'Interaction Design', 'Micro-interactions', 'Design Systems'],
     link: '#contact',
     ctaText: 'Request Walkthrough',
-    accent: '#8F5431',
+    image: '/grocery-mockup.jpg',
+    badge: 'Checkout Architecture',
+  },
+  {
+    id: 'pet-adoption',
+    num: '03',
+    category: 'Community Platform · Behavioral Match',
+    title: 'Pet Adoption',
+    subtitle: 'Empathy-Led Rescue Workflow',
+    role: 'Product Designer',
+    year: '2025',
+    description:
+      'An empathy-driven adoption ecosystem bridging municipal shelters with prospective adopters through lifestyle-aligned animal behavioral logs, medical transparency, and progressive verification tracks.',
+    metrics: [
+      { label: 'Inquiry Growth', value: '+52%' },
+      { label: 'Match Confidence', value: '91%' },
+      { label: 'Time-to-Placement', value: '4 Days' },
+    ],
+    deliverables: ['Service Blueprint', 'Interface Design', 'Editorial Direction', 'Design Systems'],
+    link: '/case-study/roomly',
+    ctaText: 'Explore Project',
+    image: '/pet-adoption-mockup.png',
+    badge: 'Emotional UI & Match Flow',
   },
 ];
 
-/* ── Interactive 3D Card Tilt Hook ───────────────────────── */
-function useCardTilt(shouldReduceMotion: boolean | null) {
-  const rotX = useMotionValue(0);
-  const rotY = useMotionValue(0);
-  const sRotX = useSpring(rotX, { damping: 25, stiffness: 180 });
-  const sRotY = useSpring(rotY, { damping: 25, stiffness: 180 });
+/* ── Individual Editorial Project Item (Full Image Showcase) ──────── */
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduceMotion) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
-    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
-    rotX.set(-yPct * 6);
-    rotY.set(xPct * 6);
-  };
-
-  const handleMouseLeave = () => {
-    rotX.set(0);
-    rotY.set(0);
-  };
-
-  return { sRotX, sRotY, handleMouseMove, handleMouseLeave };
-}
-
-/* ── Individual Project Showcase Card (Editorial Staggered Split) ── */
-const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+const EditorialProjectRow: React.FC<{ project: ProjectItem; index: number }> = ({
+  project,
+  index,
+}) => {
+  const rowRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
-  const { sRotX, sRotY, handleMouseMove, handleMouseLeave } = useCardTilt(shouldReduceMotion);
   const isEven = index % 2 === 0;
 
-  // Scroll Parallax for Card & Mockup Container
+  // Subtle image parallax on scroll
   const { scrollYProgress } = useScroll({
-    target: cardRef,
+    target: rowRef,
     offset: ['start end', 'end start'],
   });
 
-  // Smooth subtle media parallax (moves gently opposite/slower for depth)
-  const mediaParallaxY = useTransform(
+  const imageParallaxY = useTransform(
     scrollYProgress,
     [0, 1],
-    shouldReduceMotion ? [0, 0] : [24, -24]
+    shouldReduceMotion ? [0, 0] : [18, -18]
   );
-
-  // Subtle image zoom reveal on scroll through viewport
-  const mediaInnerScale = useTransform(
-    scrollYProgress,
-    [0, 0.45, 1],
-    shouldReduceMotion ? [1, 1, 1] : [1.08, 1, 1.04]
-  );
-
-  // Stagger animation container variants
-  const contentContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.09,
-        delayChildren: shouldReduceMotion ? 0 : 0.15,
-      },
-    },
-  };
-
-  const itemFadeUp = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 22 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
 
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50, scale: shouldReduceMotion ? 1 : 0.97 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
-      className="group relative rounded-[2.5rem] p-8 sm:p-12 md:p-14 lg:p-16 bg-[#FAF8F5] border border-[#161513]/12 shadow-[0_16px_40px_-8px_rgba(110,61,30,0.14),0_4px_16px_-2px_rgba(22,21,19,0.06)] hover:shadow-[0_28px_60px_-10px_rgba(110,61,30,0.22),0_10px_26px_-4px_rgba(156,102,68,0.14)] hover:border-[#8F5431]/35 transition-all duration-700 will-change-transform"
+    <article
+      ref={rowRef}
+      className="relative w-full border-b border-[#161513]/10 dark:border-white/10 py-16 sm:py-24 lg:py-32 group"
     >
-      {/* Decorative Index Watermark in Background - Kept faint & non-overlapping */}
-      <motion.span
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.9, delay: 0.3 }}
-        className="absolute top-6 right-8 sm:right-12 font-serif text-7xl sm:text-8xl md:text-9xl select-none pointer-events-none transition-all duration-700 group-hover:scale-105 z-0 text-black/[0.04] dark:text-white/[0.05] group-hover:text-black/[0.08] dark:group-hover:text-white/[0.09]"
+      {/* ── Section Index Bar / Metadata Header ── */}
+      <div className="flex flex-wrap items-baseline justify-between gap-4 pb-6 sm:pb-8 border-b border-[#161513]/10 dark:border-white/10 font-mono text-[11px] uppercase tracking-[0.22em] text-[#8E8980] dark:text-[#A09A90]">
+        <div className="flex items-center gap-3">
+          <span className="text-[#161513] dark:text-[#F4F1EA] font-bold">
+            N° {project.num}
+          </span>
+          <span className="text-[#161513]/25 dark:text-white/20">/</span>
+          <span>{project.category}</span>
+        </div>
+        <div className="flex items-center gap-6">
+          <span>{project.role}</span>
+          <span className="text-[#161513]/25 dark:text-white/20">·</span>
+          <span>{project.year}</span>
+        </div>
+      </div>
+
+      {/* ── Asymmetric Editorial Split Composition ── */}
+      <div
+        className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 pt-10 lg:pt-14 items-center ${
+          isEven ? '' : 'lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1'
+        }`}
       >
-        {project.num}
-      </motion.span>
-
-      <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-16 items-center relative z-10`}>
-        
-        {/* ── Content Column (46%) with Staggered Scroll Storytelling ── */}
-        <motion.div
-          variants={contentContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-40px' }}
-          className="w-full lg:w-[46%] flex flex-col gap-6 lg:order-none order-2"
-        >
-          {/* Header Tag / Badge */}
-          <motion.div variants={itemFadeUp} className="flex items-center gap-3 flex-wrap">
-            <span className="font-mono text-xs font-bold tracking-widest text-[#8F5431] px-2.5 py-0.5 rounded-full bg-[#8F5431]/10 border border-[#8F5431]/20">
-              CASE {project.num}
-            </span>
-            <div className="h-px w-6 bg-[#161513]/15" />
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#8E8980]">
-              {project.category}
-            </span>
-          </motion.div>
-
-          {/* Title & Metadata */}
-          <motion.div variants={itemFadeUp}>
-            <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#161513] font-normal tracking-tight leading-[1.08] transition-colors duration-300 group-hover:text-[#8F5431]">
-              {project.name}
-            </h3>
-            <div className="flex items-center gap-2 mt-2 text-xs font-mono text-[#8E8980]">
-              <span>{project.role}</span>
-              <span>&bull;</span>
-              <span>{project.timeline}</span>
-            </div>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p variants={itemFadeUp} className="text-[#5C5852] font-light leading-relaxed text-sm sm:text-base">
-            {project.desc}
-          </motion.p>
-
-          {/* Key Metrics Strip with Hover Lift */}
-          <motion.div variants={itemFadeUp} className="grid grid-cols-3 gap-3 py-4 border-y border-[#161513]/10">
-            {project.metrics.map((m, i) => (
-              <div key={i} className="flex flex-col group/metric">
-                <span className="font-serif text-xl sm:text-2xl font-bold text-[#161513] group-hover/metric:text-[#8F5431] transition-colors">
-                  {m.value}
-                </span>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E8980] mt-0.5">
-                  {m.label}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Tool Chips */}
-          <motion.div variants={itemFadeUp} className="flex flex-wrap gap-2 pt-1">
-            {project.tools.map((tool) => (
-              <span
-                key={tool}
-                className="px-3 py-1 rounded-full text-xs font-mono border border-[#161513]/10 text-[#5C5852] bg-[#EDE8DE]/60 transition-all duration-300 hover:border-[#8F5431]/40 hover:text-[#8F5431] hover:bg-white"
-              >
-                {tool}
+        {/* ── Left Editorial Column: Oversized Typography & Dossier ── */}
+        <div className="lg:col-span-5 flex flex-col justify-between h-full">
+          <div>
+            {/* Oversized Serif Title */}
+            <motion.h3
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-normal text-[#161513] dark:text-[#F4F1EA] tracking-tight leading-[0.98] select-none"
+            >
+              {project.title}
+              <span className="italic font-serif text-[#8F5431] dark:text-[#C58B65] ml-2">
+                .
               </span>
-            ))}
-          </motion.div>
+            </motion.h3>
 
-          {/* Interactive CTA Button */}
-          <motion.div variants={itemFadeUp} className="pt-3">
+            {/* Editorial Subtitle */}
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#8F5431] dark:text-[#C58B65] mt-4">
+              [ {project.subtitle} ]
+            </p>
+
+            {/* Project Narrative */}
+            <p className="mt-6 text-[#5C5852] dark:text-[#B8AFA4] font-light text-sm sm:text-[15px] leading-relaxed max-w-md">
+              {project.description}
+            </p>
+
+            {/* Metrics Dossier */}
+            <div className="grid grid-cols-3 gap-6 pt-8 mt-8 border-t border-[#161513]/10 dark:border-white/10">
+              {project.metrics.map((m, i) => (
+                <div key={i} className="flex flex-col">
+                  <span className="font-serif text-2xl sm:text-3xl text-[#161513] dark:text-[#F4F1EA] font-normal tracking-tight">
+                    {m.value}
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#8E8980] dark:text-[#A09A90] mt-1 leading-snug">
+                    {m.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Deliverables Taxonomy */}
+            <div className="flex flex-wrap gap-2 pt-6">
+              {project.deliverables.map((item) => (
+                <span
+                  key={item}
+                  className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.15em] text-[#5C5852] dark:text-[#B8AFA4] border border-[#161513]/10 dark:border-white/15 bg-[#FAF8F5] dark:bg-white/[0.03]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Understated Editorial Link */}
+          <div className="pt-10 sm:pt-14">
             {project.link.startsWith('#') ? (
               <a
                 href={project.link}
-                data-cursor="Contact"
-                className="group/btn inline-flex items-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#161513] text-white hover:bg-[#8F5431] transition-all duration-300 font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                className="group/cta inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-[#161513] dark:text-[#F4F1EA] hover:text-[#8F5431] dark:hover:text-[#C58B65] transition-colors duration-300 pb-1 border-b border-[#161513]/30 dark:border-white/30 hover:border-[#8F5431] dark:hover:border-[#C58B65]"
               >
-                <span>{project.ctaText || 'Explore Case Study'}</span>
-                <div className="w-8 h-8 rounded-full bg-white/10 group-hover/btn:bg-white text-white group-hover/btn:text-[#8F5431] flex items-center justify-center transition-all duration-300">
-                  <ArrowRight className="w-4 h-4 -rotate-45 transition-transform duration-300 group-hover/btn:rotate-0" />
-                </div>
+                <span>{project.ctaText}</span>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
               </a>
             ) : (
               <Link
                 to={project.link}
-                data-cursor="View"
-                className="group/btn inline-flex items-center gap-3 pl-6 pr-2.5 py-2.5 rounded-full bg-[#161513] text-white hover:bg-[#8F5431] transition-all duration-300 font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                className="group/cta inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-[#161513] dark:text-[#F4F1EA] hover:text-[#8F5431] dark:hover:text-[#C58B65] transition-colors duration-300 pb-1 border-b border-[#161513]/30 dark:border-white/30 hover:border-[#8F5431] dark:hover:border-[#C58B65]"
               >
-                <span>{project.ctaText || 'Explore Case Study'}</span>
-                <div className="w-8 h-8 rounded-full bg-white/10 group-hover/btn:bg-white text-white group-hover/btn:text-[#8F5431] flex items-center justify-center transition-all duration-300">
-                  <ArrowRight className="w-4 h-4 -rotate-45 transition-transform duration-300 group-hover/btn:rotate-0" />
+                <span>{project.ctaText}</span>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
+              </Link>
+            )}
+          </div>
+        </div>
+
+        {/* ── Right Editorial Column: Full Image / Video Showcase (No mobile frame) ── */}
+        <div className="lg:col-span-7 relative w-full">
+          <motion.div
+            ref={mediaRef}
+            style={{ y: imageParallaxY }}
+            className="group/media relative w-full aspect-[16/10.5] sm:aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#161513]/10 dark:border-white/10 bg-[#FAF8F5] dark:bg-[#181614] shadow-[0_16px_45px_-12px_rgba(22,21,19,0.08)] dark:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.7)] transition-all duration-500 hover:shadow-2xl hover:border-[#8F5431]/35 dark:hover:border-[#C58B65]/40"
+          >
+            {project.link.startsWith('#') ? (
+              <a href={project.link} className="block w-full h-full relative overflow-hidden">
+                {project.video ? (
+                  <video
+                    src={project.video}
+                    poster={project.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/media:scale-[1.025]"
+                  />
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/media:scale-[1.025]"
+                  />
+                )}
+
+                {/* Soft Ambient Depth Vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
+
+                {/* Top Badge */}
+                <div className="absolute top-4 left-4 sm:top-5 sm:left-5 z-20 pointer-events-none">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 dark:bg-[#161513]/85 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-wider border border-white/20 shadow-md">
+                    <Sparkles className="w-3 h-3 text-[#8F5431] dark:text-[#C58B65]" />
+                    {project.badge}
+                  </span>
+                </div>
+
+                {/* Bottom View Indicator */}
+                <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-20 pointer-events-none opacity-0 group-hover/media:opacity-100 transition-opacity duration-300">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-[#161513] text-[10px] font-mono uppercase tracking-wider font-semibold shadow-lg">
+                    <span>Explore Project</span>
+                    <ArrowUpRight className="w-3 h-3 text-[#8F5431]" />
+                  </span>
+                </div>
+              </a>
+            ) : (
+              <Link to={project.link} className="block w-full h-full relative overflow-hidden">
+                {project.video ? (
+                  <video
+                    src={project.video}
+                    poster={project.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/media:scale-[1.025]"
+                  />
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/media:scale-[1.025]"
+                  />
+                )}
+
+                {/* Soft Ambient Depth Vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
+
+                {/* Top Badge */}
+                <div className="absolute top-4 left-4 sm:top-5 sm:left-5 z-20 pointer-events-none">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 dark:bg-[#161513]/85 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-wider border border-white/20 shadow-md">
+                    <Sparkles className="w-3 h-3 text-[#8F5431] dark:text-[#C58B65]" />
+                    {project.badge}
+                  </span>
+                </div>
+
+                {/* Bottom View Indicator */}
+                <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-20 pointer-events-none opacity-0 group-hover/media:opacity-100 transition-opacity duration-300">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-[#161513] text-[10px] font-mono uppercase tracking-wider font-semibold shadow-lg">
+                    <span>Explore Project</span>
+                    <ArrowUpRight className="w-3 h-3 text-[#8F5431]" />
+                  </span>
                 </div>
               </Link>
             )}
           </motion.div>
-        </motion.div>
-
-        {/* ── Media Column (54%) with Cinematic Reveal + Parallax + 3D Tilt ── */}
-        <div className="w-full lg:w-[54%] lg:order-none order-1">
-          <motion.div
-            ref={mediaRef}
-            style={{ y: mediaParallaxY }}
-            className="transition-transform duration-100 ease-out will-change-transform"
-          >
-            <motion.div
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                rotateX: sRotX,
-                rotateY: sRotY,
-                transformStyle: 'preserve-3d',
-              }}
-              className="relative w-full rounded-[2rem] overflow-hidden border border-[#161513]/15 shadow-sm transition-all duration-500 hover:shadow-xl hover:border-[#8F5431]/40"
-            >
-              {/* Cinematic Overflow Mask Container */}
-              <div className="w-full aspect-[16/10] bg-[#161513] overflow-hidden relative group/media">
-                {/* Smooth Image/Video Reveal Layer with Scale */}
-                <motion.div
-                  style={{ scale: mediaInnerScale }}
-                  className="w-full h-full will-change-transform"
-                >
-                  {project.video ? (
-                    <video
-                      src={project.video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/media:scale-[1.04]"
-                    />
-                  ) : (
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/media:scale-[1.04]"
-                    />
-                  )}
-                </motion.div>
-
-                {/* Soft ambient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#161513]/45 via-transparent to-transparent pointer-events-none" />
-
-                {/* Floating Top Badge */}
-                <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#161513]/75 backdrop-blur-md border border-white/20 text-white text-[10px] font-mono uppercase tracking-wider shadow-sm">
-                    <Sparkles className="w-3 h-3 text-[#8F5431]" />
-                    {project.video ? 'Interactive Prototype' : 'High-Fi Showcase'}
-                  </span>
-                </div>
-
-                {/* Bottom Interactive Hover Indicator */}
-                <div className="absolute bottom-4 right-4 z-10 pointer-events-none opacity-0 group-hover/media:opacity-100 transition-opacity duration-300">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 text-[#161513] text-[10px] font-mono uppercase tracking-wider font-semibold shadow-md">
-                    <Eye className="w-3 h-3 text-[#8F5431]" />
-                    Click to Open
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
         </div>
-
       </div>
-    </motion.div>
+    </article>
   );
 };
 
-/* ── Main Projects Section ──────────────────────────────── */
+/* ── Main Selected Work Section Component ─────────────────────────── */
+
 const ProjectsSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
-
-  // Heading Animation Variants
-  const headingContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.12,
-        delayChildren: shouldReduceMotion ? 0 : 0.05,
-      },
-    },
-  };
-
-  const labelVariant = {
-    hidden: { opacity: 0, x: shouldReduceMotion ? 0 : -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const titleVariant = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const descVariant = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
 
   return (
     <section
       ref={sectionRef}
       id="work"
       data-section="projects"
-      className="relative bg-[#F4F1EA] text-[#161513] py-28 md:py-36 border-t border-[#161513]/10 overflow-hidden"
+      className="relative w-full bg-[#F4F1EA] dark:bg-[#121110] text-[#161513] dark:text-[#F4F1EA] py-24 sm:py-32 lg:py-40 border-t border-[#161513]/10 dark:border-white/10 overflow-hidden transition-colors duration-500"
     >
-      {/* Background Subtle Ambient Glow */}
-      <div className="absolute top-1/4 right-0 w-[450px] h-[450px] bg-[#8F5431]/4 blur-[130px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] bg-[#8F5431]/4 blur-[130px] rounded-full pointer-events-none" />
+      {/* Subtle Background Glows matching portfolio identity */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#8F5431]/4 dark:bg-[#C58B65]/4 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#8F5431]/4 dark:bg-[#C58B65]/4 blur-[140px] rounded-full pointer-events-none" />
 
-      {/* Header Container with Staggered Scroll Animations */}
-      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 mb-16 md:mb-20">
-        <motion.div
-          variants={headingContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          className="flex flex-col items-start"
-        >
-          {/* 1. Label: Subtle fade-in and horizontal slide */}
-          <motion.div variants={labelVariant} className="flex items-center gap-3 mb-3">
-            <motion.span
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="w-8 h-px bg-[#8F5431] origin-left"
+      {/* ── Section Container ── */}
+      <div className="max-w-[1536px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 relative z-10">
+        
+        {/* ── Section Header: Editorial Architecture ── */}
+        <header className="pb-14 sm:pb-18 border-b border-[#161513]/10 dark:border-white/10">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 sm:gap-12">
+            
+            {/* Left: Oversized Typography Header */}
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-[#8F5431] dark:text-[#C58B65] mb-5">
+                <span className="w-6 h-px bg-[#8F5431] dark:bg-[#C58B65]" />
+                <span>INDEX / 2024 — 2026</span>
+              </div>
+              <motion.h2
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-normal text-[#161513] dark:text-[#F4F1EA] tracking-tight leading-[0.95] select-none"
+              >
+                Selected{' '}
+                <span className="italic font-serif font-normal text-[#8F5431] dark:text-[#C58B65]">
+                  Work
+                </span>
+                <span>.</span>
+              </motion.h2>
+            </div>
+
+            {/* Right: Curator Dossier & Introduction */}
+            <div className="max-w-md lg:pb-2">
+              <p className="text-sm sm:text-[15px] font-light leading-relaxed text-[#5C5852] dark:text-[#B8AFA4]">
+                A rigorous archive of mobile interface systems, interaction psychology, and rapid digital product architectures engineered for scale.
+              </p>
+              <div className="mt-5 flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.2em] text-[#8E8980] dark:text-[#A09A90]">
+                <span>03 Curated Releases</span>
+                <span className="text-[#161513]/25 dark:text-white/20">|</span>
+                <span>End-to-End iOS &amp; Web</span>
+              </div>
+            </div>
+
+          </div>
+        </header>
+
+        {/* ── Editorial Project Rows ── */}
+        <div className="flex flex-col">
+          {PROJECTS.map((project, index) => (
+            <EditorialProjectRow
+              key={project.id}
+              project={project}
+              index={index}
             />
-            <span className="text-[#8E8980] font-mono text-xs uppercase tracking-wider font-semibold">
-              01 / SELECTED WORK
-            </span>
-          </motion.div>
+          ))}
+        </div>
 
-          {/* 2. Heading: Staggered text reveal with natural easing */}
-          <motion.h2
-            variants={titleVariant}
-            className="font-serif text-[#161513] text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-[1.05]"
-          >
-            Featured{' '}
-            <span className="italic text-[#8F5431] font-serif">
-              Projects.
-            </span>
-          </motion.h2>
-
-          {/* 3. Description: Smooth fade-up */}
-          <motion.p
-            variants={descVariant}
-            className="mt-4 text-[#5C5852] text-base md:text-lg max-w-[620px] leading-relaxed font-light"
-          >
-            A curated selection of end-to-end design case studies exploring mobile workflows, user psychology, and systems.
-          </motion.p>
-        </motion.div>
-      </div>
-
-      {/* Projects Cards List with Independent Viewport Triggers */}
-      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 flex flex-col gap-14 md:gap-24 relative z-10">
-        {PROJECTS.map((project, index) => (
-          <ProjectCard key={project.name} project={project} index={index} />
-        ))}
       </div>
     </section>
   );
