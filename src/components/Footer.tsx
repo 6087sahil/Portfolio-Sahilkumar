@@ -27,7 +27,17 @@ const Footer: React.FC<FooterProps> = () => {
             {['Email', 'LinkedIn', 'Dribbble', 'GitHub'].map((link) => (
               <ScrollRevealItem key={link} yOffset={10}>
                 <a 
-                  href={link === 'Email' ? 'mailto:6087sahilkumar@gmail.com' : '#'} 
+                  href={
+                    link === 'Email'
+                      ? 'mailto:6087sahilkumar@gmail.com'
+                      : link === 'LinkedIn'
+                      ? 'https://in.linkedin.com/in/sahil-kumar-40b8a2344'
+                      : link === 'Dribbble'
+                      ? 'https://dribbble.com/6087sahilkumar'
+                      : 'https://github.com/6087sahil'
+                  }
+                  target={link === 'Email' ? undefined : '_blank'}
+                  rel={link === 'Email' ? undefined : 'noreferrer'} 
                   className="group text-[#5C5852] hover:text-[#161513] text-sm font-medium transition-colors duration-300 relative py-1"
                 >
                   <span className="relative z-10 inline-block transition-transform duration-300 group-hover:-translate-y-0.5">{link}</span>

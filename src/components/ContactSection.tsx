@@ -127,7 +127,7 @@ const ContactSection: React.FC = () => {
             <div className="mt-8 flex items-center gap-6 text-xs font-mono font-semibold uppercase tracking-wider text-[#5C5852]">
               <span className="text-[#8E8980]">Connect &bull;</span>
               <a
-                href="https://linkedin.com"
+                href="https://in.linkedin.com/in/sahil-kumar-40b8a2344"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-[#8F5431] transition-colors"
@@ -135,7 +135,7 @@ const ContactSection: React.FC = () => {
                 LinkedIn
               </a>
               <a
-                href="https://dribbble.com"
+                href="https://dribbble.com/6087sahilkumar"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-[#8F5431] transition-colors"
@@ -143,7 +143,7 @@ const ContactSection: React.FC = () => {
                 Dribbble
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/6087sahil"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-[#8F5431] transition-colors"
