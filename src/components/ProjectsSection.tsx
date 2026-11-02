@@ -42,8 +42,7 @@ const PROJECTS: ProjectItem[] = [
     deliverables: ['Product Strategy', 'User Research', 'Design Systems', 'iOS HIG'],
     link: '/case-study/roomly',
     ctaText: 'Explore Case Study',
-    image: '/roomly/home_screen.png',
-    video: '/Mockup-1791278724467.mp4',
+    image: '/roomly-showcase.png',
     badge: 'Interactive Prototype',
   },
   {

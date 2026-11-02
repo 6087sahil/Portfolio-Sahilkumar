@@ -1348,10 +1348,10 @@ export default function RoomlyCaseStudy() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end max-w-5xl mx-auto">
             <FadeUp delay={0.1} className="flex flex-col items-center">
               <EditorialPhone
-                src="/roomly/filters_screen.png"
-                alt="Filters Screen"
+                src="/roomly/explore_rooms.png"
+                alt="Roomly Explore Rooms Screen"
                 className="w-[220px] sm:w-[240px]"
-                caption="01 · Constraint Engine"
+                caption="01 · Space Discovery"
               />
             </FadeUp>
 
@@ -1360,21 +1360,20 @@ export default function RoomlyCaseStudy() {
                 {/* Active Video Pulse Ring */}
                 <div className="absolute -inset-2 rounded-[46px] border border-[#8F5431]/30 animate-pulse pointer-events-none" />
                 <EditorialPhone
-                  video="/Mockup-1791278724467.mp4"
                   src="/roomly/home_screen.png"
-                  alt="Roomly Live App Prototype Walkthrough"
+                  alt="Roomly Dual-Feed Home Interface"
                   className="w-[250px] sm:w-[270px]"
-                  caption="02 · Live Prototype Motion"
+                  caption="02 · Core Living Feed"
                 />
               </div>
             </FadeUp>
 
             <FadeUp delay={0.24} className="flex flex-col items-center">
               <EditorialPhone
-                src="/roomly/room_detail_screen.png"
-                alt="Room Detail Screen"
+                src="/roomly/explore_roommates.png"
+                alt="Roomly Roommate Alignment Screen"
                 className="w-[220px] sm:w-[240px]"
-                caption="03 · Verified Living Spec"
+                caption="03 · Roommate Chemistry"
               />
             </FadeUp>
           </div>
