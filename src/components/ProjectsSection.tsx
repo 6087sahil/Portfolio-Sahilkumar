@@ -33,13 +33,13 @@ const PROJECTS: ProjectItem[] = [
     role: 'Lead Product Designer',
     year: '2026',
     description:
-      'Re-architecting urban apartment discovery around roommate lifestyle compatibility rather than just square footage and broker listings. Built from first-principles user research into an end-to-end iOS application architecture.',
+      'Re-architecting urban apartment discovery around roommate lifestyle compatibility rather than just square footage and broker listings. Built from first-principles problem analysis into an end-to-end iOS application architecture.',
     metrics: [
-      { label: 'Task Success Rate', value: '94%' },
-      { label: 'Discovery Velocity', value: '3.2×' },
-      { label: 'System Deliverables', value: '24+ Screens' },
+      { label: 'Project Scope', value: '6 Weeks' },
+      { label: 'Deliverables', value: '24+ Screens' },
+      { label: 'Platform Target', value: 'Native iOS' },
     ],
-    deliverables: ['Product Strategy', 'User Research', 'Design Systems', 'iOS HIG'],
+    deliverables: ['Product Strategy', 'UI/UX Architecture', 'Design Systems', 'iOS HIG'],
     link: '/case-study/roomly',
     ctaText: 'Explore Case Study',
     image: '/roomly-showcase.png',

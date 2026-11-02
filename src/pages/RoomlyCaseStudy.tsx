@@ -391,7 +391,7 @@ const WireframeHiFiSlider = () => {
               <div className="pt-2 border-t border-[#560E22]/10 flex items-center justify-between text-xs">
                 <span className="text-[#5C5852] flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#4FA765]" />
-                  Flatmate: Mike (Cleanliness 94%)
+                  Flatmate: Mike · Non-Smoker, WFH
                 </span>
                 <button className="px-3 py-1 rounded-lg bg-[#560E22] text-white text-xs font-medium">
                   View Room
@@ -507,14 +507,14 @@ const ParallaxScreenRow: React.FC<{
    FLOATING EDITORIAL CHAPTER NAVIGATOR (Quick section jump)
 ───────────────────────────────────────────────────────────────── */
 const CHAPTERS = [
-  { id: 'field-notes', num: '01', title: 'Field Notes' },
-  { id: 'process-artifacts', num: '02', title: 'Process & Ideas' },
-  { id: 'persona-dossier', num: '03', title: 'Persona Dossier' },
+  { id: 'field-notes', num: '01', title: 'Research & Assumptions' },
+  { id: 'process-artifacts', num: '02', title: 'Rejected Ideas' },
+  { id: 'persona-dossier', num: '03', title: 'Proto-Personas' },
   { id: 'wireframe-hifi', num: '04', title: 'Wireframe to Hi-Fi' },
-  { id: 'key-screens', num: '05', title: 'Key Screens' },
+  { id: 'key-screens', num: '05', title: 'Key Decisions' },
   { id: 'exhibition-gallery', num: '06', title: 'Dark Exhibition' },
   { id: 'design-tokens', num: '07', title: 'Design Tokens' },
-  { id: 'outcomes', num: '08', title: 'Outcomes' },
+  { id: 'outcomes', num: '08', title: 'Validation Plan' },
 ];
 
 const CaseStudyChapterNav: React.FC = () => {
@@ -762,7 +762,7 @@ export default function RoomlyCaseStudy() {
                   <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
                     <span className="col-span-4 text-[#8E8980] uppercase tracking-wider">Role</span>
                     <span className="col-span-8 text-[#161513]">
-                      Product Designer · User Research, Wireframing, Visual System
+                      Product Designer · Information Architecture, UI/UX, Design System
                     </span>
                   </div>
                   <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
@@ -782,7 +782,7 @@ export default function RoomlyCaseStudy() {
                   <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
                     <span className="col-span-4 text-[#8E8980] uppercase tracking-wider">Tools</span>
                     <span className="col-span-8 text-[#161513]">
-                      Figma, FigJam, Pen & Paper, User Interviews
+                      Figma, FigJam, Pen & Paper, Competitor Benchmarking
                     </span>
                   </div>
                   <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
@@ -843,34 +843,32 @@ export default function RoomlyCaseStudy() {
             <div className="lg:col-span-4">
               <FadeUp>
                 <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
-                  01 / Field Notes
+                  01 / Research Approach & Assumptions
                 </span>
                 <h2 className="font-serif text-3xl sm:text-4xl text-[#161513] tracking-tight leading-snug">
-                  What I discovered when talking to renters.
+                  Why shared renting breaks down in high-growth cities.
                 </h2>
 
                 {/* Real Inline Stat Callout 1 */}
                 <div className="mt-8 p-5 bg-[#FAF8F5] border border-[#161513]/10 rounded-xl space-y-2 hover:border-[#8F5431]/30 transition-colors shadow-xs">
                   <div className="pt-1 pb-1">
                     <span className="relative inline-block font-serif text-4xl text-[#8F5431] font-normal">
-                      <StatCounter to={7} /> of 10
+                      <StatCounter to={6} suffix=" Weeks" />
                       <HandDrawnCircle delay={0.3} />
                     </span>
                   </div>
                   <p className="text-xs text-[#5C5852] font-mono leading-relaxed pt-1">
-                    people I interviewed in Gurgaon and Bangalore had moved out of a shared flat within
-                    four months of signing.
+                    Self-initiated, assumption-led design sprint focused on end-to-end iOS mobile architecture.
                   </p>
                 </div>
 
                 {/* Real Inline Stat Callout 2 */}
                 <div className="mt-6 p-5 bg-[#FAF8F5] border border-[#161513]/10 rounded-xl space-y-2 hover:border-[#8F5431]/30 transition-colors shadow-xs">
                   <span className="font-serif text-4xl text-[#161513] font-normal block">
-                    <StatCounter to={14} suffix="+ days" />
+                    <StatCounter to={24} suffix="+ Screens" />
                   </span>
                   <p className="text-xs text-[#5C5852] font-mono leading-relaxed">
-                    wasted browsing outdated listings and coordinating fragmented WhatsApp group chats
-                    before seeing an apartment in person.
+                    Designed around dual-lane browsing, granular lifestyle tags, verified specs, and direct tenant messaging.
                   </p>
                 </div>
               </FadeUp>
@@ -880,25 +878,33 @@ export default function RoomlyCaseStudy() {
             <div className="lg:col-span-8 flex flex-col gap-6 text-[#161513]/85 text-lg sm:text-xl font-light leading-relaxed max-w-[65ch]">
               <FadeUp delay={0.08}>
                 <p>
-                  Every major rental platform in India—from Housing.com to NoBroker—treats apartment
-                  hunting as an inventory problem. They optimize for broker fees, square footage, and
-                  security deposits. But for young people relocating to high-stress tech corridors
-                  like Gurgaon or Bangalore, the biggest gamble isn't the distance to the metro.
+                  This is a self-initiated, assumption-led project based on competitor review
+                  (Housing.com, NoBroker, and international co-living platforms), secondary research
+                  into urban mobility, and my own firsthand experience as a renter in Delhi NCR.
                 </p>
               </FadeUp>
 
               <FadeUp delay={0.14}>
-                <p className="text-[#161513] font-normal">
-                  The biggest gamble is the stranger sleeping across the corridor.
+                <p>
+                  Every major rental platform in India treats apartment hunting strictly as an inventory problem.
+                  They optimize for broker monetization, square footage, and security deposits. But for young
+                  professionals relocating to high-pressure work districts across Delhi NCR (such as Gurgaon and
+                  Noida), the fundamental uncertainty isn't just the distance to the metro.
                 </p>
               </FadeUp>
 
               <FadeUp delay={0.18}>
+                <p className="text-[#161513] font-normal">
+                  The fundamental uncertainty is the person living across the corridor.
+                </p>
+              </FadeUp>
+
+              <FadeUp delay={0.2}>
                 <p>
-                  In traditional apps, roommate chemistry is a total black box until after the lease
-                  is signed. You might verify that the bedroom has air conditioning and a balcony, but
-                  you have no clue whether the current occupant works night shifts, throws impromptu
-                  parties on Tuesdays, or expects a strictly vegetarian kitchen.
+                  In traditional listing portals, roommate compatibility is an absolute blind spot until
+                  after the lease is signed. A listing might confirm an attached balcony and air conditioning,
+                  but reveals nothing about whether an occupant works night shifts, throws impromptu gatherings
+                  on weekdays, or expects a strictly vegetarian kitchen.
                 </p>
               </FadeUp>
 
@@ -910,16 +916,17 @@ export default function RoomlyCaseStudy() {
                     throws parties on Tuesday nights when I have a 9 AM standup, I'm miserable.”
                   </p>
                   <cite className="block text-xs font-mono text-[#5C5852] uppercase tracking-wider mt-3 not-italic">
-                    — Tanya M., 26, Product Analyst relocating from Pune to Cyber City
+                    Illustrative scenario · not a participant quote
                   </cite>
                 </blockquote>
               </FadeUp>
 
               <FadeUp delay={0.26}>
                 <p>
-                  This insight shifted the entire project. Roomly couldn't just be another property
-                  listing catalogue. It had to be a tool that matches{' '}
-                  <span className="font-medium text-[#161513]">people first</span>, and spaces second.
+                  This premise shifted the core architectural thesis: Roomly could not be another static
+                  real-estate catalog. It had to be an interface that evaluates{' '}
+                  <span className="font-medium text-[#161513]">roommate chemistry first</span>, and physical
+                  living spaces second.
                 </p>
               </FadeUp>
             </div>
@@ -935,10 +942,10 @@ export default function RoomlyCaseStudy() {
           <FadeUp>
             <div className="max-w-2xl mb-12">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
-                02 / Process & Scrapped Ideas
+                02 / Ideas I Considered & Rejected
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl text-[#161513] tracking-tight">
-                Honest process: What worked, and what died on paper.
+                Design rationale: Exploring concepts and cutting dead ends.
               </h2>
             </div>
           </FadeUp>
@@ -983,10 +990,10 @@ export default function RoomlyCaseStudy() {
                       </div>
                       <div className="grid grid-cols-2 gap-3 pt-1">
                         <div className="h-20 border border-dashed border-[#161513]/25 rounded p-2 text-[10px]">
-                          Draft Card A: Photo on top, price below. (Users ignored roommate info)
+                          Draft Card A: Photo on top, price below. (Overlooked the human element)
                         </div>
                         <div className="h-20 border border-solid border-[#8F5431]/40 bg-[#8F5431]/5 rounded p-2 text-[10px]">
-                          Draft Card B: Split tile showing flatmate avatar + habit chips. Winner!
+                          Draft Card B: Split tile showing flatmate avatar + habit chips. Selected direction.
                         </div>
                       </div>
                     </div>
@@ -999,7 +1006,7 @@ export default function RoomlyCaseStudy() {
                 </div>
 
                 <p className="mt-3.5 font-mono text-xs text-[#5C5852]">
-                  Fig. 1 — Early notebook sketches testing whether to lead with rent or flatmate
+                  Fig. 1 — Early notebook sketches exploring whether to lead with rent or flatmate
                   habits.
                 </p>
               </div>
@@ -1010,7 +1017,7 @@ export default function RoomlyCaseStudy() {
               <div className="bg-[#FAF8F5] border border-[#161513]/15 rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-[#8F5431]/30 transition-colors h-full">
                 <div>
                   <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#8F5431]/10 text-[#8F5431] font-mono text-xs font-semibold mb-4">
-                    <span>✕ Killed Feature</span>
+                    <span>✕ Rejected Concept</span>
                   </div>
 
                   <h3 className="font-serif text-2xl text-[#161513] tracking-tight line-through decoration-[#8F5431] decoration-2 mb-3">
@@ -1019,19 +1026,20 @@ export default function RoomlyCaseStudy() {
 
                   <div className="space-y-3 text-sm text-[#5C5852] font-light leading-relaxed">
                     <p>
-                      <strong className="font-medium text-[#161513]">What I tried first:</strong> In
-                      version 0.1, I built a mandatory onboarding quiz asking tenants about
-                      introversion scores, cleaning frequency on a 1–5 scale, and cooking habits.
+                      <strong className="font-medium text-[#161513]">What I considered:</strong> In
+                      early concept explorations, I considered a mandatory 20-question onboarding quiz
+                      scoring cleanliness on a 1–5 scale, introversion indexes, and cooking habits.
                     </p>
                     <p>
-                      <strong className="font-medium text-[#8F5431]">Why it died:</strong> 8 of 10
-                      user testing participants abandoned the flow by question four. People told me it
-                      felt patronizing, intrusive, and uncomfortably similar to a dating app.
+                      <strong className="font-medium text-[#8F5431]">Why I rejected it:</strong> Mandatory
+                      long onboarding creates massive friction and high drop-off risk before users experience
+                      any core value. Deep psychometric surveys feel patronizing, intrusive, and uncomfortably
+                      reminiscent of dating apps for what is fundamentally a shared-living logistical commitment.
                     </p>
                     <p>
-                      <strong className="font-medium text-[#161513]">What I replaced it with:</strong> Four
-                      non-negotiable lifestyle pills right on the property card (Non-Smoker, Pet
-                      Friendly, Quiet Hours, WFH). Clean, factual, zero pseudo-psychology.
+                      <strong className="font-medium text-[#161513]">What I designed instead:</strong> Four
+                      non-negotiable lifestyle tags directly on property cards (Non-Smoker, Pet Friendly,
+                      Quiet Hours, WFH). Factual, transparent, and easy to parse without pseudo-algorithms.
                     </p>
                   </div>
                 </div>
@@ -1077,9 +1085,8 @@ export default function RoomlyCaseStudy() {
                       Callout 01 · Hero Balcony View
                     </span>
                     <p className="text-[#5C5852] font-sans text-sm leading-relaxed">
-                      Renters told me they fear dark, windowless rooms in Gurgaon builder floors. The
-                      full-bleed natural light header immediately answers whether the room feels
-                      claustrophobic.
+                      A common issue in Delhi NCR builder floors is dark, poorly ventilated interior rooms.
+                      The full-bleed natural light header immediately clarifies natural ventilation and daylight quality.
                     </p>
                   </motion.div>
 
@@ -1092,8 +1099,8 @@ export default function RoomlyCaseStudy() {
                       Callout 02 · Factual Inventory, Not Prose
                     </span>
                     <p className="text-[#5C5852] font-sans text-sm leading-relaxed">
-                      Replaced lengthy paragraphs with standardized icons (Bed, AC, Attached Bath,
-                      Dining). Users can verify essentials in 2 seconds during a lunch break scroll.
+                      Replaced unstandardized broker descriptions with structured amenity icons (Bed, AC,
+                      Attached Bath, Dining) so renters can verify essential specifications in seconds.
                     </p>
                   </motion.div>
 
@@ -1103,11 +1110,11 @@ export default function RoomlyCaseStudy() {
                     className="p-4 rounded-xl bg-[#FAF8F5] border border-[#161513]/10 relative shadow-xs"
                   >
                     <span className="text-[#8F5431] font-bold block mb-1">
-                      Callout 03 · Persistent "Message Mike" CTA
+                      Callout 03 · Direct Flatmate Outreach
                     </span>
                     <p className="text-[#5C5852] font-sans text-sm leading-relaxed">
-                      Instead of a generic "Schedule Visit" that pings an unresponsive broker, the
-                      button connects directly to the current tenant living in the flat.
+                      Instead of a generic "Schedule Visit" button routing to an unresponsive middleman broker,
+                      the persistent CTA establishes direct contact with the verified occupant in the flat.
                     </p>
                   </motion.div>
                 </div>
@@ -1125,10 +1132,10 @@ export default function RoomlyCaseStudy() {
           <FadeUp>
             <div className="max-w-2xl mb-12">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
-                03 / Persona Dossier
+                03 / Proto-Personas
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl text-[#161513] tracking-tight">
-                Synthesizing 10 interviews into one core user reality.
+                Proto-personas (hypotheses to validate).
               </h2>
             </div>
           </FadeUp>
@@ -1141,7 +1148,7 @@ export default function RoomlyCaseStudy() {
                   <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#161513]/20 bg-[#EDE8DE] mb-4">
                     <img
                       src="/roomly/reviewer_avatar.png"
-                      alt="Persona Avatar - Priya"
+                      alt="Proto-persona Avatar - Priya"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLElement).style.display = 'none';
@@ -1150,20 +1157,20 @@ export default function RoomlyCaseStudy() {
                   </div>
                   <h3 className="font-serif text-2xl text-[#161513] font-semibold">Priya & Arjun</h3>
                   <span className="font-mono text-xs text-[#8E8980] uppercase tracking-wider block mt-0.5 mb-4">
-                    Relocating Tech Professionals · Age 24 & 26
+                    Assumption-Based Proto-Personas · Relocating Tech Professionals (24 & 26)
                   </span>
 
                   <div className="w-full space-y-2 pt-4 border-t border-[#161513]/10 text-xs font-mono">
                     <div className="flex justify-between py-1 border-b border-[#161513]/5">
-                      <span className="text-[#8E8980]">Current City:</span>
-                      <span className="text-[#161513]">Pune / Bangalore</span>
+                      <span className="text-[#8E8980]">Current Origin:</span>
+                      <span className="text-[#161513]">Relocating to NCR</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-[#161513]/5">
-                      <span className="text-[#8E8980]">Destination:</span>
-                      <span className="text-[#161513]">Gurgaon (Cyber City)</span>
+                      <span className="text-[#8E8980]">Target District:</span>
+                      <span className="text-[#161513]">Gurgaon (Cyber City / Sector 57)</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-[#161513]/5">
-                      <span className="text-[#8E8980]">Budget:</span>
+                      <span className="text-[#8E8980]">Monthly Budget:</span>
                       <span className="text-[#161513]">₹14,000 – ₹20,000 / mo</span>
                     </div>
                     <div className="flex justify-between py-1">
@@ -1177,25 +1184,25 @@ export default function RoomlyCaseStudy() {
                 <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
                   <div className="p-5 rounded-xl bg-[#F4F1EA] border border-[#161513]/10 space-y-2">
                     <h4 className="font-mono text-xs uppercase tracking-wider text-[#8F5431] font-bold">
-                      Primary Goals
+                      Hypothesized Goals
                     </h4>
                     <ul className="space-y-1.5 text-[#5C5852] font-light leading-relaxed list-disc list-inside">
-                      <li>Find a verified room within a 20-minute commute to work.</li>
-                      <li>Verify flatmate daily rhythms (WFH vs in-office, quiet hours).</li>
-                      <li>Schedule in-person visits without handing phone numbers to 10 brokers.</li>
+                      <li>Find a verified private room within a 20-minute commute to office hubs.</li>
+                      <li>Inspect prospective flatmate living rhythms (WFH schedule, quiet hours).</li>
+                      <li>Schedule direct viewings without sharing personal phone numbers with multiple brokers.</li>
                     </ul>
                   </div>
 
                   <div className="p-5 rounded-xl bg-[#F4F1EA] border border-[#161513]/10 space-y-2">
                     <h4 className="font-mono text-xs uppercase tracking-wider text-[#161513] font-bold">
-                      Daily Frustrations
+                      Observed Friction Points
                     </h4>
                     <ul className="space-y-1.5 text-[#5C5852] font-light leading-relaxed list-disc list-inside">
                       <li>
-                        Misleading photos: 0.5x wide-angle shots hiding damp walls and small rooms.
+                        Distorted wide-angle photos obscuring room proportions and maintenance state.
                       </li>
-                      <li>No way to filter by lifestyle (smoking, pets, dietary rules).</li>
-                      <li>Leads dumped into chaotic WhatsApp group threads where context dies.</li>
+                      <li>Inability to filter for core lifestyle criteria (dietary habits, pet comfort, smoking).</li>
+                      <li>Disorganized WhatsApp group handoffs where listing specifications get lost.</li>
                     </ul>
                   </div>
 
@@ -1204,8 +1211,7 @@ export default function RoomlyCaseStudy() {
                       Design Mandate
                     </span>
                     <p className="font-serif italic text-lg text-[#161513] leading-snug">
-                      “If Roomly cannot tell me who lives in the apartment before I leave the office
-                      to visit, it has failed me just like Housing.com.”
+                      “If Roomly cannot communicate who already occupies the home before a renter commutes across the city for a viewing, it repeats the same failure mode as conventional property portals.”
                     </p>
                   </div>
                 </div>
@@ -1255,8 +1261,8 @@ export default function RoomlyCaseStudy() {
                 Four screens that shaped the core product.
               </h2>
               <p className="text-base text-[#5C5852] font-light leading-relaxed mt-2">
-                Each view was built to eliminate one specific friction point discovered during
-                interviews.
+                Each view was designed to solve one specific friction point identified during
+                competitor audits and renter journey mapping.
               </p>
             </div>
           </FadeUp>
@@ -1268,7 +1274,7 @@ export default function RoomlyCaseStudy() {
               category="Discovery Architecture"
               title="Dual-Feed Home Screen"
               description="I split the feed into two equal browsing lanes—available rooms and recommended flatmates—so users don’t have to choose between searching for a space or searching for a person."
-              whatITriedFirst='I initially placed flatmate profiles behind a separate bottom navigation tab. Testing showed 80% of users never opened that tab—they expected to see who lived in the neighborhood directly within their room feed.'
+              whatITriedFirst='I initially placed flatmate profiles behind a separate bottom navigation tab. During architectural reviews, I realized isolating people from spaces created unnatural friction—renters think about who they live with alongside where they live, so uniting them in one dual-lane feed proved far more cohesive.'
               imgSrc="/roomly/home_screen.png"
               caption="Fig. 6A — Primary Discovery Feed (iOS)"
             />
@@ -1279,7 +1285,7 @@ export default function RoomlyCaseStudy() {
               category="Constraint System"
               title="Precision Filter Sheet"
               description="I consolidated budget ranges, room types, and non-negotiable lifestyle rules into a single bottom sheet with instant live result counts."
-              whatITriedFirst='I first designed a multi-step modal wizard. Participants disliked having to tap "Next" three times just to see if any rooms met their budget in Sector 54. A single scrollable sheet with immediate feedback reduced filter abandonment.'
+              whatITriedFirst='I first sketched a multi-step modal wizard. I rejected it because clicking through sequential dialogs adds cognitive load just to check budget and location. Consolidating all parameters into a single scrollable sheet with immediate live match counts keeps the search fluid.'
               imgSrc="/roomly/filters_screen.png"
               caption="Fig. 6B — Single-sheet constraint filter"
               reverse
@@ -1291,7 +1297,7 @@ export default function RoomlyCaseStudy() {
               category="Detail Transparency"
               title="Room Details & Living Context"
               description="I placed the existing flatmate's profile and verified inventory right below the hero photo, before legal and lease terms."
-              whatITriedFirst="Earlier mockups had the security deposit terms taking up the first screenful. Testers scrolled straight past the numbers to see who was living in the flat. Prioritizing human context mirrored real user behavior."
+              whatITriedFirst="Earlier wireframes placed legal lease terms and security deposits directly below the hero photo. In evaluation, I realized financial specifics only matter once the room quality and flatmate chemistry feel viable. Elevating the existing occupant's profile directly below the gallery mirrors real decision-making priority."
               imgSrc="/roomly/room_detail_screen.png"
               caption="Fig. 6C — Room specs & flatmate profile preview"
             />
@@ -1302,7 +1308,7 @@ export default function RoomlyCaseStudy() {
               category="People First"
               title="Roommate Discovery & Mutual Alignment"
               description='I replaced vague "compatibility scores" with concrete habit badges (Cleanliness, Sleep Schedule, Dietary preference) so users can make an informed choice on their own terms.'
-              whatITriedFirst='My v1 design featured an animated "94% Match" badge. Every single interview subject asked what that number meant: "94% of what?" Replacing the score with factual tags built far greater trust.'
+              whatITriedFirst='My v1 concept included an animated percentage match badge. I discarded this because opaque compatibility scores are meaningless without context. Replacing an arbitrary number with factual habit badges (Cleanliness, Sleep Schedule, Dietary preference) gives renters transparent criteria to evaluate compatibility on their own terms.'
               imgSrc="/roomly/onboarding_2.png"
               caption="Fig. 6D — Transparent habit tags over arbitrary scores"
               reverse
@@ -1525,8 +1531,8 @@ export default function RoomlyCaseStudy() {
                       <p className="text-[10px] text-[#5C5852]">Software Engineer · Non-Smoker</p>
                     </div>
                   </div>
-                  <span className="px-2 py-0.5 rounded-full bg-[#4FA765]/10 text-[#4FA765] text-[10px] font-mono font-medium">
-                    94% Match
+                  <span className="px-2 py-0.5 rounded-full bg-[#560E22]/10 text-[#560E22] text-[10px] font-mono font-medium">
+                    Early Riser · WFH
                   </span>
                 </motion.div>
 
@@ -1567,17 +1573,17 @@ export default function RoomlyCaseStudy() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-         09 — HONEST OUTCOMES & LEARNINGS
+         09 — HONEST REFLECTION & PLANNED VALIDATION ROADMAP
       ───────────────────────────────────────────────────────────── */}
       <section id="outcomes" className="py-20 md:py-28 border-b border-[#161513]/10">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
           <FadeUp>
             <div className="max-w-2xl mb-12">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
-                07 / Reflection
+                07 / Reflection & Next Steps
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl text-[#161513] tracking-tight">
-                What worked, what failed, and what I'd change.
+                Design rationale, trade-offs, and validation roadmap.
               </h2>
             </div>
           </FadeUp>
@@ -1586,15 +1592,15 @@ export default function RoomlyCaseStudy() {
             <FadeUp delay={0.08}>
               <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 space-y-2 hover:border-[#4FA765]/40 transition-colors shadow-xs">
                 <span className="font-mono text-xs text-[#4FA765] font-semibold uppercase tracking-wider block">
-                  01 · What Worked
+                  01 · What Worked Well
                 </span>
                 <h3 className="font-serif text-xl text-[#161513] font-semibold">
                   Lifestyle pills cut awkward chats
                 </h3>
                 <p className="text-sm text-[#5C5852] font-light leading-relaxed">
-                  Surfacing non-negotiable lifestyle habits directly on the discovery cards
-                  immediately eliminated the standard 15-minute interrogation dance on WhatsApp.
-                  Testers knew within 5 seconds if a household was an alignment match.
+                  Surfacing non-negotiable living habits directly on discovery cards establishes immediate clarity.
+                  Renters can quickly assess whether daily household rhythms (sleep schedule, cleanliness, dietary rules)
+                  align before initiating contact.
                 </p>
               </div>
             </FadeUp>
@@ -1602,14 +1608,14 @@ export default function RoomlyCaseStudy() {
             <FadeUp delay={0.14}>
               <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 space-y-2 hover:border-[#4FA765]/40 transition-colors shadow-xs">
                 <span className="font-mono text-xs text-[#4FA765] font-semibold uppercase tracking-wider block">
-                  02 · What Worked
+                  02 · What Worked Well
                 </span>
                 <h3 className="font-serif text-xl text-[#161513] font-semibold">
-                  Single-sheet filter sheet
+                  Single-sheet filter architecture
                 </h3>
                 <p className="text-sm text-[#5C5852] font-light leading-relaxed">
-                  Moving from multi-page questionnaires to a single bottom sheet with live matching
-                  counters tripled the number of filters applied per user session during evaluation.
+                  Consolidating parameters into a single bottom sheet with live matching counters keeps renters anchored
+                  in context, encouraging quick adjustments without navigating back and forth across multi-step flows.
                 </p>
               </div>
             </FadeUp>
@@ -1617,16 +1623,16 @@ export default function RoomlyCaseStudy() {
             <FadeUp delay={0.2}>
               <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 space-y-2 hover:border-[#8F5431]/40 transition-colors shadow-xs">
                 <span className="font-mono text-xs text-[#8F5431] font-semibold uppercase tracking-wider block">
-                  03 · What Failed & Got Scrapped
+                  03 · Ideas Considered & Rejected
                 </span>
                 <h3 className="font-serif text-xl text-[#161513] font-semibold">
                   The automated deposit calculator
                 </h3>
                 <p className="text-sm text-[#5C5852] font-light leading-relaxed">
-                  I spent a week designing a complex shared deposit splitting calculator that
-                  accounted for variable utility splits. In usability tests, people were
-                  overwhelmed. Users simply wanted to see their exact fixed monthly share without
-                  entering utility formulas. I scrapped it in favor of a clear, fixed rent line.
+                  I explored a shared deposit calculator that attempted to account for fluctuating monthly utilities.
+                  I rejected it because variable formulas add unnecessary complexity at the discovery stage. Showing a
+                  predictable, fixed base rent line keeps the interface clean; shared utility splits are better resolved
+                  once housemates are established.
                 </p>
               </div>
             </FadeUp>
@@ -1634,19 +1640,85 @@ export default function RoomlyCaseStudy() {
             <FadeUp delay={0.26}>
               <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 space-y-2 hover:border-[#161513]/30 transition-colors shadow-xs">
                 <span className="font-mono text-xs text-[#161513] font-semibold uppercase tracking-wider block">
-                  04 · What I'd Do Next
+                  04 · Trust & Safety Architecture
                 </span>
                 <h3 className="font-serif text-xl text-[#161513] font-semibold">
                   Verified leaseholder endorsements
                 </h3>
                 <p className="text-sm text-[#5C5852] font-light leading-relaxed">
-                  If I took this project into production, I would design a verified past-roommate
-                  review system (similar to Airbnb guest reviews) validating cleanliness, quiet
-                  hours, and bill timeliness to build durable tenant trust.
+                  A critical hypothesis to test in future iterations is peer verification. A system of verified occupant
+                  badges and past-flatmate endorsements (similar to Airbnb guest reviews) could validate quiet hours,
+                  cleanliness, and timely bill payment to foster long-term tenant trust.
                 </p>
               </div>
             </FadeUp>
           </div>
+
+          {/* ── Next Steps: Validation Section ── */}
+          <FadeUp delay={0.3} className="mt-16 max-w-4xl">
+            <div className="p-8 sm:p-10 rounded-2xl bg-[#FAF8F5] border border-[#161513]/15 space-y-8 shadow-xs">
+              <div className="border-b border-[#161513]/10 pb-5">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] font-bold block mb-1">
+                  Validation Roadmap
+                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl text-[#161513]">
+                  Next steps: Testing hypotheses with real renters
+                </h3>
+                <p className="text-sm text-[#5C5852] font-light leading-relaxed mt-1">
+                  Because Roomly was developed as a self-initiated conceptual case study, rigorous empirical validation
+                  is the immediate next phase before any production build.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs font-mono">
+                {/* Step 1 */}
+                <div className="p-5 rounded-xl bg-white border border-[#161513]/10 space-y-2">
+                  <span className="text-[#8F5431] font-bold block uppercase tracking-wider">
+                    01 · Qualitative Interviews
+                  </span>
+                  <p className="font-sans text-sm text-[#5C5852] font-light leading-relaxed">
+                    Interview 5–6 young working professionals in Delhi NCR who have previously lived with flatmates
+                    to probe how they evaluate personal chemistry, navigate shared expenses, and handle house rules.
+                  </p>
+                </div>
+
+                {/* Step 2 */}
+                <div className="p-5 rounded-xl bg-white border border-[#161513]/10 space-y-2">
+                  <span className="text-[#8F5431] font-bold block uppercase tracking-wider">
+                    02 · Prototype Usability Testing
+                  </span>
+                  <p className="font-sans text-sm text-[#5C5852] font-light leading-relaxed">
+                    Run moderated usability tests of the interactive Figma prototype with 5 users, evaluating whether
+                    the dual-feed layout reduces cognitive load and whether habit badges provide sufficient decision confidence.
+                  </p>
+                </div>
+
+                {/* Step 3 */}
+                <div className="p-5 rounded-xl bg-white border border-[#161513]/10 space-y-2">
+                  <span className="text-[#161513] font-bold block uppercase tracking-wider">
+                    03 · Metrics I Would Track
+                  </span>
+                  <ul className="font-sans text-sm text-[#5C5852] font-light leading-relaxed list-disc list-inside space-y-1">
+                    <li>Primary task completion (finding an aligned room + flatmate).</li>
+                    <li>Time-to-first-message initiated to a prospective flatmate.</li>
+                    <li>Drop-off rate at the single-sheet filter interface.</li>
+                    <li>Search-to-inquiry conversion compared to conventional portals.</li>
+                  </ul>
+                </div>
+
+                {/* Step 4 */}
+                <div className="p-5 rounded-xl bg-white border border-[#161513]/10 space-y-2">
+                  <span className="text-[#161513] font-bold block uppercase tracking-wider">
+                    04 · Trust & Safety Roadmap
+                  </span>
+                  <p className="font-sans text-sm text-[#5C5852] font-light leading-relaxed">
+                    Design and evaluate security workflows: government ID verification badges, verified leaseholder
+                    endorsements, and private in-app messaging to keep personal contact numbers protected until mutual interest is established.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </FadeUp>
         </div>
       </section>
 
