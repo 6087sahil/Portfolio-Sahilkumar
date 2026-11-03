@@ -195,17 +195,14 @@ const AboutSection: React.FC = () => {
             <div className="lg:col-span-6 flex justify-center lg:justify-start">
               <div className="relative w-[280px] sm:w-[350px] md:w-[380px] py-4">
                 
-                {/* Layered Back Polaroid (Dehradun Mountain Duotone) */}
-                <div className="absolute -top-4 -left-4 sm:-left-6 w-[78%] bg-white dark:bg-[#1E1C18] p-3 pb-8 sm:pb-9 rounded-2xl border border-[#161513]/10 dark:border-white/10 shadow-[0_12px_28px_-8px_rgba(22,21,19,0.12)] -rotate-6 select-none pointer-events-none z-0 opacity-85">
-                  <div className="aspect-square bg-[#6E3D1E] overflow-hidden rounded-xl relative">
+                {/* Layered Back Polaroid (Mountain Peak Background) */}
+                <div className="absolute -top-4 -left-4 sm:-left-6 w-[78%] bg-white dark:bg-[#1E1C18] p-3 pb-8 sm:pb-9 rounded-2xl border border-[#161513]/10 dark:border-white/10 shadow-[0_12px_28px_-8px_rgba(22,21,19,0.12)] -rotate-6 select-none pointer-events-none z-0 opacity-90">
+                  <div className="aspect-square overflow-hidden rounded-xl relative bg-[#2A1520]">
                     <img
-                      src="/hero-bottom.png"
-                      alt="Dehradun mountains landscape"
-                      className="w-full h-full object-cover filter grayscale contrast-125 brightness-95"
+                      src="/hero-back-mountain.jpg"
+                      alt="Mountain peak landscape"
+                      className="w-full h-full object-cover object-center"
                     />
-                    {/* Warm Brown Duotone Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-[#542a13] via-[#8F5431] to-[#b37750] opacity-85 mix-blend-multiply pointer-events-none" />
-                    <div className="absolute inset-0 bg-[#8F5431]/40 mix-blend-color pointer-events-none" />
                   </div>
                   <div className="pt-2 text-left">
                     <span className="font-serif italic text-xs text-[#8F5431] dark:text-[#E8AF8B]">
