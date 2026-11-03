@@ -10,7 +10,7 @@ const Footer: React.FC<FooterProps> = () => {
     <footer
       className="w-full bg-[#EDE8DE] border-t border-[#161513]/10 text-[#161513] pt-16 pb-12 relative z-20 overflow-hidden transition-colors duration-500"
     >
-      <ScrollReveal delay={0.1} duration={1} yOffset={30} className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
+      <ScrollReveal delay={0.1} duration={1} yOffset={30} className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-16 lg:px-24">
         
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
           
@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = () => {
                   }
                   target={link === 'Email' ? undefined : '_blank'}
                   rel={link === 'Email' ? undefined : 'noreferrer'} 
-                  className="group text-[#5C5852] hover:text-[#161513] text-sm font-medium transition-colors duration-300 relative py-1"
+                  className="group text-[#5C5852] hover:text-[#161513] text-sm font-medium transition-colors duration-300 relative py-2 min-h-[44px] inline-flex items-center"
                 >
                   <span className="relative z-10 inline-block transition-transform duration-300 group-hover:-translate-y-0.5">{link}</span>
                 </a>

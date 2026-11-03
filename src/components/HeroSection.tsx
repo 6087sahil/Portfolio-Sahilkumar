@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
   return (
-    <section className="h-screen flex flex-col overflow-x-clip relative">
+    <section className="min-h-[100svh] h-screen flex flex-col overflow-x-clip relative">
       {/* Interactive Background */}
       <div className="absolute inset-0 z-0 bg-black">
         <div className="absolute inset-0 opacity-75 brightness-90">
@@ -17,7 +17,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center relative z-10 px-6 md:px-16 lg:px-24 pointer-events-none text-white">
+      <div className="flex-1 flex flex-col justify-center relative z-10 px-4 sm:px-6 md:px-16 lg:px-24 pointer-events-none text-white">
         
         <div className="w-full flex flex-col items-start text-left max-w-2xl">
           {/* Portfolio Year */}
@@ -79,7 +79,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
                     hidden: { opacity: 0, y: 30, rotateX: -90 },
                     visible: { opacity: 1, y: 0, rotateX: 0, transition: { type: "spring", damping: 12, stiffness: 100 } }
                   }}
-                  className="text-white drop-shadow-lg text-6xl sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px]" 
+                  className="text-white drop-shadow-lg text-[clamp(2.75rem,10vw,4.5rem)] sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px]" 
                   style={{ fontFamily: "'Arima', sans-serif", whiteSpace: char === " " ? "pre" : "normal" }}
                 >
                   {char}
@@ -113,7 +113,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
           >
             <a 
               href="#projects"
-              className="hero-cta-btn group pointer-events-auto relative inline-flex items-center gap-2 bg-white text-[#111111] dark:text-[#111111] px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]"
+              className="hero-cta-btn group pointer-events-auto relative inline-flex items-center justify-center min-h-[44px] gap-2 bg-white text-[#111111] dark:text-[#111111] px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]"
             >
               <span className="relative z-10 flex items-center gap-2 text-[#111111] dark:text-[#111111]">
                 View My Work
@@ -123,7 +123,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
             </a>
             <a 
               href="#contact"
-              className="group pointer-events-auto relative inline-flex items-center gap-2 bg-transparent text-white px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 border border-white/20 hover:border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] backdrop-blur-md"
+              className="group pointer-events-auto relative inline-flex items-center justify-center min-h-[44px] gap-2 bg-transparent text-white px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 border border-white/20 hover:border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] backdrop-blur-md"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Let's Connect

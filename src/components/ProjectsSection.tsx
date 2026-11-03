@@ -167,7 +167,7 @@ const EditorialProjectRow: React.FC<{ project: ProjectItem; index: number }> = (
             </p>
 
             {/* Metrics Dossier */}
-            <div className="grid grid-cols-3 gap-6 pt-8 mt-8 border-t border-[#161513]/10 dark:border-white/10">
+            <div className="grid grid-cols-3 gap-2 sm:gap-6 pt-8 mt-8 border-t border-[#161513]/10 dark:border-white/10">
               {project.metrics.map((m, i) => (
                 <div key={i} className="flex flex-col">
                   <span className="font-serif text-2xl sm:text-3xl text-[#161513] dark:text-[#F4F1EA] font-normal tracking-tight">
@@ -198,7 +198,7 @@ const EditorialProjectRow: React.FC<{ project: ProjectItem; index: number }> = (
             {project.link.startsWith('#') ? (
               <a
                 href={project.link}
-                className="group/cta inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-[#161513] dark:text-[#F4F1EA] hover:text-[#8F5431] dark:hover:text-[#C58B65] transition-colors duration-300 pb-1 border-b border-[#161513]/30 dark:border-white/30 hover:border-[#8F5431] dark:hover:border-[#C58B65]"
+                className="group/cta inline-flex items-center min-h-[44px] gap-3 font-mono text-xs uppercase tracking-[0.24em] text-[#161513] dark:text-[#F4F1EA] hover:text-[#8F5431] dark:hover:text-[#C58B65] transition-colors duration-300 pb-1 border-b border-[#161513]/30 dark:border-white/30 hover:border-[#8F5431] dark:hover:border-[#C58B65]"
               >
                 <span>{project.ctaText}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
@@ -206,7 +206,7 @@ const EditorialProjectRow: React.FC<{ project: ProjectItem; index: number }> = (
             ) : (
               <Link
                 to={project.link}
-                className="group/cta inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-[#161513] dark:text-[#F4F1EA] hover:text-[#8F5431] dark:hover:text-[#C58B65] transition-colors duration-300 pb-1 border-b border-[#161513]/30 dark:border-white/30 hover:border-[#8F5431] dark:hover:border-[#C58B65]"
+                className="group/cta inline-flex items-center min-h-[44px] gap-3 font-mono text-xs uppercase tracking-[0.24em] text-[#161513] dark:text-[#F4F1EA] hover:text-[#8F5431] dark:hover:text-[#C58B65] transition-colors duration-300 pb-1 border-b border-[#161513]/30 dark:border-white/30 hover:border-[#8F5431] dark:hover:border-[#C58B65]"
               >
                 <span>{project.ctaText}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
@@ -328,7 +328,7 @@ const ProjectsSection: React.FC = () => {
       <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#8F5431]/4 dark:bg-[#C58B65]/4 blur-[140px] rounded-full pointer-events-none" />
 
       {/* ── Section Container ── */}
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 relative z-10">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 md:px-16 lg:px-20 relative z-10">
         
         {/* ── Section Header: Editorial Architecture ── */}
         <header className="pb-14 sm:pb-18 border-b border-[#161513]/10 dark:border-white/10">

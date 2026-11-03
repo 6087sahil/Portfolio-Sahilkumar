@@ -101,7 +101,7 @@ const SkillsSection: React.FC = () => {
       id="skills"
       className="relative bg-[#F4F1EA] text-[#161513] py-24 md:py-32 border-t border-[#161513]/10"
     >
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-16 lg:px-24">
 
         {/* ── Heading ── */}
         <motion.div style={{ y: headingY }} className="mb-14">

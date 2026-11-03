@@ -46,7 +46,7 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="relative w-full bg-[#EDE8DE] text-[#161513] border-t border-[#161513]/10 overflow-hidden py-24 md:py-32"
     >
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-16 lg:px-24">
         
         {/* Section Label */}
         <div className="mb-4">
@@ -208,7 +208,7 @@ const ContactSection: React.FC = () => {
                               key={type}
                               type="button"
                               onClick={() => setSelectedType(type)}
-                              className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                              className={`px-3.5 py-2 min-h-[40px] rounded-full text-xs font-mono transition-all cursor-pointer flex items-center justify-center ${
                                 isSelected
                                   ? 'bg-[#161513] text-white font-semibold'
                                   : 'bg-white border border-[#161513]/15 text-[#5C5852] hover:border-[#161513]/40'
@@ -232,7 +232,7 @@ const ContactSection: React.FC = () => {
                         placeholder="e.g. Elena Rostova"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white border border-[#161513]/15 text-sm text-[#161513] placeholder:text-[#8E8980]/50 focus:outline-none focus:border-[#161513] focus:ring-1 focus:ring-[#161513] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-[#161513]/15 text-base md:text-sm text-[#161513] placeholder:text-[#8E8980]/50 focus:outline-none focus:border-[#161513] focus:ring-1 focus:ring-[#161513] transition-all"
                       />
                     </div>
 
@@ -247,7 +247,7 @@ const ContactSection: React.FC = () => {
                         placeholder="name@company.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white border border-[#161513]/15 text-sm text-[#161513] placeholder:text-[#8E8980]/50 focus:outline-none focus:border-[#161513] focus:ring-1 focus:ring-[#161513] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-[#161513]/15 text-base md:text-sm text-[#161513] placeholder:text-[#8E8980]/50 focus:outline-none focus:border-[#161513] focus:ring-1 focus:ring-[#161513] transition-all"
                       />
                     </div>
 
@@ -261,14 +261,14 @@ const ContactSection: React.FC = () => {
                         placeholder="Tell me about your product, timeline, or what you are looking to build..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl bg-white border border-[#161513]/15 text-sm text-[#161513] placeholder:text-[#8E8980]/50 focus:outline-none focus:border-[#161513] focus:ring-1 focus:ring-[#161513] transition-all resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-[#161513]/15 text-base md:text-sm text-[#161513] placeholder:text-[#8E8980]/50 focus:outline-none focus:border-[#161513] focus:ring-1 focus:ring-[#161513] transition-all resize-none"
                       />
                     </div>
 
                     {/* Submit Button */}
                     <button
                       type="submit"
-                      className="group w-full mt-2 py-3.5 px-6 rounded-full bg-[#161513] text-white hover:bg-[#8F5431] transition-all font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                      className="group w-full mt-2 py-3.5 px-6 min-h-[44px] rounded-full bg-[#161513] text-white hover:bg-[#8F5431] transition-all font-mono text-xs uppercase tracking-wider font-semibold shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <span>Send Message</span>
                       <Send className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

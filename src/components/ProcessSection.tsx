@@ -375,7 +375,7 @@ const ProcessSection: React.FC = () => {
     >
       {/* Sticky panel */}
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
-        <div className="flex-1 flex flex-col justify-center w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 py-6 md:py-8">
+        <div className="flex-1 flex flex-col justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-16 lg:px-24 py-6 md:py-8">
 
           {/* Section label + headline */}
           <div className="mb-6">
@@ -405,7 +405,7 @@ const ProcessSection: React.FC = () => {
               </div>
 
               {/* Steps list */}
-              <div className="flex flex-col divide-y divide-[#161513]/10 flex-1 min-h-0">
+              <div className="flex flex-col divide-y divide-[#161513]/10 flex-1 min-h-0 overflow-y-auto lg:overflow-visible max-h-[calc(100svh-170px)] lg:max-h-none hide-scrollbar">
                 {steps.map((step, i) => {
                   const isActive = activeStep === i;
                   return (

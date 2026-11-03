@@ -48,7 +48,7 @@ const ServicesSection: React.FC = () => {
     if (trackRef.current && containerRef.current) {
       const trackWidth = trackRef.current.scrollWidth;
       const viewportWidth = containerRef.current.offsetWidth;
-      const padding = window.innerWidth >= 1024 ? 96 : window.innerWidth >= 768 ? 64 : 24;
+      const padding = window.innerWidth >= 1024 ? 96 : window.innerWidth >= 768 ? 64 : 16;
       const overflow = Math.max(0, trackWidth - viewportWidth + padding);
       setMaxScroll(-overflow);
       
@@ -90,7 +90,7 @@ const ServicesSection: React.FC = () => {
       <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-[#8F5431]/4 blur-[140px] rounded-full pointer-events-none" />
 
       {/* Header Row */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24 mb-12 md:mb-16 flex items-end justify-between flex-wrap gap-6">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-16 lg:px-24 mb-12 md:mb-16 flex items-end justify-between flex-wrap gap-6">
         <div>
           <span className="text-[#8E8980] font-mono text-xs uppercase tracking-wider mb-3 block">
             02 / Capabilities &amp; Services
@@ -115,7 +115,7 @@ const ServicesSection: React.FC = () => {
 
       {/* Cursor-Controlled Draggable Track */}
       <div
-        className={`relative z-10 w-full overflow-hidden pl-6 md:pl-16 lg:pl-24 py-8 -my-8 hide-scrollbar ${
+        className={`relative z-10 w-full overflow-hidden pl-4 sm:pl-6 md:pl-16 lg:pl-24 py-8 -my-8 hide-scrollbar ${
           isDragging ? 'cursor-grabbing' : 'cursor-grab'
         }`}
       >

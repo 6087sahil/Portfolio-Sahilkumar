@@ -34,6 +34,7 @@ const NavBar: React.FC = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [expertiseOpen, setExpertiseOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileExpertiseOpen, setMobileExpertiseOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,6 +42,8 @@ const NavBar: React.FC = () => {
   const isScrolledRef = useRef(false);
   const isClickNavigatingRef = useRef(false);
   const expertiseDropdownRef = useRef<HTMLDivElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const isHomePage = location.pathname === '/';
   // On home page, transparent over hero until scrolled
@@ -138,12 +141,50 @@ const NavBar: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  /* ── Lock body scroll when mobile menu is open ── */
+  /* ── Lock body scroll & handle Esc / Focus Trap when mobile menu is open ── */
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : 'unset';
-    return () => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      // Auto focus close button for accessibility
+      setTimeout(() => closeButtonRef.current?.focus(), 50);
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setMobileMenuOpen(false);
+          return;
+        }
+
+        // Focus trap
+        if (e.key === 'Tab' && drawerRef.current) {
+          const focusables = drawerRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+          if (focusables.length === 0) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              last.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === last) {
+              first.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      };
+
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = 'unset';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
       document.body.style.overflow = 'unset';
-    };
+    }
   }, [mobileMenuOpen]);
 
   /* ── Navigation click handler ── */
@@ -233,10 +274,10 @@ const NavBar: React.FC = () => {
               </Link>
             </div>
 
-            {/* ── Desktop Single-line Navigation ── */}
+            {/* ── Desktop Single-line Navigation (>= 1024px) ── */}
             <nav
               aria-label="Primary navigation"
-              className="hidden md:flex items-center gap-1 lg:gap-2"
+              className="hidden lg:flex items-center gap-1 lg:gap-2"
               onMouseLeave={() => setHoveredLink(null)}
             >
               {/* ▸ Expertise with Circular Downward Arrow */}
@@ -381,7 +422,7 @@ const NavBar: React.FC = () => {
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.92 }}
                 aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                className={`w-9 h-9 flex items-center justify-center cursor-pointer transition-colors duration-300 ${textSecondary}`}
+                className={`w-10 h-10 flex items-center justify-center cursor-pointer transition-colors duration-300 ${textSecondary}`}
               >
                 <div className="relative w-4 h-4">
                   <motion.div
@@ -428,13 +469,28 @@ const NavBar: React.FC = () => {
               </div>
             </nav>
 
-            {/* ── Mobile & Tablet Header Controls ── */}
-            <div className="flex md:hidden items-center gap-2">
+            {/* ── Mobile & Tablet Header Controls (< 1024px) ── */}
+            <div className="flex lg:hidden items-center gap-2 sm:gap-3">
+              {/* Keep "Let's Talk" accessible on header for tablet & mobile */}
+              <a
+                href="/#contact"
+                onClick={(e) => handleNavClick(e, '/#contact')}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.05em] uppercase transition-all duration-300 select-none ${
+                  isTransparent
+                    ? 'bg-white text-[#161513] shadow-sm'
+                    : 'bg-[#161513] dark:bg-[#C58B65] text-[#F4F1EA] dark:text-[#171512]'
+                }`}
+              >
+                <span>Let's Talk</span>
+                <ArrowRight className="w-3 h-3" />
+              </a>
+
+              {/* Accessible Theme Toggle (min 44x44px touch target) */}
               <button
                 type="button"
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className={`w-9 h-9 flex items-center justify-center cursor-pointer ${textSecondary}`}
+                className={`w-11 h-11 flex items-center justify-center cursor-pointer ${textSecondary}`}
               >
                 {theme === 'dark' ? (
                   <Sun className="w-4 h-4" />
@@ -443,31 +499,40 @@ const NavBar: React.FC = () => {
                 )}
               </button>
 
+              {/* Hamburger Button with accessibility attributes */}
               <button
                 type="button"
+                id="mobile-drawer-toggle"
                 onClick={() => setMobileMenuOpen(true)}
                 aria-label="Open menu"
-                className={`w-9 h-9 flex items-center justify-center cursor-pointer transition-colors ${textPrimary}`}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-navigation-drawer"
+                className={`w-11 h-11 flex items-center justify-center cursor-pointer transition-colors ${textPrimary}`}
               >
-                <Menu className="w-5 h-5" />
+                <Menu className="w-6 h-6" />
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* ── Mobile Full-screen Editorial Overlay ── */}
+      {/* ── Mobile Full-screen Accessible Drawer ── */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-navigation-drawer"
+            ref={drawerRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Drawer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[200] bg-[#F4F1EA] dark:bg-[#161513] flex flex-col justify-between p-6 sm:p-10 transition-colors duration-500"
+            className="fixed inset-0 z-[200] bg-[#F4F1EA] dark:bg-[#161513] flex flex-col justify-between p-6 sm:p-10 pt-[calc(1rem+env(safe-area-inset-top,0px))] pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] transition-colors duration-500 overflow-y-auto"
           >
             {/* Top Bar inside Overlay */}
-            <div className="flex items-center justify-between pb-6 border-b border-[#161513]/10 dark:border-white/10">
+            <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-[#161513]/10 dark:border-white/10 shrink-0">
               <Link
                 to="/"
                 onClick={() => setMobileMenuOpen(false)}
@@ -477,10 +542,11 @@ const NavBar: React.FC = () => {
                 SK<span className="text-[#8F5431] dark:text-[#C58B65]">.</span>
               </Link>
               <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label="Close menu"
-                className="w-10 h-10 flex items-center justify-center text-[#161513] dark:text-[#F4F1EA] hover:opacity-70 transition-opacity cursor-pointer"
+                className="w-11 h-11 flex items-center justify-center text-[#161513] dark:text-[#F4F1EA] hover:opacity-70 transition-opacity cursor-pointer rounded-full"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -493,14 +559,63 @@ const NavBar: React.FC = () => {
               exit="hidden"
               variants={{
                 visible: {
-                  transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+                  transition: { staggerChildren: 0.05, delayChildren: 0.08 },
                 },
                 hidden: {
-                  transition: { staggerChildren: 0.03, staggerDirection: -1 },
+                  transition: { staggerChildren: 0.02, staggerDirection: -1 },
                 },
               }}
-              className="flex-1 flex flex-col justify-center gap-4 py-8"
+              className="flex-1 flex flex-col justify-center gap-2 sm:gap-3 py-6"
             >
+              {/* Expertise with Touch Submenu Accordion */}
+              <div className="border-b border-[#161513]/8 dark:border-white/8 py-2">
+                <button
+                  type="button"
+                  onClick={() => setMobileExpertiseOpen((prev) => !prev)}
+                  aria-expanded={mobileExpertiseOpen}
+                  className="w-full flex items-center justify-between py-2 text-left min-h-[44px]"
+                >
+                  <span
+                    className={`text-2xl sm:text-3xl font-light uppercase tracking-tight transition-colors duration-300 ${
+                      isExpertiseActive
+                        ? 'text-[#8F5431] dark:text-[#C58B65]'
+                        : 'text-[#161513] dark:text-[#F4F1EA]'
+                    }`}
+                  >
+                    Expertise
+                  </span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-[#8F5431] transition-transform duration-300 ${
+                      mobileExpertiseOpen ? 'rotate-180' : 'rotate-0'
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {mobileExpertiseOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden flex flex-col gap-2 pl-4 pt-2 pb-2"
+                    >
+                      {expertiseSubmenu.map((sub) => (
+                        <a
+                          key={sub.label}
+                          href={sub.href}
+                          onClick={(e) => handleNavClick(e, sub.href)}
+                          className="py-2 text-sm sm:text-base font-mono uppercase tracking-wider text-[#5C5852] dark:text-[#A8A29E] hover:text-[#8F5431] dark:hover:text-[#E8AF8B] transition-colors min-h-[44px] flex items-center"
+                        >
+                          &bull; {sub.label}
+                        </a>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Standard Nav Links */}
               {[
                 { label: 'About', href: '/about' },
                 { label: 'Services', href: '/#services' },
@@ -516,14 +631,14 @@ const NavBar: React.FC = () => {
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
                     variants={{
-                      hidden: { opacity: 0, x: -20 },
+                      hidden: { opacity: 0, x: -16 },
                       visible: {
                         opacity: 1,
                         x: 0,
-                        transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                        transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
                       },
                     }}
-                    className="group flex items-baseline justify-between py-3 border-b border-[#161513]/8 dark:border-white/8 select-none"
+                    className="group flex items-baseline justify-between py-2 sm:py-3 border-b border-[#161513]/8 dark:border-white/8 select-none min-h-[44px]"
                   >
                     <span
                       className={`text-2xl sm:text-3xl font-light uppercase tracking-tight transition-colors duration-300 ${
@@ -543,16 +658,16 @@ const NavBar: React.FC = () => {
             </motion.nav>
 
             {/* Bottom Contact CTA inside Overlay */}
-            <div className="pt-6 border-t border-[#161513]/10 dark:border-white/10 flex items-center justify-between">
+            <div className="pt-4 sm:pt-6 border-t border-[#161513]/10 dark:border-white/10 flex items-center justify-between shrink-0">
               <a
                 href="/#contact"
                 onClick={(e) => handleNavClick(e, '/#contact')}
-                className="inline-flex items-center gap-2 bg-[#161513] dark:bg-[#C58B65] text-[#F4F1EA] dark:text-[#171512] px-6 py-3 text-xs font-semibold uppercase tracking-[0.06em]"
+                className="inline-flex items-center gap-2 bg-[#161513] dark:bg-[#C58B65] text-[#F4F1EA] dark:text-[#171512] px-6 py-3.5 min-h-[44px] text-xs font-semibold uppercase tracking-[0.06em] rounded-full"
               >
                 <span>Let's Talk</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
-              <span className="text-xs text-[#161513]/40 dark:text-white/40">
+              <span className="text-xs text-[#161513]/40 dark:text-white/40 font-mono">
                 Sahil Kumar &copy; {new Date().getFullYear()}
               </span>
             </div>

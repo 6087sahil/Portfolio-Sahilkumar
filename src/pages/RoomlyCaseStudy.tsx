@@ -7,6 +7,7 @@ import {
   useSpring,
   useMotionValue,
   useInView,
+  useReducedMotion,
 } from 'framer-motion';
 import {
   ArrowLeft,
@@ -159,6 +160,14 @@ const EditorialPhone: React.FC<PhoneProps> = ({
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    setIsTouchDevice(window.matchMedia('(hover: none) or (pointer: coarse)').matches);
+  }, []);
+
+  const canTilt = interactiveTilt && !shouldReduceMotion && !isTouchDevice;
 
   // 3D perspective tilt
   const mouseX = useMotionValue(0);
@@ -173,7 +182,7 @@ const EditorialPhone: React.FC<PhoneProps> = ({
   const glareOpacity = useTransform(smoothX, [-0.5, 0, 0.5], [0.18, 0.05, 0.28]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!interactiveTilt || !cardRef.current) return;
+    if (!canTilt || !cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const xPct = (e.clientX - rect.left) / rect.width - 0.5;
     const yPct = (e.clientY - rect.top) / rect.height - 0.5;
@@ -193,8 +202,8 @@ const EditorialPhone: React.FC<PhoneProps> = ({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{
-          rotateX: interactiveTilt ? rotateX : 0,
-          rotateY: interactiveTilt ? rotateY : 0,
+          rotateX: canTilt ? rotateX : 0,
+          rotateY: canTilt ? rotateY : 0,
           transformStyle: 'preserve-3d',
           perspective: 1000,
           boxShadow:
@@ -276,7 +285,19 @@ const EditorialPhone: React.FC<PhoneProps> = ({
 const WireframeHiFiSlider = () => {
   const [sliderPos, setSliderPos] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState<number>(0);
   const isDragging = useRef(false);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setContainerWidth(entry.contentRect.width);
+      }
+    });
+    ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, []);
 
   const handleMove = (clientX: number) => {
     if (!containerRef.current) return;
@@ -308,7 +329,11 @@ const WireframeHiFiSlider = () => {
           isDragging.current = false;
         }}
         onMouseMove={onMouseMove}
+        onTouchStart={(e) => {
+          handleMove(e.touches[0].clientX);
+        }}
         onTouchMove={onTouchMove}
+        style={{ touchAction: 'none' }}
         className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[2/1] rounded-2xl overflow-hidden border border-[#161513]/15 bg-[#FAF8F5] cursor-ew-resize select-none shadow-md group"
       >
         {/* Left Layer: Wireframe (Structural Blueprint) */}
@@ -345,12 +370,12 @@ const WireframeHiFiSlider = () => {
 
         {/* Right Layer: High-Fidelity Final UI */}
         <div
-          className="absolute inset-y-0 right-0 overflow-hidden bg-[#FAF8F5] flex items-center justify-center p-6 md:p-10"
+          className="absolute inset-y-0 right-0 overflow-hidden bg-[#FAF8F5] flex items-center justify-center p-6 md:p-10 pointer-events-none"
           style={{ width: `${100 - sliderPos}%` }}
         >
           <div
-            className="absolute inset-y-0 right-0 w-[896px] max-w-none flex items-center justify-center p-6 md:p-10 pointer-events-none"
-            style={{ width: containerRef.current?.offsetWidth || '100%' }}
+            className="absolute inset-y-0 right-0 flex items-center justify-center p-6 md:p-10 pointer-events-none"
+            style={{ width: containerWidth ? `${containerWidth}px` : (containerRef.current?.offsetWidth || '100%') }}
           >
             <div className="w-full max-w-md bg-[#FDEAF0] border border-[#560E22]/15 rounded-2xl p-5 md:p-7 space-y-4 shadow-sm text-[#161513]">
               <div className="flex justify-between items-center pb-2 border-b border-[#560E22]/10">
@@ -623,7 +648,7 @@ const BackToTopProgress: React.FC = () => {
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-[#161513] text-[#FAF8F5] flex items-center justify-center shadow-xl hover:bg-[#8F5431] transition-colors group cursor-pointer"
+          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-[#161513] text-[#FAF8F5] flex items-center justify-center shadow-xl hover:bg-[#8F5431] transition-colors group cursor-pointer safe-area-bottom safe-area-right"
         >
           {/* Progress Circle Ring */}
           <svg className="absolute inset-0 w-full h-full -rotate-90 p-1" viewBox="0 0 48 48">
@@ -699,7 +724,7 @@ export default function RoomlyCaseStudy() {
          Clean back link and quiet project title, no floating pills.
       ───────────────────────────────────────────────────────────── */}
       <header className="w-full border-b border-[#161513]/10 bg-[#F4F1EA]/95 sticky top-0 z-40 backdrop-blur-sm">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-4 flex items-center justify-between text-xs font-mono">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12 py-4 flex items-center justify-between text-xs font-mono">
           <Link
             to="/"
             className="group inline-flex items-center gap-2 text-[#5C5852] hover:text-[#161513] transition-colors"
@@ -721,7 +746,7 @@ export default function RoomlyCaseStudy() {
          Right: 3D interactive phone mockup with tactile note.
       ───────────────────────────────────────────────────────────── */}
       <section className="relative pt-12 md:pt-20 pb-20 md:pb-28 border-b border-[#161513]/10 overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
             {/* Left Column (Cols 1-7) */}
             <div className="lg:col-span-7 flex flex-col">
@@ -759,37 +784,37 @@ export default function RoomlyCaseStudy() {
               {/* Meta List Table with Hairline Rules & Staggered Reveal */}
               <FadeUp delay={0.15}>
                 <div className="border-t border-[#161513]/15 text-xs font-mono divide-y divide-[#161513]/10">
-                  <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
-                    <span className="col-span-4 text-[#8E8980] uppercase tracking-wider">Role</span>
-                    <span className="col-span-8 text-[#161513]">
+                  <div className="py-3.5 grid grid-cols-12 gap-2 sm:gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
+                    <span className="col-span-5 sm:col-span-4 text-[#8E8980] uppercase tracking-wider">Role</span>
+                    <span className="col-span-7 sm:col-span-8 text-[#161513]">
                       Product Designer · Information Architecture, UI/UX, Design System
                     </span>
                   </div>
-                  <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
-                    <span className="col-span-4 text-[#8E8980] uppercase tracking-wider">
+                  <div className="py-3.5 grid grid-cols-12 gap-2 sm:gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
+                    <span className="col-span-5 sm:col-span-4 text-[#8E8980] uppercase tracking-wider">
                       Timeline
                     </span>
-                    <span className="col-span-8 text-[#161513]">6 Weeks · Q1 2024</span>
+                    <span className="col-span-7 sm:col-span-8 text-[#161513]">6 Weeks · Q1 2024</span>
                   </div>
-                  <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
-                    <span className="col-span-4 text-[#8E8980] uppercase tracking-wider">
+                  <div className="py-3.5 grid grid-cols-12 gap-2 sm:gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
+                    <span className="col-span-5 sm:col-span-4 text-[#8E8980] uppercase tracking-wider">
                       Platform
                     </span>
-                    <span className="col-span-8 text-[#161513]">
+                    <span className="col-span-7 sm:col-span-8 text-[#161513]">
                       Native iOS · 430 × 932 pt Canvas
                     </span>
                   </div>
-                  <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
-                    <span className="col-span-4 text-[#8E8980] uppercase tracking-wider">Tools</span>
-                    <span className="col-span-8 text-[#161513]">
+                  <div className="py-3.5 grid grid-cols-12 gap-2 sm:gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
+                    <span className="col-span-5 sm:col-span-4 text-[#8E8980] uppercase tracking-wider">Tools</span>
+                    <span className="col-span-7 sm:col-span-8 text-[#161513]">
                       Figma, FigJam, Pen & Paper, Competitor Benchmarking
                     </span>
                   </div>
-                  <div className="py-3.5 grid grid-cols-12 gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
-                    <span className="col-span-4 text-[#8E8980] uppercase tracking-wider">
+                  <div className="py-3.5 grid grid-cols-12 gap-2 sm:gap-4 hover:bg-[#FAF8F5]/60 transition-colors px-2 -mx-2 rounded">
+                    <span className="col-span-5 sm:col-span-4 text-[#8E8980] uppercase tracking-wider">
                       Prototype
                     </span>
-                    <span className="col-span-8">
+                    <span className="col-span-7 sm:col-span-8">
                       <a
                         href="https://www.figma.com/proto/B3oFSh9ObaTE5YMCLYamwa/Roommate---Rooms-app?node-id=243-2171&t=iD2BAYVWj3NWawEU-1"
                         target="_blank"
@@ -837,7 +862,7 @@ export default function RoomlyCaseStudy() {
          Broken grid: Wide narrative on left, marginalia & numbers on right.
       ───────────────────────────────────────────────────────────── */}
       <section id="field-notes" className="py-20 md:py-28 border-b border-[#161513]/10">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Header / Marginalia (Cols 1-4) */}
             <div className="lg:col-span-4">
@@ -938,7 +963,7 @@ export default function RoomlyCaseStudy() {
          03 — PROCESS ARTIFACTS: Sketches, Scrapped Ideas, & Redlines
       ───────────────────────────────────────────────────────────── */}
       <section id="process-artifacts" className="py-20 md:py-28 border-b border-[#161513]/10 bg-[#FAF8F5]">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
           <FadeUp>
             <div className="max-w-2xl mb-12">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
@@ -1128,7 +1153,7 @@ export default function RoomlyCaseStudy() {
          04 — USER PERSONA (Dossier layout)
       ───────────────────────────────────────────────────────────── */}
       <section id="persona-dossier" className="py-20 md:py-28 border-b border-[#161513]/10">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
           <FadeUp>
             <div className="max-w-2xl mb-12">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
@@ -1225,7 +1250,7 @@ export default function RoomlyCaseStudy() {
          05 — WIREFRAME TO HI-FI (Draggable comparison slider)
       ───────────────────────────────────────────────────────────── */}
       <section id="wireframe-hifi" className="py-20 md:py-28 border-b border-[#161513]/10">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
           <FadeUp>
             <div className="max-w-2xl mb-8">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
@@ -1251,7 +1276,7 @@ export default function RoomlyCaseStudy() {
          06 — KEY FEATURE SCREENS WITH SCROLL PARALLAX
       ───────────────────────────────────────────────────────────── */}
       <section id="key-screens" className="py-20 md:py-28 border-b border-[#161513]/10">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
           <FadeUp>
             <div className="max-w-2xl mb-16">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
@@ -1333,7 +1358,7 @@ export default function RoomlyCaseStudy() {
           }}
         />
 
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
           <FadeUp>
             <div className="max-w-2xl mb-16 text-left">
               <span className="font-mono text-xs text-[#8F5431] uppercase tracking-widest block mb-2 font-semibold">
@@ -1404,7 +1429,7 @@ export default function RoomlyCaseStudy() {
          08 — DESIGN SYSTEM (Interactive Tokens & Micro-Components)
       ───────────────────────────────────────────────────────────── */}
       <section id="design-tokens" className="py-20 md:py-28 border-b border-[#161513]/10">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
           <FadeUp>
             <div className="max-w-2xl mb-12">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
@@ -1576,7 +1601,7 @@ export default function RoomlyCaseStudy() {
          09 — HONEST REFLECTION & PLANNED VALIDATION ROADMAP
       ───────────────────────────────────────────────────────────── */}
       <section id="outcomes" className="py-20 md:py-28 border-b border-[#161513]/10">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
           <FadeUp>
             <div className="max-w-2xl mb-12">
               <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-2">
@@ -1726,7 +1751,7 @@ export default function RoomlyCaseStudy() {
          10 — SIMPLE NEXT PROJECT LINK
       ───────────────────────────────────────────────────────────── */}
       <footer className="py-20 md:py-28 bg-[#F4F1EA]">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
           <div>
             <span className="font-mono text-xs text-[#8E8980] uppercase tracking-widest block mb-1">
               Have a Project in Mind?

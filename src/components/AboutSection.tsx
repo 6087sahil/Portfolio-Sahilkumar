@@ -75,7 +75,7 @@ const BackToTopProgress: React.FC = () => {
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-8 right-6 sm:right-8 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#161513] text-[#FAF8F5] dark:bg-[#FAF8F5] dark:text-[#161513] flex items-center justify-center shadow-xl hover:bg-[#8F5431] dark:hover:bg-[#8F5431] dark:hover:text-white transition-colors group cursor-pointer"
+          className="fixed bottom-8 right-6 sm:right-8 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#161513] text-[#FAF8F5] dark:bg-[#FAF8F5] dark:text-[#161513] flex items-center justify-center shadow-xl hover:bg-[#8F5431] dark:hover:bg-[#8F5431] dark:hover:text-white transition-colors group cursor-pointer safe-area-bottom safe-area-right"
         >
           <svg className="absolute inset-0 w-full h-full -rotate-90 p-1" viewBox="0 0 48 48">
             <circle
@@ -255,7 +255,7 @@ const AboutSection: React.FC = () => {
                 {/* Parallax Floating Tags */}
                 <motion.div
                   style={shouldReduceMotion ? {} : { y: yBadge1 }}
-                  className="absolute top-[22%] -left-6 sm:-left-12 z-20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
+                  className="absolute top-[22%] -left-2 sm:-left-12 z-20 px-3.5 sm:px-5 py-1.5 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
                 >
                   <span className="text-[#161513] dark:text-[#F4F1EA] text-[10px] sm:text-xs font-mono font-semibold tracking-widest uppercase">
                     DESIGN
@@ -264,7 +264,7 @@ const AboutSection: React.FC = () => {
 
                 <motion.div
                   style={shouldReduceMotion ? {} : { y: yBadge2 }}
-                  className="absolute top-[58%] -right-6 sm:-right-10 z-20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
+                  className="absolute top-[58%] -right-2 sm:-right-10 z-20 px-3.5 sm:px-5 py-1.5 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
                 >
                   <span className="text-[#161513] dark:text-[#F4F1EA] text-[10px] sm:text-xs font-mono font-semibold tracking-widest uppercase">
                     RESEARCH
@@ -273,7 +273,7 @@ const AboutSection: React.FC = () => {
 
                 <motion.div
                   style={shouldReduceMotion ? {} : { y: yBadge3 }}
-                  className="absolute bottom-[18%] -left-5 sm:-left-10 z-20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
+                  className="absolute bottom-[18%] -left-2 sm:-left-10 z-20 px-3.5 sm:px-5 py-1.5 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
                 >
                   <span className="text-[#161513] dark:text-[#F4F1EA] text-[10px] sm:text-xs font-mono font-semibold tracking-widest uppercase">
                     INTERACTION
@@ -399,7 +399,7 @@ const AboutSection: React.FC = () => {
             </FadeUp>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {[
               {
                 num: '01',
@@ -469,7 +469,7 @@ const AboutSection: React.FC = () => {
             <div className="p-5 sm:p-8 rounded-2xl sm:rounded-[1.75rem] bg-[#FAF8F5] dark:bg-[#1E1C18] border border-[#161513]/10 dark:border-white/10 flex flex-col gap-8">
               
               {/* 3-Column Skills Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-start">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
                 
                 {/* Column 1: DESIGN */}
                 <div className="flex flex-col gap-3.5">

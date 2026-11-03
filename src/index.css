@@ -212,6 +212,28 @@ html.lenis {
   }
 }
 
+/* Hide custom cursor completely on touch / coarse pointer devices */
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor-container {
+    display: none !important;
+  }
+}
+
+/* Ensure inputs on mobile have at least 16px to prevent iOS auto-zoom */
+@media screen and (max-width: 767px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Safe area insets support */
+.safe-area-bottom {
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+.safe-area-right {
+  right: calc(1.5rem + env(safe-area-inset-right, 0px)) !important;
+}
+
 /* Custom Cursor Root Container */
 .custom-cursor-container {
   position: fixed;
