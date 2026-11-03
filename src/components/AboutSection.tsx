@@ -192,85 +192,91 @@ const AboutSection: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center pt-2">
             
             {/* Left Column: Photo with Polaroid Frame + Floating Tags */}
-            <div className="lg:col-span-6 flex justify-center lg:justify-start items-center">
-              {/* Outer wrapper: px-14 py-10 gives breathing room for tags that bleed outside */}
-              <div className="relative w-full max-w-[380px] px-14 py-10">
-
-                {/* Back layer: single solid-colour card, rotate +3deg, 12px offset */}
-                <div
-                  className="absolute inset-0 rounded-[20px] bg-[#EDE8DE] dark:bg-[#2A2621] border border-[#161513]/10 dark:border-white/10 pointer-events-none z-0"
-                  style={{ transform: 'translate(12px, 12px) rotate(3deg)' }}
-                />
+            <div className="lg:col-span-6 flex justify-center lg:justify-start">
+              <div className="relative w-[280px] sm:w-[350px] md:w-[380px] py-4">
+                
+                {/* Layered Back Polaroid (Dehradun Mountain Duotone) */}
+                <div className="absolute -top-4 -left-4 sm:-left-6 w-[78%] bg-white dark:bg-[#1E1C18] p-3 pb-8 sm:pb-9 rounded-2xl border border-[#161513]/10 dark:border-white/10 shadow-[0_12px_28px_-8px_rgba(22,21,19,0.12)] -rotate-6 select-none pointer-events-none z-0 opacity-85">
+                  <div className="aspect-square bg-[#6E3D1E] overflow-hidden rounded-xl relative">
+                    <img
+                      src="/hero-bottom.png"
+                      alt="Dehradun mountains landscape"
+                      className="w-full h-full object-cover filter grayscale contrast-125 brightness-95"
+                    />
+                    {/* Warm Brown Duotone Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#542a13] via-[#8F5431] to-[#b37750] opacity-85 mix-blend-multiply pointer-events-none" />
+                    <div className="absolute inset-0 bg-[#8F5431]/40 mix-blend-color pointer-events-none" />
+                  </div>
+                  <div className="pt-2 text-left">
+                    <span className="font-serif italic text-xs text-[#8F5431] dark:text-[#E8AF8B]">
+                      Dehradun.
+                    </span>
+                  </div>
+                </div>
 
                 {/* Main Foreground Polaroid Photo Frame */}
                 <motion.div
                   style={shouldReduceMotion ? {} : { y: yImage }}
                   whileHover={shouldReduceMotion ? {} : { rotate: 0, scale: 1.02 }}
                   transition={{ duration: 0.35, ease: EASE_SPRING }}
-                  className="relative z-10 bg-white dark:bg-[#1E1C18] p-4 rounded-[20px] border border-[#161513]/15 dark:border-white/15 shadow-[0_22px_55px_-12px_rgba(22,21,19,0.22),0_8px_22px_-6px_rgba(22,21,19,0.08)] hover:shadow-[0_28px_65px_-12px_rgba(110,61,30,0.28)] rotate-2 transition-shadow duration-500 group cursor-pointer"
+                  className="relative z-10 bg-white dark:bg-[#1E1C18] p-3.5 sm:p-4 pb-12 sm:pb-14 rounded-2xl sm:rounded-[1.75rem] border border-[#161513]/15 dark:border-white/15 shadow-[0_22px_55px_-12px_rgba(22,21,19,0.22),0_8px_22px_-6px_rgba(22,21,19,0.08)] hover:shadow-[0_28px_65px_-12px_rgba(110,61,30,0.28)] rotate-2 transition-shadow duration-500 group cursor-pointer"
                 >
-                  {/* Photo: aspect 4/5, slightly desaturated */}
-                  <div
-                    className="relative w-full overflow-hidden rounded-[16px] border border-black/5 dark:border-white/5"
-                    style={{ aspectRatio: '4/5' }}
-                  >
+                  {/* Photo Inner Canvas */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#EDE8DE] dark:bg-[#2A2621] rounded-xl sm:rounded-2xl border border-black/5 dark:border-white/5 shadow-inner">
                     <img
                       src={imageUrl}
                       alt="Sahil Kumar"
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-                      style={{ objectPosition: 'center 20%', filter: 'saturate(82%)' }}
+                      className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
                     />
                   </div>
 
-                  {/* Caption: centered, 16px top padding, inside card — never overlapped */}
-                  <div className="pt-4 text-center">
-                    <p className="font-serif italic text-base text-[#161513]/85 dark:text-white/85 tracking-tight leading-tight select-none">
+                  {/* Editorial Handwritten Chin Caption */}
+                  <div className="pt-3.5 sm:pt-4 text-left">
+                    <p className="font-serif italic text-base sm:text-lg text-[#161513]/90 dark:text-white/90 tracking-tight leading-tight select-none">
                       happiest a little higher up.
                     </p>
                   </div>
                 </motion.div>
 
-                {/* AVAILABLE FOR WORK — top-right, half-overlapping card border */}
+                {/* Floating "Available for work" Badge */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 }}
-                  className="absolute top-6 right-0 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-md"
+                  className="absolute -top-6 -right-3 sm:-right-6 z-20 flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-md"
                 >
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4FA765] opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#4FA765]" />
                   </span>
-                  <span className="text-[#161513] dark:text-[#F4F1EA] text-[11px] font-mono font-semibold tracking-wider uppercase whitespace-nowrap">
+                  <span className="text-[#161513] dark:text-[#F4F1EA] text-[11px] sm:text-xs font-mono font-semibold tracking-wider uppercase">
                     Available for work
                   </span>
                 </motion.div>
 
-                {/* DESIGN — left middle */}
+                {/* Parallax Floating Tags */}
                 <motion.div
                   style={shouldReduceMotion ? {} : { y: yBadge1 }}
-                  className="absolute top-[40%] -translate-y-1/2 left-0 z-20 px-4 py-2 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
+                  className="absolute top-[22%] -left-6 sm:-left-12 z-20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
                 >
                   <span className="text-[#161513] dark:text-[#F4F1EA] text-[10px] sm:text-xs font-mono font-semibold tracking-widest uppercase">
                     DESIGN
                   </span>
                 </motion.div>
 
-                {/* RESEARCH — right lower (below middle) */}
                 <motion.div
                   style={shouldReduceMotion ? {} : { y: yBadge2 }}
-                  className="absolute top-[62%] -translate-y-1/2 right-0 z-20 px-4 py-2 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
+                  className="absolute top-[58%] -right-6 sm:-right-10 z-20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
                 >
                   <span className="text-[#161513] dark:text-[#F4F1EA] text-[10px] sm:text-xs font-mono font-semibold tracking-widest uppercase">
                     RESEARCH
                   </span>
                 </motion.div>
 
-                {/* INTERACTION — bottom-right, below caption area, outside card */}
                 <motion.div
                   style={shouldReduceMotion ? {} : { y: yBadge3 }}
-                  className="absolute bottom-2 right-0 z-20 px-4 py-2 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
+                  className="absolute bottom-[18%] -left-5 sm:-left-10 z-20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[#161513]/15 dark:border-white/15 bg-white/95 dark:bg-[#1E1C18]/95 backdrop-blur-xl shadow-sm hover:border-[#8F5431] hover:text-[#8F5431] transition-colors"
                 >
                   <span className="text-[#161513] dark:text-[#F4F1EA] text-[10px] sm:text-xs font-mono font-semibold tracking-widest uppercase">
                     INTERACTION
