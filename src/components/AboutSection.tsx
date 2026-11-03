@@ -504,27 +504,40 @@ const AboutSection: React.FC = () => {
           </FadeUp>
 
           <FadeUp delay={0.08}>
-            <div className="flex flex-col gap-4 p-8 sm:p-12 rounded-2xl sm:rounded-[1.75rem] bg-[#FAF8F5] dark:bg-[#1E1C18] border border-[#161513]/10 dark:border-white/10">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#8F5431]" />
-                <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
-                  PERSPECTIVE & LIFE OUTSIDE WORK
-                </span>
-              </div>
+            <div className="group relative overflow-hidden rounded-2xl sm:rounded-[1.75rem] border border-[#161513]/10 dark:border-white/10 p-8 sm:p-12 md:p-14 min-h-[380px] sm:min-h-[440px] flex flex-col justify-end shadow-md">
+              {/* Background atmospheric image */}
+              <img
+                src="/forest-mist.jpg"
+                alt="Misty pine forest landscape"
+                className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+              />
 
-              <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#161513] dark:text-[#FAF8F5] tracking-tight">
-                Clarity comes from stepping away from the screen.
-              </h3>
+              {/* Rich gradient overlay for crystal-clear readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#161513]/95 via-[#161513]/70 to-[#161513]/30 md:bg-gradient-to-r md:from-[#161513]/95 md:via-[#161513]/75 md:to-transparent pointer-events-none" />
 
-              <p className="text-[#5C5852] dark:text-[#A8A29E] text-base sm:text-lg leading-relaxed pt-2 max-w-[65ch]">
-                When I am not designing in Figma, I spend time stepping away from the screen to reset. Taking walks, noticing typography and signs around the city, and heading up to the hills whenever I can brings fresh perspective back to my work.
-              </p>
+              {/* Content overlay */}
+              <div className="relative z-10 flex flex-col gap-4 max-w-2xl">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#E8AF8B]" />
+                  <span className="font-mono text-xs uppercase tracking-widest text-[#E8AF8B] font-semibold">
+                    PERSPECTIVE & LIFE OUTSIDE WORK
+                  </span>
+                </div>
 
-              <div className="flex items-center gap-3 pt-3">
-                <span className="w-2 h-2 rounded-full bg-[#8F5431]" />
-                <span className="font-serif italic text-sm text-[#8F5431] dark:text-[#E8AF8B]">
-                  "happiest a little higher up."
-                </span>
+                <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-white tracking-tight leading-snug">
+                  Clarity comes from stepping away from the screen.
+                </h3>
+
+                <p className="text-white/85 text-base sm:text-lg leading-relaxed pt-1 max-w-[60ch]">
+                  When I am not designing in Figma, I spend time stepping away from the screen to reset. Taking walks, noticing typography and signs around the city, and heading up to the hills whenever I can brings fresh perspective back to my work.
+                </p>
+
+                <div className="flex items-center gap-3 pt-2">
+                  <span className="w-2 h-2 rounded-full bg-[#E8AF8B]" />
+                  <span className="font-serif italic text-sm sm:text-base text-[#E8AF8B]">
+                    "happiest a little higher up."
+                  </span>
+                </div>
               </div>
             </div>
           </FadeUp>
