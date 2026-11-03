@@ -470,21 +470,7 @@ const NavBar: React.FC = () => {
             </nav>
 
             {/* ── Mobile & Tablet Header Controls (< 1024px) ── */}
-            <div className="flex lg:hidden items-center gap-2 sm:gap-3">
-              {/* Keep "Let's Talk" accessible on header for tablet & mobile */}
-              <a
-                href="/#contact"
-                onClick={(e) => handleNavClick(e, '/#contact')}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.05em] uppercase transition-all duration-300 select-none ${
-                  isTransparent
-                    ? 'bg-white text-[#161513] shadow-sm'
-                    : 'bg-[#161513] dark:bg-[#C58B65] text-[#F4F1EA] dark:text-[#171512]'
-                }`}
-              >
-                <span>Let's Talk</span>
-                <ArrowRight className="w-3 h-3" />
-              </a>
-
+            <div className="flex lg:hidden items-center gap-1 sm:gap-2">
               {/* Accessible Theme Toggle (min 44x44px touch target) */}
               <button
                 type="button"
