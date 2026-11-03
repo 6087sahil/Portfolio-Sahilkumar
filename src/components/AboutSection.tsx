@@ -509,7 +509,7 @@ const AboutSection: React.FC = () => {
               <img
                 src="/beyond-night-walk.jpg"
                 alt="Night city walk with cherry blossoms and moon"
-                className="absolute inset-0 w-full h-full object-cover object-[center_35%] pointer-events-none transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+                className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
               />
 
               {/* Rich gradient overlay for crystal-clear readability */}
