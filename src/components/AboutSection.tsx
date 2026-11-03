@@ -697,9 +697,9 @@ const AboutSection: React.FC = () => {
             <div className="group relative overflow-hidden rounded-2xl sm:rounded-[1.75rem] border border-[#161513]/10 dark:border-white/10 p-8 sm:p-12 md:p-14 min-h-[380px] sm:min-h-[440px] flex flex-col justify-end shadow-md">
               {/* Background atmospheric image */}
               <img
-                src="/beyond-night-walk.jpg"
-                alt="Night city walk with cherry blossoms and moon"
-                className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+                src="/beyond-sunset-bike.jpg"
+                alt="Sunset landscape with bicycle by a wooden fence"
+                className="absolute inset-0 w-full h-full object-cover object-right md:object-center pointer-events-none transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
               />
 
               {/* Rich gradient overlay for crystal-clear readability */}
