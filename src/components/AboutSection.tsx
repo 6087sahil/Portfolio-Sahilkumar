@@ -504,51 +504,28 @@ const AboutSection: React.FC = () => {
           </FadeUp>
 
           <FadeUp delay={0.08}>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-2xl sm:rounded-[1.75rem] bg-[#FAF8F5] dark:bg-[#1E1C18] border border-[#161513]/10 dark:border-white/10">
-              
-              <div className="lg:col-span-7 flex flex-col gap-4">
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#8F5431]" />
-                  <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
-                    PERSPECTIVE & LIFE OUTSIDE WORK
-                  </span>
-                </div>
-
-                <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#161513] dark:text-[#FAF8F5] tracking-tight">
-                  Clarity comes from stepping away from the screen.
-                </h3>
-
-                <p className="text-[#5C5852] dark:text-[#A8A29E] text-base sm:text-lg leading-relaxed pt-2 max-w-[65ch]">
-                  When I am not designing in Figma, I spend time stepping away from the screen to reset. Taking walks, noticing typography and signs around the city, and heading up to the hills whenever I can brings fresh perspective back to my work.
-                </p>
-
-                <div className="flex items-center gap-3 pt-3">
-                  <span className="w-2 h-2 rounded-full bg-[#8F5431]" />
-                  <span className="font-serif italic text-sm text-[#8F5431] dark:text-[#E8AF8B]">
-                    "happiest a little higher up."
-                  </span>
-                </div>
+            <div className="flex flex-col gap-4 p-8 sm:p-12 rounded-2xl sm:rounded-[1.75rem] bg-[#FAF8F5] dark:bg-[#1E1C18] border border-[#161513]/10 dark:border-white/10">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#8F5431]" />
+                <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
+                  PERSPECTIVE & LIFE OUTSIDE WORK
+                </span>
               </div>
 
-              <div className="lg:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-[280px] bg-white dark:bg-[#25221C] p-3 pb-8 rounded-2xl border border-[#161513]/10 dark:border-white/10 shadow-md rotate-2 hover:rotate-0 transition-transform duration-500">
-                  <div className="aspect-[4/3] bg-[#6E3D1E] overflow-hidden rounded-xl relative">
-                    <img
-                      src="/hero-bottom.png"
-                      alt="Dehradun mountains snapshot"
-                      className="w-full h-full object-cover filter grayscale contrast-125 brightness-95"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-[#542a13] via-[#8F5431] to-[#b37750] opacity-80 mix-blend-multiply pointer-events-none" />
-                    <div className="absolute inset-0 bg-[#8F5431]/40 mix-blend-color pointer-events-none" />
-                  </div>
-                  <div className="pt-3 text-left">
-                    <p className="font-serif italic text-xs text-[#8F5431] dark:text-[#E8AF8B]">
-                      Dehradun, India &bull; analog mountain snapshot
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#161513] dark:text-[#FAF8F5] tracking-tight">
+                Clarity comes from stepping away from the screen.
+              </h3>
 
+              <p className="text-[#5C5852] dark:text-[#A8A29E] text-base sm:text-lg leading-relaxed pt-2 max-w-[65ch]">
+                When I am not designing in Figma, I spend time stepping away from the screen to reset. Taking walks, noticing typography and signs around the city, and heading up to the hills whenever I can brings fresh perspective back to my work.
+              </p>
+
+              <div className="flex items-center gap-3 pt-3">
+                <span className="w-2 h-2 rounded-full bg-[#8F5431]" />
+                <span className="font-serif italic text-sm text-[#8F5431] dark:text-[#E8AF8B]">
+                  "happiest a little higher up."
+                </span>
+              </div>
             </div>
           </FadeUp>
         </section>
