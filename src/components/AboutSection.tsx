@@ -504,28 +504,49 @@ const AboutSection: React.FC = () => {
           </FadeUp>
 
           <FadeUp delay={0.08}>
-            <div className="flex flex-col gap-4 p-8 sm:p-12 rounded-2xl sm:rounded-[1.75rem] bg-[#FAF8F5] dark:bg-[#1E1C18] border border-[#161513]/10 dark:border-white/10">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#8F5431]" />
-                <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
-                  PERSPECTIVE & LIFE OUTSIDE WORK
-                </span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-8 sm:p-12 rounded-2xl sm:rounded-[1.75rem] bg-[#FAF8F5] dark:bg-[#1E1C18] border border-[#161513]/10 dark:border-white/10">
+              
+              <div className="lg:col-span-7 flex flex-col gap-4">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#8F5431]" />
+                  <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
+                    PERSPECTIVE & LIFE OUTSIDE WORK
+                  </span>
+                </div>
+
+                <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#161513] dark:text-[#FAF8F5] tracking-tight">
+                  Clarity comes from stepping away from the screen.
+                </h3>
+
+                <p className="text-[#5C5852] dark:text-[#A8A29E] text-base sm:text-lg leading-relaxed pt-2 max-w-[65ch]">
+                  When I am not designing in Figma, I spend time stepping away from the screen to reset. Taking walks, noticing typography and signs around the city, and heading up to the hills whenever I can brings fresh perspective back to my work.
+                </p>
+
+                <div className="flex items-center gap-3 pt-3">
+                  <span className="w-2 h-2 rounded-full bg-[#8F5431]" />
+                  <span className="font-serif italic text-sm text-[#8F5431] dark:text-[#E8AF8B]">
+                    "happiest a little higher up."
+                  </span>
+                </div>
               </div>
 
-              <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#161513] dark:text-[#FAF8F5] tracking-tight">
-                Clarity comes from stepping away from the screen.
-              </h3>
-
-              <p className="text-[#5C5852] dark:text-[#A8A29E] text-base sm:text-lg leading-relaxed pt-2 max-w-[65ch]">
-                When I am not designing in Figma, I spend time stepping away from the screen to reset. Taking walks, noticing typography and signs around the city, and heading up to the hills whenever I can brings fresh perspective back to my work.
-              </p>
-
-              <div className="flex items-center gap-3 pt-3">
-                <span className="w-2 h-2 rounded-full bg-[#8F5431]" />
-                <span className="font-serif italic text-sm text-[#8F5431] dark:text-[#E8AF8B]">
-                  "happiest a little higher up."
-                </span>
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative w-full max-w-[280px] bg-white dark:bg-[#25221C] p-3 pb-7 rounded-2xl border border-[#161513]/10 dark:border-white/10 shadow-[0_12px_32px_-8px_rgba(22,21,19,0.15)] rotate-2 hover:rotate-0 transition-transform duration-500">
+                  <div className="aspect-[3/4] overflow-hidden rounded-xl relative bg-[#EDE8DE] dark:bg-[#2A2621]">
+                    <img
+                      src="/forest-mist.jpg"
+                      alt="Misty pine forest in the hills"
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
+                  <div className="pt-3 text-left">
+                    <p className="font-serif italic text-xs text-[#8F5431] dark:text-[#E8AF8B]">
+                      Dehradun, India &bull; analog mountain snapshot
+                    </p>
+                  </div>
+                </div>
               </div>
+
             </div>
           </FadeUp>
         </section>
