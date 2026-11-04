@@ -468,10 +468,10 @@ const AboutSection: React.FC = () => {
           <FadeUp delay={0.16}>
             <div className="p-5 sm:p-8 rounded-2xl sm:rounded-[1.75rem] bg-[#FAF8F5] dark:bg-[#1E1C18] border border-[#161513]/10 dark:border-white/10 flex flex-col gap-8">
               
-              {/* 3-Column Skills Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+              {/* 2-Column Balanced Skills Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-start">
                 
-                {/* Column 1: DESIGN */}
+                {/* Column 1: DESIGN (3 Skills) */}
                 <div className="flex flex-col gap-3.5">
                   <div className="flex items-center justify-between pb-2.5 border-b border-[#161513]/10 dark:border-white/10">
                     <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
@@ -537,124 +537,129 @@ const AboutSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Column 2: THINKING */}
-                <div className="flex flex-col gap-3.5">
-                  <div className="flex items-center justify-between pb-2.5 border-b border-[#161513]/10 dark:border-white/10">
-                    <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
-                      THINKING
-                    </span>
-                    <span className="font-mono text-[10px] text-[#8E8980] dark:text-[#A8A29E] uppercase tracking-wider">
-                      2 SKILLS
-                    </span>
-                  </div>
+                {/* Column 2: THINKING & INTERACTION (3 Skills total) */}
+                <div className="flex flex-col gap-6">
+                  
+                  {/* THINKING (2 Skills) */}
+                  <div className="flex flex-col gap-3.5">
+                    <div className="flex items-center justify-between pb-2.5 border-b border-[#161513]/10 dark:border-white/10">
+                      <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
+                        THINKING
+                      </span>
+                      <span className="font-mono text-[10px] text-[#8E8980] dark:text-[#A8A29E] uppercase tracking-wider">
+                        2 SKILLS
+                      </span>
+                    </div>
 
-                  <div className="flex flex-col gap-3">
-                    {[
-                      {
-                        name: 'FigJam',
-                        desc: 'Mapping user journeys, brainstorming layouts, and organizing design thoughts.',
-                        dots: 2,
-                        level: 'Comfortable',
-                      },
-                      {
-                        name: 'Secondary Research',
-                        desc: 'Evaluating competitor flows, customer feedback, and common UX friction points.',
-                        dots: 1,
-                        level: 'Learning',
-                      },
-                    ].map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="group/item flex flex-col justify-between p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#25221C] border border-[#161513]/10 dark:border-white/10 hover:border-[#8F5431] dark:hover:border-[#E8AF8B] hover:-translate-y-0.5 transition-all duration-300 shadow-xs hover:shadow-sm"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <h3 className="font-serif text-[20px] font-normal text-[#161513] dark:text-[#FAF8F5] leading-snug group-hover/item:text-[#8F5431] dark:group-hover/item:text-[#E8AF8B] transition-colors">
-                            {item.name}
-                          </h3>
-                          <div className="flex items-center gap-1.5 pt-1.5 shrink-0">
-                            <div className="flex items-center gap-1" aria-hidden="true">
-                              {[1, 2, 3].map((dot) => (
-                                <span
-                                  key={dot}
-                                  className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                                    dot <= item.dots
-                                      ? 'bg-[#8F5431] dark:bg-[#E8AF8B]'
-                                      : 'bg-[#161513]/15 dark:bg-white/15'
-                                  }`}
-                                />
-                              ))}
+                    <div className="flex flex-col gap-3">
+                      {[
+                        {
+                          name: 'FigJam',
+                          desc: 'Mapping user journeys, brainstorming layouts, and organizing design thoughts.',
+                          dots: 2,
+                          level: 'Comfortable',
+                        },
+                        {
+                          name: 'Secondary Research',
+                          desc: 'Evaluating competitor flows, customer feedback, and common UX friction points.',
+                          dots: 1,
+                          level: 'Learning',
+                        },
+                      ].map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="group/item flex flex-col justify-between p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#25221C] border border-[#161513]/10 dark:border-white/10 hover:border-[#8F5431] dark:hover:border-[#E8AF8B] hover:-translate-y-0.5 transition-all duration-300 shadow-xs hover:shadow-sm"
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <h3 className="font-serif text-[20px] font-normal text-[#161513] dark:text-[#FAF8F5] leading-snug group-hover/item:text-[#8F5431] dark:group-hover/item:text-[#E8AF8B] transition-colors">
+                              {item.name}
+                            </h3>
+                            <div className="flex items-center gap-1.5 pt-1.5 shrink-0">
+                              <div className="flex items-center gap-1" aria-hidden="true">
+                                {[1, 2, 3].map((dot) => (
+                                  <span
+                                    key={dot}
+                                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                                      dot <= item.dots
+                                        ? 'bg-[#8F5431] dark:bg-[#E8AF8B]'
+                                        : 'bg-[#161513]/15 dark:bg-white/15'
+                                    }`}
+                                  />
+                                ))}
+                              </div>
+                              <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
+                                {item.level}
+                              </span>
                             </div>
-                            <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
-                              {item.level}
-                            </span>
                           </div>
+                          <p className="text-[#5C5852] dark:text-[#A8A29E] text-[14px] font-light leading-relaxed pt-2">
+                            {item.desc}
+                          </p>
                         </div>
-                        <p className="text-[#5C5852] dark:text-[#A8A29E] text-[14px] font-light leading-relaxed pt-2">
-                          {item.desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Column 3: INTERACTION */}
-                <div className="flex flex-col gap-3.5">
-                  <div className="flex items-center justify-between pb-2.5 border-b border-[#161513]/10 dark:border-white/10">
-                    <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
-                      INTERACTION
-                    </span>
-                    <span className="font-mono text-[10px] text-[#8E8980] dark:text-[#A8A29E] uppercase tracking-wider">
-                      1 SKILL
-                    </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="flex flex-col gap-3">
-                    {[
-                      {
-                        name: 'Prototyping',
-                        desc: 'Connecting realistic screen transitions, click triggers, and component states in Figma.',
-                        dots: 2,
-                        level: 'Comfortable',
-                      },
-                    ].map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="group/item flex flex-col justify-between p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#25221C] border border-[#161513]/10 dark:border-white/10 hover:border-[#8F5431] dark:hover:border-[#E8AF8B] hover:-translate-y-0.5 transition-all duration-300 shadow-xs hover:shadow-sm"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <h3 className="font-serif text-[20px] font-normal text-[#161513] dark:text-[#FAF8F5] leading-snug group-hover/item:text-[#8F5431] dark:group-hover/item:text-[#E8AF8B] transition-colors">
-                            {item.name}
-                          </h3>
-                          <div className="flex items-center gap-1.5 pt-1.5 shrink-0">
-                            <div className="flex items-center gap-1" aria-hidden="true">
-                              {[1, 2, 3].map((dot) => (
-                                <span
-                                  key={dot}
-                                  className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                                    dot <= item.dots
-                                      ? 'bg-[#8F5431] dark:bg-[#E8AF8B]'
-                                      : 'bg-[#161513]/15 dark:bg-white/15'
-                                  }`}
-                                />
-                              ))}
+                  {/* INTERACTION (1 Skill) */}
+                  <div className="flex flex-col gap-3.5">
+                    <div className="flex items-center justify-between pb-2.5 border-b border-[#161513]/10 dark:border-white/10">
+                      <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
+                        INTERACTION
+                      </span>
+                      <span className="font-mono text-[10px] text-[#8E8980] dark:text-[#A8A29E] uppercase tracking-wider">
+                        1 SKILL
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col gap-3">
+                      {[
+                        {
+                          name: 'Prototyping',
+                          desc: 'Connecting realistic screen transitions, click triggers, and component states in Figma.',
+                          dots: 2,
+                          level: 'Comfortable',
+                        },
+                      ].map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="group/item flex flex-col justify-between p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#25221C] border border-[#161513]/10 dark:border-white/10 hover:border-[#8F5431] dark:hover:border-[#E8AF8B] hover:-translate-y-0.5 transition-all duration-300 shadow-xs hover:shadow-sm"
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <h3 className="font-serif text-[20px] font-normal text-[#161513] dark:text-[#FAF8F5] leading-snug group-hover/item:text-[#8F5431] dark:group-hover/item:text-[#E8AF8B] transition-colors">
+                              {item.name}
+                            </h3>
+                            <div className="flex items-center gap-1.5 pt-1.5 shrink-0">
+                              <div className="flex items-center gap-1" aria-hidden="true">
+                                {[1, 2, 3].map((dot) => (
+                                  <span
+                                    key={dot}
+                                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                                      dot <= item.dots
+                                        ? 'bg-[#8F5431] dark:bg-[#E8AF8B]'
+                                        : 'bg-[#161513]/15 dark:bg-white/15'
+                                    }`}
+                                  />
+                                ))}
+                              </div>
+                              <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
+                                {item.level}
+                              </span>
                             </div>
-                            <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
-                              {item.level}
-                            </span>
                           </div>
+                          <p className="text-[#5C5852] dark:text-[#A8A29E] text-[14px] font-light leading-relaxed pt-2">
+                            {item.desc}
+                          </p>
                         </div>
-                        <p className="text-[#5C5852] dark:text-[#A8A29E] text-[14px] font-light leading-relaxed pt-2">
-                          {item.desc}
-                        </p>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
+
                 </div>
 
               </div>
 
               {/* Bottom Row: Currently Learning */}
-              <div className="pt-6 border-t border-[#161513]/10 dark:border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="pt-6 border-t border-[#161513]/10 dark:border-white/10 flex flex-wrap items-center gap-3 sm:gap-6">
                 <div className="flex items-center gap-2.5">
                   <span className="w-2 h-2 rounded-full bg-[#8F5431] dark:bg-[#E8AF8B] animate-pulse" />
                   <span className="font-mono text-xs uppercase tracking-widest text-[#8F5431] dark:text-[#E8AF8B] font-semibold">
