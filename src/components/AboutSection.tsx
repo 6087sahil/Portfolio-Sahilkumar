@@ -828,8 +828,9 @@ const AboutSection: React.FC = () => {
 
               <Magnet strength={12} padding={15}>
                 <button
+                  type="button"
                   onClick={() => scrollToSection('contact')}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#161513] dark:bg-[#FAF8F5] text-white dark:text-[#161513] hover:bg-[#8F5431] dark:hover:bg-[#8F5431] dark:hover:text-white rounded-full font-mono text-xs font-semibold tracking-wider uppercase transition-colors shadow-md cursor-pointer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-[#161513]/25 dark:border-white/30 text-[#161513] dark:text-[#FAF8F5] hover:border-[#8F5431] hover:text-[#8F5431] dark:hover:border-[#E8AF8B] dark:hover:text-[#E8AF8B] hover:bg-[#8F5431]/5 dark:hover:bg-white/5 rounded-full font-mono text-xs font-semibold tracking-wider uppercase transition-all shadow-xs hover:shadow-sm cursor-pointer"
                 >
                   <span>GET IN TOUCH</span>
                   <ArrowRight className="w-4 h-4" />
