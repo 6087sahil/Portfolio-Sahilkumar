@@ -652,3 +652,28 @@ button {
   transition-duration: 450ms;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CIRCULAR RIPPLE VIEW TRANSITION FOR THEME TOGGLE
+   ═══════════════════════════════════════════════════════════════════════════════ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Guard: Disable background/color transitions during view transition to eliminate flicker */
+html.vt-active,
+html.vt-active *,
+html.vt-active *::before,
+html.vt-active *::after {
+  transition: none !important;
+}
