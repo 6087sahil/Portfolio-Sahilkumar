@@ -95,8 +95,7 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
       >
         {/* Name Identity */}
         <div className="text-left font-black tracking-tight leading-[0.9] text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] uppercase whitespace-nowrap">
-          SAHIL KUMAR <br/> 
-          <span className="tracking-tighter">-26</span>
+          SAHIL KUMAR
         </div>
 
         {/* Loader Percentage */}
