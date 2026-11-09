@@ -125,7 +125,7 @@ const AboutSection: React.FC = () => {
   const yBadge2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const yBadge3 = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
-  const imageUrl = '/sahil-profile.png';
+  const imageUrl = '/sahil-portrait.jpg';
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
