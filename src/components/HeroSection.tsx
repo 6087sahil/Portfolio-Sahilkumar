@@ -79,7 +79,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
                     hidden: { opacity: 0, y: 30, rotateX: -90 },
                     visible: { opacity: 1, y: 0, rotateX: 0, transition: { type: "spring", damping: 12, stiffness: 100 } }
                   }}
-                  className="text-[#8F5431] drop-shadow-lg text-[clamp(2.75rem,10vw,4.5rem)] sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px]" 
+                  className={`${index >= 6 ? 'text-[#8F5431]' : 'text-white'} drop-shadow-lg text-[clamp(2.75rem,10vw,4.5rem)] sm:text-7xl md:text-[80px] lg:text-[100px] xl:text-[110px]`} 
                   style={{ fontFamily: "'Arima', sans-serif", whiteSpace: char === " " ? "pre" : "normal" }}
                 >
                   {char}
