@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 const CONFIG = {
   audioSrc:   '/assets/audio/song.mp3',
-  coverSrc:   '/assets/images/album-cover.jpg',
+  coverSrc:   '/assets/images/miles-cover.jpg',
   trackName:  'Sunflower',
   artistName: 'Post Malone & Swae Lee',
 };
