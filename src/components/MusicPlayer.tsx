@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 const CONFIG = {
   audioSrc:   '/assets/audio/song.mp3',
   coverSrc:   '/assets/images/album-cover.jpg',
-  trackName:  'Chill Vibes',
-  artistName: 'Sahil Studio',
+  trackName:  'Sunflower',
+  artistName: 'Post Malone & Swae Lee',
 };
 
 // ─── TYPES ───────────────────────────────────────────────────────────────────
@@ -443,3 +443,4 @@ const MusicPlayer: React.FC = () => {
 };
 
 export default MusicPlayer;
+
