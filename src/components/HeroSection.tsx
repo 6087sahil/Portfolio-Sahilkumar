@@ -2,7 +2,6 @@ import React from 'react';
 import RevealBackground from './RevealBackground';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import MusicPlayer from './MusicPlayer';
 
 interface HeroSectionProps {
   isLoaded?: boolean;
@@ -158,9 +157,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
           Scroll to explore
         </span>
       </motion.div>
-
-      {/* Premium Music Player — fixed bottom-right */}
-      <MusicPlayer />
 
     </section>
   );

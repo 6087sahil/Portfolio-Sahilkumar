@@ -8,6 +8,7 @@ import CustomCursor from './components/CustomCursor';
 import LoadingScreen from './components/LoadingScreen';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import Footer from './components/Footer';
+import MusicPlayer from './components/MusicPlayer';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -88,6 +89,7 @@ function AppContent() {
         </Routes>
         
         {!isCaseStudy && <Footer isAboutPage={isAboutPage} />}
+        {!isLoading && <MusicPlayer />}
       </div>
     </>
   );
