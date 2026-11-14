@@ -116,7 +116,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
             className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4"
           >
             <a 
-              href="#projects"
+              href="#work"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById('work');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', '#work');
+                }
+              }}
               className="hero-cta-btn group pointer-events-auto relative inline-flex items-center justify-center min-h-[44px] gap-2 bg-[#633316] hover:bg-[#4F270F] text-[#FAF8F5] px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 border border-[#A66640]/40 shadow-[0_12px_36px_-6px_rgba(60,30,12,0.45),0_0_20px_rgba(99,51,22,0.25)] hover:shadow-[0_18px_45px_-6px_rgba(60,30,12,0.6),0_0_30px_rgba(99,51,22,0.35)]"
             >
               <span className="relative z-10 flex items-center gap-2 text-[#FAF8F5]">

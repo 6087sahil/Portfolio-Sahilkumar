@@ -323,6 +323,8 @@ const ProjectsSection: React.FC = () => {
       data-section="projects"
       className="relative w-full bg-[#F4F1EA] dark:bg-[#121110] text-[#161513] dark:text-[#F4F1EA] py-24 sm:py-32 lg:py-40 border-t border-[#161513]/10 dark:border-white/10 overflow-hidden transition-colors duration-500"
     >
+      {/* Anchor alias for #projects */}
+      <div id="projects" className="absolute -top-10 pointer-events-none" />
       {/* Subtle Background Glows matching portfolio identity */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#8F5431]/4 dark:bg-[#C58B65]/4 blur-[140px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-[#8F5431]/4 dark:bg-[#C58B65]/4 blur-[140px] rounded-full pointer-events-none" />
