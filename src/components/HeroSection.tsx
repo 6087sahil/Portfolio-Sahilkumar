@@ -117,13 +117,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
           >
             <a 
               href="#projects"
-              className="hero-cta-btn group pointer-events-auto relative inline-flex items-center justify-center min-h-[44px] gap-2 bg-white text-[#111111] dark:text-[#111111] px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]"
+              className="hero-cta-btn group pointer-events-auto relative inline-flex items-center justify-center min-h-[44px] gap-2 bg-[#8F5431] hover:bg-[#784323] text-[#FAF8F5] px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 border border-[#A66640]/40 shadow-[0_12px_36px_-6px_rgba(110,61,30,0.35),0_0_25px_rgba(143,84,49,0.25)] hover:shadow-[0_18px_45px_-6px_rgba(110,61,30,0.5),0_0_35px_rgba(143,84,49,0.4)]"
             >
-              <span className="relative z-10 flex items-center gap-2 text-[#111111] dark:text-[#111111]">
+              <span className="relative z-10 flex items-center gap-2 text-[#FAF8F5]">
                 View My Work
-                <ArrowRight className="w-4 h-4 text-[#111111] dark:text-[#111111] transition-transform duration-500 group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 text-[#FAF8F5] transition-transform duration-500 group-hover:translate-x-1" />
               </span>
-              <div className="absolute inset-0 bg-stone-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-[#6E3D1E] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
             <a 
               href="#contact"

@@ -619,13 +619,22 @@ html.dark .cursor-dot {
   background-color: #C58B65 !important;
 }
 
-/* 11. Hero CTA Button Dark Mode Protection */
+/* 11. Hero CTA Button - Styled to match warm brown portfolio accent */
+.hero-cta-btn,
 html.dark .hero-cta-btn {
-  background-color: #FFFFFF !important;
-  color: #111111 !important;
+  background-color: #8F5431 !important;
+  color: #FAF8F5 !important;
+  border-color: rgba(166, 102, 64, 0.35) !important;
 }
+
+.hero-cta-btn *,
 html.dark .hero-cta-btn * {
-  color: #111111 !important;
+  color: #FAF8F5 !important;
+}
+
+.hero-cta-btn:hover,
+html.dark .hero-cta-btn:hover {
+  background-color: #784323 !important;
 }
 
 /* 12. Subtle selection color */
