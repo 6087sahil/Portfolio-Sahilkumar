@@ -8,7 +8,6 @@ import CustomCursor from './components/CustomCursor';
 import LoadingScreen from './components/LoadingScreen';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import Footer from './components/Footer';
-import MusicPlayer from './components/MusicPlayer';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -63,7 +62,6 @@ function AppContent() {
     }
   }, [location]);
 
-  const isHomePage = location.pathname === '/';
   const isAboutPage = location.pathname === '/about';
   const isCaseStudy = location.pathname.startsWith('/case-study/');
 
@@ -90,7 +88,6 @@ function AppContent() {
         </Routes>
         
         {!isCaseStudy && <Footer isAboutPage={isAboutPage} />}
-        {!isLoading && isHomePage && <MusicPlayer />}
       </div>
     </>
   );
