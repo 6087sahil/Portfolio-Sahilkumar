@@ -1,496 +1,609 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Play, Pause, Volume2, VolumeX, ChevronRight, ChevronLeft } from 'lucide-react';
 
-// ─── CONFIGURATION ────────────────────────────────────────────────────────────
-const CONFIG = {
-  audioSrc:   '/assets/audio/song.mp3',
-  coverSrc:   '/assets/images/miles-cover.jpg',
-  trackName:  'Sunflower',
-  artistName: 'Post Malone & Swae Lee',
+// ─────────────────────────────────────────────────────────────────────────────
+// PLAYLIST — Edit tracks here. Use `src: ''` for a silent fallback.
+// ─────────────────────────────────────────────────────────────────────────────
+interface Track {
+  title:    string;
+  artist:   string;
+  art:      string;   // path relative to /public
+  src:      string;   // path relative to /public
+}
+
+const TRACKS: Track[] = [
+  {
+    title:  'Sunflower',
+    artist: 'Post Malone & Swae Lee',
+    art:    '/assets/images/miles-cover.jpg',
+    src:    '/assets/audio/song.mp3',
+  },
+  // Add more tracks below ↓
+  // {
+  //   title:  'Another Song',
+  //   artist: 'Another Artist',
+  //   art:    '/assets/images/another-cover.jpg',
+  //   src:    '/assets/audio/another.mp3',
+  // },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+const fmt = (s: number): string => {
+  if (!isFinite(s) || s < 0) return '0:00';
+  const m = Math.floor(s / 60);
+  const ss = Math.floor(s % 60);
+  return `${m}:${ss < 10 ? '0' : ''}${ss}`;
 };
 
-// Format seconds into m:ss
-const formatTime = (seconds: number): string => {
-  if (isNaN(seconds) || seconds < 0) return '0:00';
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-};
+const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
+// ─────────────────────────────────────────────────────────────────────────────
+// COMPONENT
+// ─────────────────────────────────────────────────────────────────────────────
 const MusicPlayer: React.FC = () => {
-  const [isPlaying,    setIsPlaying]    = useState(false);
-  const [isLoading,    setIsLoading]    = useState(false);
-  const [isAvailable,  setIsAvailable]  = useState(true);
-  const [isCollapsed,  setIsCollapsed]  = useState(false);
-  const [currentTime,  setCurrentTime]  = useState(0);
-  const [duration,     setDuration]     = useState(0);
-  const [volume,       setVolume]       = useState(0.85);
-  const [isMuted,      setIsMuted]      = useState(false);
-  const [showVolume,   setShowVolume]   = useState(false);
-  const [imgError,     setImgError]     = useState(false);
-  const [mounted,      setMounted]      = useState(false);
-  const [isHovered,    setIsHovered]    = useState(false);
+  /* ── Core state ─────────────────────────────────────────────────────── */
+  const [trackIdx,    setTrackIdx]    = useState(0);
+  const [isPlaying,   setIsPlaying]   = useState(false);
+  const [isLoading,   setIsLoading]   = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration,    setDuration]    = useState(0);
+  const [isMuted,     setIsMuted]     = useState(false);
+  const [isSeeking,   setIsSeeking]   = useState(false);
+  const [mounted,     setMounted]     = useState(false);
+  const [artError,    setArtError]    = useState<Record<number, boolean>>({});
 
-  const audioRef       = useRef<HTMLAudioElement | null>(null);
-  const progressBarRef = useRef<HTMLDivElement | null>(null);
+  /* ── Refs ───────────────────────────────────────────────────────────── */
+  const audioRef      = useRef<HTMLAudioElement | null>(null);
+  const progressRef   = useRef<HTMLDivElement | null>(null);
+  const diskRef       = useRef<HTMLDivElement | null>(null);
+  const diskAngle     = useRef<number>(0);        // accumulated rotation in degrees
+  const rafRef        = useRef<number | undefined>(undefined);  // requestAnimationFrame id
+  const lastTs        = useRef<number | undefined>(undefined);  // timestamp for RAF delta
+  const playerRef     = useRef<HTMLDivElement | null>(null);
 
-  // Check prefers-reduced-motion
-  const prefersReduced =
-    typeof window !== 'undefined' &&
+  const track    = TRACKS[trackIdx];
+  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  /* ── prefers-reduced-motion ─────────────────────────────────────────── */
+  const reduced = typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Mount entrance
+  /* ── Entrance mount ─────────────────────────────────────────────────── */
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 300);
+    const t = setTimeout(() => setMounted(true), 250);
     return () => clearTimeout(t);
   }, []);
 
-  // Sync volume to audio element
+  /* ── Keyboard shortcut: Space = play/pause ──────────────────────────── */
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : volume;
-    }
-  }, [volume, isMuted]);
+    const onKey = (e: KeyboardEvent) => {
+      if (
+        e.code === 'Space' &&
+        document.activeElement?.closest('[data-mp-player]')
+      ) {
+        e.preventDefault();
+        togglePlay();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isPlaying]);                   // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Pause when tab is hidden to save CPU/battery
+  /* ── Auto-pause on tab hide ─────────────────────────────────────────── */
   useEffect(() => {
-    const handleVisibility = () => {
+    const fn = () => {
       if (document.hidden && audioRef.current && !audioRef.current.paused) {
         audioRef.current.pause();
       }
     };
-    document.addEventListener('visibilitychange', handleVisibility);
-    return () => document.removeEventListener('visibilitychange', handleVisibility);
+    document.addEventListener('visibilitychange', fn);
+    return () => document.removeEventListener('visibilitychange', fn);
   }, []);
 
-  // Audio lifecycle listeners
+  /* ── Sync volume to audio element ───────────────────────────────────── */
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : 0.8;
+    }
+  }, [isMuted]);
+
+  /* ── Vinyl disc rotation via RAF (smooth, GPU-friendly) ─────────────── */
+  useEffect(() => {
+    if (reduced) return;
+
+    const spin = (ts: number) => {
+      if (lastTs.current == null) lastTs.current = ts;
+      const delta = ts - lastTs.current;
+      lastTs.current = ts;
+
+      if (diskRef.current) {
+        // 360° per 8 s = 45°/s = 0.045°/ms
+        diskAngle.current = (diskAngle.current + delta * 0.045) % 360;
+        diskRef.current.style.transform = `rotate(${diskAngle.current}deg)`;
+      }
+      rafRef.current = requestAnimationFrame(spin);
+    };
+
+    if (isPlaying) {
+      lastTs.current = undefined as unknown as number;
+      rafRef.current = requestAnimationFrame(spin);
+    } else {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lastTs.current = undefined as unknown as number;
+    }
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isPlaying, reduced]);
+
+  /* ── Audio event wiring ─────────────────────────────────────────────── */
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const onPlay = () => {
-      setIsPlaying(true);
-      setIsLoading(false);
-      setIsAvailable(true);
-    };
+    const onPlay       = () => { setIsPlaying(true);  setIsLoading(false); };
+    const onPause      = () => { setIsPlaying(false); setIsLoading(false); };
+    const onWaiting    = () => setIsLoading(true);
+    const onCanPlay    = () => setIsLoading(false);
+    const onTimeUpdate = () => { if (!isSeeking) setCurrentTime(audio.currentTime); };
+    const onMeta       = () => setDuration(audio.duration || 0);
+    const onEnded      = () => handleNext();
 
-    const onPause = () => {
-      setIsPlaying(false);
-      setIsLoading(false);
-    };
-
-    const onTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-    };
-
-    const onLoadedMetadata = () => {
-      setDuration(audio.duration || 0);
-      setIsAvailable(true);
-    };
-
-    const onEnded = () => {
-      setIsPlaying(false);
-      setCurrentTime(0);
-    };
-
-    const onError = () => {
-      setIsPlaying(false);
-      setIsLoading(false);
-      setIsAvailable(false);
-    };
-
-    const onWaiting = () => {
-      setIsLoading(true);
-    };
-
-    const onCanPlay = () => {
-      setIsLoading(false);
-      setIsAvailable(true);
-      if (audio.duration) setDuration(audio.duration);
-    };
-
-    audio.addEventListener('play', onPlay);
-    audio.addEventListener('pause', onPause);
+    audio.addEventListener('play',       onPlay);
+    audio.addEventListener('pause',      onPause);
+    audio.addEventListener('waiting',    onWaiting);
+    audio.addEventListener('canplay',    onCanPlay);
     audio.addEventListener('timeupdate', onTimeUpdate);
-    audio.addEventListener('loadedmetadata', onLoadedMetadata);
-    audio.addEventListener('ended', onEnded);
-    audio.addEventListener('error', onError);
-    audio.addEventListener('waiting', onWaiting);
-    audio.addEventListener('canplay', onCanPlay);
+    audio.addEventListener('loadedmetadata', onMeta);
+    audio.addEventListener('ended',      onEnded);
 
     return () => {
-      audio.removeEventListener('play', onPlay);
-      audio.removeEventListener('pause', onPause);
+      audio.removeEventListener('play',       onPlay);
+      audio.removeEventListener('pause',      onPause);
+      audio.removeEventListener('waiting',    onWaiting);
+      audio.removeEventListener('canplay',    onCanPlay);
       audio.removeEventListener('timeupdate', onTimeUpdate);
-      audio.removeEventListener('loadedmetadata', onLoadedMetadata);
-      audio.removeEventListener('ended', onEnded);
-      audio.removeEventListener('error', onError);
-      audio.removeEventListener('waiting', onWaiting);
-      audio.removeEventListener('canplay', onCanPlay);
+      audio.removeEventListener('loadedmetadata', onMeta);
+      audio.removeEventListener('ended',      onEnded);
     };
-  }, []);
+  }, [isSeeking, trackIdx]);         // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Handle Play/Pause
-  const handleTogglePlay = async (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
+  /* ── When track changes: reset + optionally continue playing ─────────── */
+  useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || !isAvailable) return;
+    if (!audio) return;
+    setCurrentTime(0);
+    setDuration(0);
+    setIsLoading(true);
+    setArtError({});          // reset per-track art errors
+    audio.load();
+    if (isPlaying) {
+      audio.play().catch(() => setIsPlaying(false));
+    }
+  }, [trackIdx]);              // eslint-disable-line react-hooks/exhaustive-deps
 
+  /* ── Helpers ────────────────────────────────────────────────────────── */
+  const togglePlay = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
     if (isPlaying) {
       audio.pause();
     } else {
       setIsLoading(true);
-      try {
-        await audio.play();
-      } catch {
-        setIsPlaying(false);
-        setIsLoading(false);
-        setIsAvailable(false);
-      }
+      try { await audio.play(); } catch { setIsPlaying(false); setIsLoading(false); }
     }
   };
 
-  // Handle Seek through Progress Bar
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    const audio = audioRef.current;
-    const bar = progressBarRef.current;
-    if (!audio || !bar || !duration) return;
-
-    const rect = bar.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const percent = Math.max(0, Math.min(1, clickX / rect.width));
-    const newTime = percent * duration;
-
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
+  const handlePrev = () => {
+    if (currentTime > 3 && audioRef.current) {
+      // restart current track if >3 s in, else go to prev
+      audioRef.current.currentTime = 0;
+      setCurrentTime(0);
+    } else {
+      setTrackIdx(i => (i - 1 + TRACKS.length) % TRACKS.length);
+    }
   };
 
-  // Toggle Mute
-  const handleToggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsMuted(!isMuted);
+  const handleNext = () => {
+    setTrackIdx(i => (i + 1) % TRACKS.length);
   };
 
-  // Calculate progress percentage
-  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
+  /* ── Progress bar seek (click + drag) ──────────────────────────────── */
+  const getSeekFraction = (e: MouseEvent | React.MouseEvent) => {
+    const bar = progressRef.current;
+    if (!bar) return 0;
+    const { left, width } = bar.getBoundingClientRect();
+    return clamp((e.clientX - left) / width, 0, 1);
+  };
+
+  const handleProgressMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsSeeking(true);
+    const frac = getSeekFraction(e);
+    setCurrentTime(frac * duration);
+
+    const onMove = (ev: MouseEvent) => {
+      const f = getSeekFraction(ev);
+      setCurrentTime(f * duration);
+    };
+    const onUp = (ev: MouseEvent) => {
+      const f = getSeekFraction(ev);
+      if (audioRef.current && duration) {
+        audioRef.current.currentTime = f * duration;
+      }
+      setCurrentTime(f * duration);
+      setIsSeeking(false);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  };
+
+  /* ── Render ─────────────────────────────────────────────────────────── */
+  const hasArt = !artError[trackIdx];
 
   return (
     <>
-      {/* ── Luxury Scoped CSS ──────────────────────────────────────────── */}
+      {/* ── Scoped CSS keyframes & helpers ───────────────────────────── */}
       <style>{`
-        @keyframes luxury-spin {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
+        /* Only active when prefers-reduced-motion is NOT set */
+        @keyframes mp-glow-pulse {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50%       { opacity: 0.55; transform: scale(1.04); }
         }
+        @keyframes mp-eq1 { 0%,100%{scaleY:.25} 40%{scaleY:1} 70%{scaleY:.6} }
+        @keyframes mp-eq2 { 0%,100%{scaleY:.8}  30%{scaleY:.2} 65%{scaleY:1} }
+        @keyframes mp-eq3 { 0%,100%{scaleY:.4}  50%{scaleY:1} 80%{scaleY:.3} }
+        @keyframes mp-eq4 { 0%,100%{scaleY:1}   45%{scaleY:.3} 75%{scaleY:.7} }
 
-        @keyframes luxury-pulse {
-          0%, 100% {
-            box-shadow: 
-              inset 0 1px 1px 0 rgba(255, 255, 255, 0.14),
-              inset 0 -1px 0 0 rgba(0, 0, 0, 0.4),
-              0 14px 34px -4px rgba(0, 0, 0, 0.65),
-              0 0 20px rgba(217, 119, 54, 0.18);
+        .mp-eq-bar { transform-origin: bottom center; }
+        .mp-eq-playing .mp-eq-bar-1 { animation: mp-eq1 0.85s ease-in-out infinite; }
+        .mp-eq-playing .mp-eq-bar-2 { animation: mp-eq2 0.70s ease-in-out infinite; animation-delay:.15s; }
+        .mp-eq-playing .mp-eq-bar-3 { animation: mp-eq3 0.95s ease-in-out infinite; animation-delay:.08s; }
+        .mp-eq-playing .mp-eq-bar-4 { animation: mp-eq4 0.75s ease-in-out infinite; animation-delay:.22s; }
+
+        /* Focus ring on interactive elements */
+        .mp-btn:focus-visible { outline: 2px solid #E07A3B; outline-offset: 3px; }
+
+        /* Seek thumb appears on progress hover */
+        .mp-progress:hover .mp-thumb { opacity: 1 !important; }
+        .mp-progress { cursor: pointer; }
+
+        /* Loading spinner */
+        @keyframes mp-spin { to { transform: rotate(360deg); } }
+        .mp-spinner { animation: mp-spin .9s linear infinite; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .mp-eq-bar, .mp-glow, .mp-spinner {
+            animation: none !important;
           }
-          50% {
-            box-shadow: 
-              inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
-              inset 0 -1px 0 0 rgba(0, 0, 0, 0.4),
-              0 18px 40px -4px rgba(0, 0, 0, 0.75),
-              0 0 28px rgba(217, 119, 54, 0.3);
-          }
-        }
-
-        .luxury-glass {
-          background: linear-gradient(135deg, rgba(24, 16, 12, 0.8) 0%, rgba(14, 9, 7, 0.88) 100%);
-          backdrop-filter: blur(28px) saturate(190%);
-          -webkit-backdrop-filter: blur(28px) saturate(190%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 
-            inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
-            inset 0 -1px 0 0 rgba(0, 0, 0, 0.4),
-            0 16px 36px -6px rgba(0, 0, 0, 0.65),
-            0 4px 16px rgba(0, 0, 0, 0.35);
-        }
-
-        .luxury-glass:hover {
-          border-color: rgba(217, 119, 54, 0.35);
         }
       `}</style>
 
-      {/* ── Native Audio Element ───────────────────────────────────────── */}
+      {/* ── Hidden native audio element ───────────────────────────────── */}
       <audio
         ref={audioRef}
-        src={CONFIG.audioSrc}
+        src={track.src || undefined}
         preload="metadata"
-        loop
+        loop={TRACKS.length === 1}
       />
 
-      {/* ── Fixed Bottom-Right Container ───────────────────────────────── */}
+      {/* ══ PLAYER ROOT ════════════════════════════════════════════════ */}
       <div
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 select-none pointer-events-auto"
+        ref={playerRef}
+        data-mp-player
+        role="region"
+        aria-label="Music player"
+        className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 select-none pointer-events-auto"
         style={{
           opacity:    mounted ? 1 : 0,
-          transform:  mounted ? 'translateY(0)' : 'translateY(16px)',
-          transition: prefersReduced ? 'none' : 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          setShowVolume(false);
+          transform:  mounted ? 'translateY(0)' : 'translateY(20px)',
+          transition: reduced ? 'none' : 'opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1)',
         }}
       >
-        {/* ── Collapsed Mini Mode ─────────────────────────────────────── */}
-        {isCollapsed ? (
-          <button
-            onClick={() => setIsCollapsed(false)}
-            aria-label="Expand music player"
-            className="group relative flex items-center gap-2 p-1.5 rounded-full luxury-glass transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none"
+        {/* ── Ambient glow — behind the player, pulses while playing ─── */}
+        {!reduced && (
+          <div
+            className="mp-glow pointer-events-none absolute -inset-6 rounded-full"
             style={{
-              borderColor: isPlaying ? 'rgba(217, 119, 54, 0.5)' : 'rgba(255, 255, 255, 0.1)',
+              background:   'radial-gradient(ellipse at center, rgba(217,119,54,.35) 0%, transparent 70%)',
+              animation:    isPlaying ? 'mp-glow-pulse 3s ease-in-out infinite' : 'none',
+              opacity:      isPlaying ? 0.4 : 0,
+              transition:   'opacity .6s ease',
+              zIndex:       -1,
             }}
+          />
+        )}
+
+        {/* ══ PILL CONTAINER ════════════════════════════════════════════ */}
+        <div
+          className="relative flex items-center gap-3 px-3 py-2.5 sm:px-4"
+          style={{
+            /* Luxury glassmorphism */
+            borderRadius:         '999px',
+            background:           'linear-gradient(140deg, rgba(32,20,13,.86) 0%, rgba(16,10,7,.92) 100%)',
+            backdropFilter:       'blur(28px) saturate(200%)',
+            WebkitBackdropFilter: 'blur(28px) saturate(200%)',
+            border:               isPlaying ? '1px solid rgba(217,119,54,.4)' : '1px solid rgba(255,255,255,.09)',
+            boxShadow: isPlaying
+              ? 'inset 0 1px 1px rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.45), 0 18px 40px -6px rgba(0,0,0,.7), 0 0 24px rgba(217,119,54,.22)'
+              : 'inset 0 1px 1px rgba(255,255,255,.12), inset 0 -1px 0 rgba(0,0,0,.45), 0 14px 32px -6px rgba(0,0,0,.65)',
+            transition:   'border-color .4s ease, box-shadow .4s ease',
+            minWidth:     '270px',
+            maxWidth:     '340px',
+          }}
+          /* Hover lift */
+          onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)'; }}
+        >
+
+          {/* ── Vinyl disc album art ─────────────────────────────────── */}
+          <div
+            className="relative flex-shrink-0"
+            style={{ width: 48, height: 48 }}
           >
-            {/* Spinning Mini Disc */}
-            <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+            {/* Rotating outer glow/accent ring */}
+            <div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                inset:       '-3px',
+                border:      `1.5px solid ${isPlaying ? 'rgba(224,122,59,.8)' : 'rgba(224,122,59,.3)'}`,
+                boxShadow:   isPlaying ? '0 0 10px rgba(224,122,59,.4)' : 'none',
+                transition:  'border-color .4s, box-shadow .4s',
+              }}
+            />
+
+            {/* Disc — rotated by RAF, not CSS animation (smoother pause) */}
+            <div
+              ref={diskRef}
+              className="w-full h-full rounded-full overflow-hidden relative"
+              style={{ background: '#160E09', willChange: 'transform' }}
+            >
+              {hasArt ? (
+                <img
+                  src={track.art}
+                  alt={`${track.title} album art`}
+                  onError={() => setArtError(p => ({ ...p, [trackIdx]: true }))}
+                  className="w-full h-full object-cover block"
+                  draggable={false}
+                />
+              ) : (
+                /* Fallback vinyl grooves */
+                <div
+                  className="w-full h-full"
+                  style={{
+                    background: `
+                      radial-gradient(circle, #2E190E 0%, #110B07 100%),
+                      repeating-radial-gradient(circle at 50%, #190F08 0, #190F08 1px, transparent 1px, transparent 4px)
+                    `,
+                  }}
+                />
+              )}
+
+              {/* Glossy sheen overlay */}
               <div
-                className="w-full h-full rounded-full overflow-hidden"
-                style={{
-                  animation:          !prefersReduced ? 'luxury-spin 8s linear infinite' : 'none',
-                  animationPlayState: isPlaying ? 'running' : 'paused',
+                className="absolute inset-0 rounded-full pointer-events-none"
+                style={{ background: 'radial-gradient(circle at 32% 24%, rgba(255,255,255,.26) 0%, transparent 55%)' }}
+              />
+            </div>
+
+            {/* Centre spindle */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+              style={{
+                width: 8, height: 8,
+                background: 'radial-gradient(circle, #E07A3B 20%, #1A110C 80%)',
+                boxShadow:  '0 0 4px rgba(0,0,0,.8), inset 0 0 1px rgba(255,255,255,.4)',
+              }}
+            />
+          </div>
+
+          {/* ── Track info + progress ────────────────────────────────── */}
+          <div className="flex flex-col flex-1 min-w-0 gap-1">
+            {/* Title row with equalizer */}
+            <div className="flex items-center gap-1.5 min-w-0">
+              {/* 4-bar EQ (visible + animating only while playing) */}
+              <div
+                className={`flex items-end gap-[2px] flex-shrink-0 overflow-hidden ${isPlaying ? 'mp-eq-playing' : ''}`}
+                style={{ height: 12, width: 14 }}
+                aria-hidden="true"
+              >
+                {[1, 2, 3, 4].map(n => (
+                  <span
+                    key={n}
+                    className={`mp-eq-bar mp-eq-bar-${n} rounded-sm`}
+                    style={{
+                      width:      3,
+                      height:     isPlaying ? 12 : 4,
+                      background: '#E07A3B',
+                      display:    'block',
+                      flexShrink: 0,
+                      transition: isPlaying ? 'none' : 'height .3s ease',
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Song title — truncated */}
+              <span
+                className="text-[12.5px] font-semibold leading-tight truncate"
+                style={{ color: '#FDF8F0', fontFamily: 'inherit', textShadow: '0 1px 2px rgba(0,0,0,.4)' }}
+              >
+                {track.title}
+              </span>
+            </div>
+
+            {/* Artist — truncated */}
+            <span
+              className="text-[10px] font-medium leading-none truncate"
+              style={{ color: 'rgba(253,248,240,.52)', fontFamily: 'inherit' }}
+            >
+              {track.artist}
+            </span>
+
+            {/* Progress bar */}
+            <div className="flex items-center gap-2 mt-0.5">
+              {/* Current time */}
+              <span className="text-[9px] font-mono tabular-nums" style={{ color: 'rgba(253,248,240,.4)', minWidth: 24 }}>
+                {fmt(currentTime)}
+              </span>
+
+              {/* Seek track */}
+              <div
+                ref={progressRef}
+                className="mp-progress relative flex-1 flex items-center"
+                style={{ height: 16 }}
+                onMouseDown={handleProgressMouseDown}
+                role="slider"
+                aria-label="Seek"
+                aria-valuenow={Math.round(currentTime)}
+                aria-valuemin={0}
+                aria-valuemax={Math.round(duration)}
+                tabIndex={0}
+                onKeyDown={e => {
+                  if (!audioRef.current) return;
+                  if (e.code === 'ArrowRight') audioRef.current.currentTime = clamp(currentTime + 5, 0, duration);
+                  if (e.code === 'ArrowLeft')  audioRef.current.currentTime = clamp(currentTime - 5, 0, duration);
                 }}
               >
-                {!imgError ? (
-                  <img
-                    src={CONFIG.coverSrc}
-                    alt={CONFIG.trackName}
-                    onError={() => setImgError(true)}
-                    className="w-full h-full object-cover block"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-[#1A110C] flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-[#D97736]" />
-                  </div>
-                )}
-              </div>
-
-              {/* Center Spindle Dot */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-black border border-white/30" />
-            </div>
-
-            {/* Expand Chevron Icon */}
-            <div className="pr-2 text-stone-300 group-hover:text-[#D97736] transition-colors duration-200">
-              <ChevronLeft className="w-4 h-4" />
-            </div>
-          </button>
-        ) : (
-          /* ── Full Expanded Luxury Glass Pill ───────────────────────── */
-          <div
-            className="relative flex flex-col luxury-glass rounded-[24px] sm:rounded-full transition-all duration-300"
-            style={{
-              minWidth:  '260px',
-              maxWidth:  '320px',
-              animation: isPlaying && !prefersReduced ? 'luxury-pulse 3.5s ease-in-out infinite' : 'none',
-            }}
-          >
-            <div className="flex items-center gap-2.5 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2">
-              {/* ── Circular Album Artwork ─────────────────────────────── */}
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0">
-                {/* Thin Ambient Accent Ring */}
+                {/* Track background */}
                 <div
-                  className="absolute -inset-[2px] rounded-full pointer-events-none transition-all duration-500"
-                  style={{
-                    border:    `1px solid ${isPlaying ? 'rgba(217, 119, 54, 0.65)' : 'rgba(217, 119, 54, 0.25)'}`,
-                    boxShadow: isPlaying ? '0 0 10px rgba(217, 119, 54, 0.3)' : 'none',
-                  }}
-                />
-
-                {/* Rotating Artwork */}
-                <div
-                  className="w-full h-full rounded-full overflow-hidden relative shadow-inner"
-                  style={{
-                    animation:          !prefersReduced ? 'luxury-spin 9s linear infinite' : 'none',
-                    animationPlayState: isPlaying ? 'running' : 'paused',
-                    background:         '#160E09',
-                  }}
+                  className="w-full rounded-full overflow-hidden"
+                  style={{ height: 2.5, background: 'rgba(255,255,255,.12)' }}
                 >
-                  {!imgError ? (
-                    <img
-                      src={CONFIG.coverSrc}
-                      alt={CONFIG.trackName}
-                      onError={() => setImgError(true)}
-                      className="w-full h-full object-cover block"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-[#1A110C] flex items-center justify-center">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#D97736]" />
-                    </div>
-                  )}
-
-                  {/* Top-Left Specular Sheen */}
+                  {/* Filled gradient bar */}
                   <div
-                    className="absolute inset-0 rounded-full pointer-events-none"
+                    className="h-full rounded-full"
                     style={{
-                      background: 'radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.24) 0%, transparent 60%)',
+                      width:      `${progress}%`,
+                      background: 'linear-gradient(90deg, #C06028 0%, #E07A3B 60%, #F09050 100%)',
+                      boxShadow:  '0 0 6px rgba(224,122,59,.55)',
+                      transition: isSeeking ? 'none' : 'width .15s linear',
                     }}
                   />
                 </div>
 
-                {/* Metallic Spindle Dot */}
+                {/* Scrubber thumb — visible on hover via CSS */}
                 <div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full pointer-events-none"
+                  className="mp-thumb absolute top-1/2 -translate-y-1/2 rounded-full pointer-events-none"
                   style={{
-                    background: 'radial-gradient(circle, #E07A3B 30%, #1A110C 90%)',
-                    boxShadow:  '0 0 3px rgba(0, 0, 0, 0.8), inset 0 0 1px rgba(255, 255, 255, 0.4)',
+                    width:    10,
+                    height:   10,
+                    left:     `calc(${progress}% - 5px)`,
+                    background: '#FAF5ED',
+                    boxShadow: '0 0 6px rgba(0,0,0,.8), 0 0 4px #E07A3B',
+                    opacity:  0,
+                    transition: 'opacity .15s ease',
                   }}
                 />
               </div>
 
-              {/* ── Track Info & Progress ─────────────────────────────── */}
-              <div className="flex-1 min-w-0 pr-1 flex flex-col justify-center">
-                <div className="flex items-center justify-between gap-1">
-                  <span
-                    className="text-[12px] sm:text-[12.5px] font-semibold tracking-tight truncate leading-tight text-[#FDF8F0]"
-                    style={{ fontFamily: 'inherit' }}
-                  >
-                    {CONFIG.trackName}
-                  </span>
-
-                  {/* Time indicator (shown on hover) */}
-                  <span
-                    className="text-[9.5px] font-mono text-stone-400 transition-opacity duration-200"
-                    style={{ opacity: isHovered || isPlaying ? 0.8 : 0 }}
-                  >
-                    {formatTime(currentTime)}
-                  </span>
-                </div>
-
-                <div
-                  className="text-[10px] sm:text-[10.5px] font-medium truncate mt-0.5 text-stone-400"
-                  style={{ color: 'rgba(253, 248, 240, 0.52)', fontFamily: 'inherit' }}
-                >
-                  {CONFIG.artistName}
-                </div>
-
-                {/* ── Thin Audio Progress Indicator ───────────────────── */}
-                <div
-                  ref={progressBarRef}
-                  onClick={handleSeek}
-                  className="relative w-full mt-1.5 h-3 flex items-center cursor-pointer group/progress"
-                >
-                  {/* Progress Track Background */}
-                  <div className="w-full h-[2px] group-hover/progress:h-[3px] rounded-full bg-white/10 overflow-hidden transition-all duration-200">
-                    <div
-                      className="h-full rounded-full transition-all duration-150"
-                      style={{
-                        width:      `${progressPercent}%`,
-                        background: 'linear-gradient(90deg, #D97736 0%, #E07A3B 100%)',
-                        boxShadow:  '0 0 6px rgba(217, 119, 54, 0.5)',
-                      }}
-                    />
-                  </div>
-
-                  {/* Scrubber Knob (visible on progress hover) */}
-                  <div
-                    className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#FAF5ED] opacity-0 group-hover/progress:opacity-100 transition-opacity duration-200 pointer-events-none"
-                    style={{
-                      left:      `calc(${progressPercent}% - 4px)`,
-                      boxShadow: '0 0 6px rgba(0, 0, 0, 0.8), 0 0 4px #D97736',
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* ── Controls Group (Volume, Play/Pause, Collapse) ──────── */}
-              <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
-                {/* Volume Button */}
-                <div className="relative flex items-center">
-                  <button
-                    onClick={handleToggleMute}
-                    onMouseEnter={() => setShowVolume(true)}
-                    aria-label={isMuted ? 'Unmute' : 'Mute'}
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-stone-400 hover:text-[#D97736] transition-colors duration-200 focus:outline-none cursor-pointer"
-                  >
-                    {isMuted || volume === 0 ? (
-                      <VolumeX className="w-3.5 h-3.5" />
-                    ) : (
-                      <Volume2 className="w-3.5 h-3.5" />
-                    )}
-                  </button>
-
-                  {/* Volume Slider Popover */}
-                  {showVolume && (
-                    <div
-                      className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 px-2 py-2 rounded-xl luxury-glass flex flex-col items-center gap-1 z-30"
-                      onMouseEnter={() => setShowVolume(true)}
-                      onMouseLeave={() => setShowVolume(false)}
-                    >
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={isMuted ? 0 : volume}
-                        onChange={(e) => {
-                          setVolume(parseFloat(e.target.value));
-                          setIsMuted(false);
-                        }}
-                        className="w-16 h-1 accent-[#D97736] cursor-pointer"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {/* Play / Pause Circular Button */}
-                <button
-                  onClick={handleTogglePlay}
-                  disabled={!isAvailable}
-                  aria-label={isPlaying ? 'Pause music' : 'Play music'}
-                  aria-pressed={isPlaying}
-                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer focus:outline-none transition-all duration-300 hover:scale-106 active:scale-94"
-                  style={{
-                    border:     isPlaying ? '1.5px solid #E07A3B' : '1.5px solid rgba(217, 119, 54, 0.7)',
-                    background: isPlaying
-                      ? 'radial-gradient(circle, rgba(217, 119, 54, 0.28) 0%, rgba(217, 119, 54, 0.08) 100%)'
-                      : 'radial-gradient(circle, rgba(217, 119, 54, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%)',
-                    color:      '#E07A3B',
-                    boxShadow:  isPlaying
-                      ? '0 0 14px rgba(217, 119, 54, 0.4), inset 0 0 6px rgba(217, 119, 54, 0.2)'
-                      : '0 2px 6px rgba(0, 0, 0, 0.3)',
-                    opacity:    isAvailable ? 1 : 0.4,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#E07A3B';
-                    e.currentTarget.style.boxShadow = '0 0 18px rgba(217, 119, 54, 0.5), inset 0 0 8px rgba(217, 119, 54, 0.25)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = isPlaying ? '#E07A3B' : 'rgba(217, 119, 54, 0.7)';
-                    e.currentTarget.style.boxShadow = isPlaying
-                      ? '0 0 14px rgba(217, 119, 54, 0.4), inset 0 0 6px rgba(217, 119, 54, 0.2)'
-                      : '0 2px 6px rgba(0, 0, 0, 0.3)';
-                  }}
-                >
-                  {isLoading ? (
-                    <div className="w-3 h-3 rounded-full border-2 border-[#E07A3B] border-t-transparent animate-spin" />
-                  ) : isPlaying ? (
-                    <Pause className="w-3.5 h-3.5 fill-current" />
-                  ) : (
-                    <Play className="w-3.5 h-3.5 fill-current translate-x-[1px]" />
-                  )}
-                </button>
-
-                {/* Collapse Chevron Button */}
-                <button
-                  onClick={() => setIsCollapsed(true)}
-                  aria-label="Collapse player"
-                  title="Minimize"
-                  className="w-6 h-6 rounded-full flex items-center justify-center text-stone-400 hover:text-stone-200 hover:bg-white/5 transition-all duration-200 focus:outline-none cursor-pointer"
-                >
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
+              {/* Duration */}
+              <span className="text-[9px] font-mono tabular-nums" style={{ color: 'rgba(253,248,240,.4)', minWidth: 24, textAlign: 'right' }}>
+                {fmt(duration)}
+              </span>
             </div>
           </div>
-        )}
+
+          {/* ── Controls: Prev · Play/Pause · Next · Volume ──────────── */}
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+
+            {/* Previous track */}
+            <button
+              className="mp-btn flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
+              style={{ width: 28, height: 28, color: 'rgba(253,248,240,.65)', background: 'transparent' }}
+              onClick={handlePrev}
+              aria-label="Previous track"
+              title="Previous"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z" />
+              </svg>
+            </button>
+
+            {/* Play / Pause — large gradient button */}
+            <button
+              className="mp-btn relative flex items-center justify-center rounded-full transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none"
+              style={{
+                width:    40,
+                height:   40,
+                color:    '#FDF8F0',
+                background: isPlaying
+                  ? 'linear-gradient(145deg, #C06028 0%, #E07A3B 50%, #F09050 100%)'
+                  : 'linear-gradient(145deg, #A85020 0%, #C86830 60%, #E07A3B 100%)',
+                boxShadow: isPlaying
+                  ? '0 0 20px rgba(224,122,59,.55), 0 4px 10px rgba(0,0,0,.4), inset 0 1px 1px rgba(255,255,255,.25)'
+                  : '0 4px 12px rgba(0,0,0,.45), inset 0 1px 1px rgba(255,255,255,.2)',
+                transition: 'background .3s ease, box-shadow .3s ease',
+              }}
+              onClick={togglePlay}
+              aria-label={isPlaying ? 'Pause' : 'Play'}
+              aria-pressed={isPlaying}
+            >
+              {isLoading ? (
+                /* Spinner */
+                <svg
+                  className="mp-spinner"
+                  width="16" height="16" viewBox="0 0 24 24" fill="none"
+                >
+                  <circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,.3)" strokeWidth="3" />
+                  <path d="M12 3a9 9 0 0 1 9 9" stroke="white" strokeWidth="3" strokeLinecap="round" />
+                </svg>
+              ) : isPlaying ? (
+                /* Pause bars */
+                <svg width="13" height="15" viewBox="0 0 12 15" fill="currentColor">
+                  <rect x="0" y="0" width="4" height="15" rx="1.5" />
+                  <rect x="8" y="0" width="4" height="15" rx="1.5" />
+                </svg>
+              ) : (
+                /* Play triangle */
+                <svg width="14" height="15" viewBox="0 0 14 15" fill="currentColor" style={{ marginLeft: 2 }}>
+                  <path d="M1.5 1.3a1 1 0 0 0-1.5.86v11.68a1 1 0 0 0 1.5.87l10.9-5.84a1 1 0 0 0 0-1.74L1.5 1.3z" />
+                </svg>
+              )}
+            </button>
+
+            {/* Next track */}
+            <button
+              className="mp-btn flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
+              style={{ width: 28, height: 28, color: 'rgba(253,248,240,.65)', background: 'transparent' }}
+              onClick={handleNext}
+              aria-label="Next track"
+              title="Next"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 18 14.5 12 6 6v12zm8-12v12h2V6h-2z" />
+              </svg>
+            </button>
+
+            {/* Volume toggle */}
+            <button
+              className="mp-btn flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
+              style={{ width: 28, height: 28, color: isMuted ? 'rgba(253,248,240,.3)' : 'rgba(253,248,240,.65)' }}
+              onClick={() => setIsMuted(m => !m)}
+              aria-label={isMuted ? 'Unmute' : 'Mute'}
+              title={isMuted ? 'Unmute' : 'Mute'}
+            >
+              {isMuted ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <line x1="23" y1="9" x2="17" y2="15" />
+                  <line x1="17" y1="9" x2="23" y2="15" />
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+                </svg>
+              )}
+            </button>
+          </div>
+
+        </div>{/* end pill */}
       </div>
     </>
   );
