@@ -63,6 +63,7 @@ function AppContent() {
     }
   }, [location]);
 
+  const isHomePage = location.pathname === '/';
   const isAboutPage = location.pathname === '/about';
   const isCaseStudy = location.pathname.startsWith('/case-study/');
 
@@ -89,7 +90,7 @@ function AppContent() {
         </Routes>
         
         {!isCaseStudy && <Footer isAboutPage={isAboutPage} />}
-        {!isLoading && <MusicPlayer />}
+        {!isLoading && isHomePage && <MusicPlayer />}
       </div>
     </>
   );
