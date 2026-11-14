@@ -117,13 +117,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ isLoaded = true }) => {
           >
             <a 
               href="#projects"
-              className="hero-cta-btn group pointer-events-auto relative inline-flex items-center justify-center min-h-[44px] gap-2 bg-[#3B1E08] hover:bg-[#271304] text-[#FAF8F5] px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 border border-[#8F5431]/40 shadow-[0_12px_36px_-6px_rgba(20,10,3,0.5),0_0_20px_rgba(59,30,8,0.3)] hover:shadow-[0_18px_45px_-6px_rgba(20,10,3,0.65),0_0_30px_rgba(59,30,8,0.45)]"
+              className="hero-cta-btn group pointer-events-auto relative inline-flex items-center justify-center min-h-[44px] gap-2 bg-[#633316] hover:bg-[#4F270F] text-[#FAF8F5] px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-widest overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 border border-[#A66640]/40 shadow-[0_12px_36px_-6px_rgba(60,30,12,0.45),0_0_20px_rgba(99,51,22,0.25)] hover:shadow-[0_18px_45px_-6px_rgba(60,30,12,0.6),0_0_30px_rgba(99,51,22,0.35)]"
             >
               <span className="relative z-10 flex items-center gap-2 text-[#FAF8F5]">
                 View My Work
                 <ArrowRight className="w-4 h-4 text-[#FAF8F5] transition-transform duration-500 group-hover:translate-x-1" />
               </span>
-              <div className="absolute inset-0 bg-[#271304] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-[#4F270F] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
             <a 
               href="#contact"

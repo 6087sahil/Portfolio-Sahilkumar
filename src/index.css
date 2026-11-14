@@ -619,12 +619,12 @@ html.dark .cursor-dot {
   background-color: #C58B65 !important;
 }
 
-/* 11. Hero CTA Button - Styled with deep chocolate brown accent */
+/* 11. Hero CTA Button - Styled with warm rich mocha brown accent */
 .hero-cta-btn,
 html.dark .hero-cta-btn {
-  background-color: #3B1E08 !important;
+  background-color: #633316 !important;
   color: #FAF8F5 !important;
-  border-color: rgba(143, 84, 49, 0.4) !important;
+  border-color: rgba(166, 102, 64, 0.4) !important;
 }
 
 .hero-cta-btn *,
@@ -634,7 +634,7 @@ html.dark .hero-cta-btn * {
 
 .hero-cta-btn:hover,
 html.dark .hero-cta-btn:hover {
-  background-color: #271304 !important;
+  background-color: #4F270F !important;
 }
 
 /* 12. Subtle selection color */
