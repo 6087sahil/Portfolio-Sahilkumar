@@ -440,10 +440,10 @@ const MusicPlayer: React.FC = () => {
           </div>
         ) : (
           /* ════════════════════════════════════════════════════════════════════
-              EXPANDED EXACT CARD (Sleek, Compact & Horizontal)
+              EXPANDED EXACT CARD (Ultra Compact & Refined)
              ════════════════════════════════════════════════════════════════════ */
           <div
-            className="w-[370px] sm:w-[395px] max-w-[calc(100vw-24px)] rounded-[24px] p-3.5 sm:p-4 transition-colors duration-400"
+            className="w-[315px] sm:w-[335px] max-w-[calc(100vw-24px)] rounded-[20px] p-3 transition-colors duration-400"
             style={{
               background: isDark
                 ? 'linear-gradient(155deg, #231F1B 0%, #1A1714 100%)'
@@ -452,22 +452,22 @@ const MusicPlayer: React.FC = () => {
                 ? '1px solid rgba(255,255,255,0.08)'
                 : '1px solid rgba(22,21,19,0.06)',
               boxShadow: isDark
-                ? '0 20px 48px -10px rgba(0,0,0,0.75), 0 6px 20px -6px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)'
-                : '0 20px 48px -12px rgba(90,52,25,0.14), 0 6px 16px -6px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)',
+                ? '0 16px 40px -8px rgba(0,0,0,0.75), 0 4px 16px -4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)'
+                : '0 16px 40px -10px rgba(90,52,25,0.14), 0 4px 12px -4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)',
             }}
           >
             {/* ── TOP HEADER ROW ────────────────────────────────────────── */}
-            <div className="flex items-center justify-between mb-2.5">
+            <div className="flex items-center justify-between mb-2">
               {/* Left: 4 orange squares + "Crate" */}
-              <div className="flex items-center gap-2">
-                <div className="grid grid-cols-2 gap-[2px] w-3.5 h-3.5">
-                  <span className="w-[5px] h-[5px] rounded-[1.5px] bg-[#E07A3B]" />
-                  <span className="w-[5px] h-[5px] rounded-[1.5px] bg-[#E07A3B]" />
-                  <span className="w-[5px] h-[5px] rounded-[1.5px] bg-[#E07A3B]" />
-                  <span className="w-[5px] h-[5px] rounded-[1.5px] bg-[#E07A3B]" />
+              <div className="flex items-center gap-1.5">
+                <div className="grid grid-cols-2 gap-[1.5px] w-3 h-3">
+                  <span className="w-[4.5px] h-[4.5px] rounded-[1px] bg-[#E07A3B]" />
+                  <span className="w-[4.5px] h-[4.5px] rounded-[1px] bg-[#E07A3B]" />
+                  <span className="w-[4.5px] h-[4.5px] rounded-[1px] bg-[#E07A3B]" />
+                  <span className="w-[4.5px] h-[4.5px] rounded-[1px] bg-[#E07A3B]" />
                 </div>
                 <span
-                  className="font-bold text-[13.5px] tracking-tight leading-none"
+                  className="font-bold text-[12px] tracking-tight leading-none"
                   style={{ color: isDark ? '#F4F1EA' : '#161513' }}
                 >
                   Crate
@@ -475,13 +475,13 @@ const MusicPlayer: React.FC = () => {
               </div>
 
               {/* Right: Orange dot + "NOW PLAYING" + Minimize button */}
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1.5">
                   <span
                     className={`w-1.5 h-1.5 rounded-full bg-[#E07A3B] ${isPlaying ? 'crate-dot-pulse' : ''}`}
                   />
                   <span
-                    className="text-[9px] font-bold uppercase tracking-[0.12em]"
+                    className="text-[8px] font-bold uppercase tracking-[0.12em]"
                     style={{ color: isDark ? '#A69E92' : '#8C8273' }}
                   >
                     NOW PLAYING
@@ -492,24 +492,24 @@ const MusicPlayer: React.FC = () => {
                 <button
                   onClick={() => setIsMinimized(true)}
                   aria-label="Minimize player"
-                  className="w-4 h-4 rounded-full flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity"
+                  className="w-3.5 h-3.5 rounded-full flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity"
                   style={{ color: isDark ? '#F4F1EA' : '#161513' }}
                   title="Minimize"
                 >
-                  <svg width="8" height="2" viewBox="0 0 8 2" fill="currentColor">
-                    <rect width="8" height="2" rx="1" />
+                  <svg width="7" height="2" viewBox="0 0 7 2" fill="currentColor">
+                    <rect width="7" height="2" rx="1" />
                   </svg>
                 </button>
               </div>
             </div>
 
             {/* ── MIDDLE ROW: VINYL & CONTROLS ───────────────────────────── */}
-            <div className="flex items-center gap-3.5 sm:gap-4 mb-2.5">
+            <div className="flex items-center gap-2.5 mb-2">
               {/* ─ Left: Album Sleeve with sliding vinyl record ─ */}
-              <div className="relative flex-shrink-0 w-[112px] h-[78px] sm:w-[120px] sm:h-[84px] flex items-center">
-                {/* Vinyl Record (positioned right, sticking out ~38px) */}
+              <div className="relative flex-shrink-0 w-[94px] h-[64px] flex items-center">
+                {/* Vinyl Record (positioned right, sticking out ~30px) */}
                 <div
-                  className="absolute right-0 w-[74px] h-[74px] sm:w-[80px] sm:h-[80px] rounded-full overflow-hidden shadow-lg pointer-events-none"
+                  className="absolute right-0 w-[62px] h-[62px] rounded-full overflow-hidden shadow-md pointer-events-none"
                   style={{ zIndex: 0 }}
                 >
                   {/* Rotating Disc */}
@@ -523,12 +523,12 @@ const MusicPlayer: React.FC = () => {
 
                     {/* Center Orange Label */}
                     <div
-                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-inner relative"
+                      className="w-6 h-6 rounded-full flex items-center justify-center shadow-inner relative"
                       style={{ background: '#E07A3B' }}
                     >
                       {/* Spindle hole */}
                       <div
-                        className="w-2.5 h-2.5 rounded-full"
+                        className="w-2 h-2 rounded-full"
                         style={{
                           background: '#121110',
                           boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.8), 0 0 1px rgba(255,255,255,0.4)',
@@ -540,11 +540,11 @@ const MusicPlayer: React.FC = () => {
 
                 {/* Square Album Jacket/Sleeve */}
                 <div
-                  className="relative z-10 w-[76px] h-[76px] sm:w-[82px] sm:h-[82px] rounded-xl overflow-hidden flex-shrink-0"
+                  className="relative z-10 w-[64px] h-[64px] rounded-lg overflow-hidden flex-shrink-0"
                   style={{
                     boxShadow: isDark
-                      ? '3px 5px 16px -2px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.5)'
-                      : '3px 6px 18px -3px rgba(70,40,20,0.22), 0 1px 3px rgba(0,0,0,0.06)',
+                      ? '2px 4px 12px -2px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.5)'
+                      : '2px 5px 14px -2px rgba(70,40,20,0.2), 0 1px 2px rgba(0,0,0,0.06)',
                   }}
                 >
                   {hasArt ? (
@@ -560,13 +560,13 @@ const MusicPlayer: React.FC = () => {
                       className="w-full h-full flex items-center justify-center"
                       style={{ background: '#2E190E', color: '#FAF5ED' }}
                     >
-                      <span className="text-xs font-bold">{track.title}</span>
+                      <span className="text-[10px] font-bold">{track.title}</span>
                     </div>
                   )}
 
                   {/* Gentle edge shadow to simulate sleeve opening */}
                   <div
-                    className="absolute inset-y-0 right-0 w-2.5 pointer-events-none"
+                    className="absolute inset-y-0 right-0 w-2 pointer-events-none"
                     style={{
                       background: 'linear-gradient(to left, rgba(0,0,0,0.3) 0%, transparent 100%)',
                     }}
@@ -578,7 +578,7 @@ const MusicPlayer: React.FC = () => {
               <div className="flex flex-col flex-1 min-w-0">
                 {/* Daily Rotation Tag */}
                 <span
-                  className="text-[9px] sm:text-[9.5px] font-bold uppercase tracking-[0.1em] leading-tight truncate mb-0.5"
+                  className="text-[8px] font-bold uppercase tracking-[0.08em] leading-tight truncate mb-0.5"
                   style={{ color: isDark ? '#9E988E' : '#8A8275' }}
                 >
                   {track.tag || 'DAILY ROTATION'}
@@ -586,7 +586,7 @@ const MusicPlayer: React.FC = () => {
 
                 {/* Song Title */}
                 <h3
-                  className="text-[15px] sm:text-[16px] font-bold leading-tight truncate tracking-tight mb-0.5"
+                  className="text-[13px] sm:text-[14px] font-bold leading-tight truncate tracking-tight mb-0.5"
                   style={{
                     color: isDark ? '#F4F1EA' : '#161513',
                     fontFamily: "'Satoshi', 'Manrope', sans-serif",
@@ -597,23 +597,23 @@ const MusicPlayer: React.FC = () => {
 
                 {/* Artist Name */}
                 <p
-                  className="text-[11px] sm:text-[11.5px] font-medium leading-tight truncate mb-2"
+                  className="text-[10px] sm:text-[10.5px] font-medium leading-tight truncate mb-1.5"
                   style={{ color: isDark ? '#B0A89C' : '#6A645B' }}
                 >
                   {track.artist}
                 </p>
 
                 {/* ─ Progress Bar ─ */}
-                <div className="mb-2">
+                <div className="mb-1.5">
                   <div
                     ref={progressRef}
                     onClick={handleProgressDown}
                     onTouchStart={handleProgressDown}
-                    className="relative w-full h-3 flex items-center cursor-pointer group"
+                    className="relative w-full h-2.5 flex items-center cursor-pointer group"
                   >
                     {/* Background Track */}
                     <div
-                      className="w-full h-[2.5px] rounded-full overflow-hidden"
+                      className="w-full h-[2px] rounded-full overflow-hidden"
                       style={{
                         background: isDark
                           ? 'rgba(255,255,255,0.12)'
@@ -633,17 +633,17 @@ const MusicPlayer: React.FC = () => {
 
                     {/* Progress Orange Dot Thumb */}
                     <div
-                      className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#E07A3B] pointer-events-none transition-transform"
+                      className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#E07A3B] pointer-events-none transition-transform"
                       style={{
-                        left: `calc(${progress}% - 5px)`,
-                        boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                        left: `calc(${progress}% - 4px)`,
+                        boxShadow: '0 1px 2px rgba(0,0,0,0.3)',
                       }}
                     />
                   </div>
 
                   {/* Time Labels */}
                   <div
-                    className="flex justify-between items-center text-[9px] font-medium tracking-tight mt-[-2px]"
+                    className="flex justify-between items-center text-[8px] font-medium tracking-tight mt-[-3px]"
                     style={{ color: isDark ? '#8E877C' : '#8C8273' }}
                   >
                     <span>{fmt(currentTime)}</span>
@@ -657,7 +657,7 @@ const MusicPlayer: React.FC = () => {
                   <button
                     onClick={() => setIsShuffle(s => !s)}
                     aria-label="Toggle shuffle"
-                    className="p-1 rounded-full transition-colors"
+                    className="p-0.5 rounded-full transition-colors"
                     style={{
                       color: isShuffle
                         ? '#E07A3B'
@@ -665,7 +665,7 @@ const MusicPlayer: React.FC = () => {
                     }}
                     title="Shuffle"
                   >
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
                     </svg>
                   </button>
@@ -674,42 +674,42 @@ const MusicPlayer: React.FC = () => {
                   <button
                     onClick={handlePrev}
                     aria-label="Previous track"
-                    className="p-1 rounded-full transition-transform active:scale-90"
+                    className="p-0.5 rounded-full transition-transform active:scale-90"
                     style={{ color: isDark ? '#F4F1EA' : '#161513' }}
                     title="Previous"
                   >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
                     </svg>
                   </button>
 
-                  {/* Play / Pause (Large Solid Round Button) */}
+                  {/* Play / Pause (Solid Round Button) */}
                   <button
                     onClick={togglePlay}
                     aria-label={isPlaying ? 'Pause' : 'Play'}
-                    className="w-8.5 h-8.5 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none"
+                    className="w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none"
                     style={{
-                      width: 34,
-                      height: 34,
+                      width: 28,
+                      height: 28,
                       background: isDark ? '#F4F1EA' : '#181614',
                       color: isDark ? '#181614' : '#F4F1EA',
                       boxShadow: isDark
-                        ? '0 4px 12px -2px rgba(0,0,0,0.6)'
-                        : '0 6px 16px -3px rgba(0,0,0,0.3)',
+                        ? '0 3px 10px -2px rgba(0,0,0,0.6)'
+                        : '0 4px 12px -2px rgba(0,0,0,0.3)',
                     }}
                   >
                     {isLoading ? (
-                      <svg className="crate-spinner" width="13" height="13" viewBox="0 0 24 24" fill="none">
+                      <svg className="crate-spinner" width="11" height="11" viewBox="0 0 24 24" fill="none">
                         <circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.2)" strokeWidth="3"/>
                         <path d="M12 3a9 9 0 0 1 9 9" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
                       </svg>
                     ) : isPlaying ? (
-                      <svg width="11" height="12" viewBox="0 0 12 15" fill="currentColor">
+                      <svg width="9" height="10" viewBox="0 0 12 15" fill="currentColor">
                         <rect x="0" y="0" width="3.8" height="15" rx="1.5" />
                         <rect x="7.2" y="0" width="3.8" height="15" rx="1.5" />
                       </svg>
                     ) : (
-                      <svg width="11" height="12" viewBox="0 0 14 15" fill="currentColor" style={{ marginLeft: 1.5 }}>
+                      <svg width="9" height="10" viewBox="0 0 14 15" fill="currentColor" style={{ marginLeft: 1 }}>
                         <path d="M1.5 1.3a1 1 0 0 0-1.5.86v11.68a1 1 0 0 0 1.5.87l10.9-5.84a1 1 0 0 0 0-1.74L1.5 1.3z"/>
                       </svg>
                     )}
@@ -719,11 +719,11 @@ const MusicPlayer: React.FC = () => {
                   <button
                     onClick={handleNext}
                     aria-label="Next track"
-                    className="p-1 rounded-full transition-transform active:scale-90"
+                    className="p-0.5 rounded-full transition-transform active:scale-90"
                     style={{ color: isDark ? '#F4F1EA' : '#161513' }}
                     title="Next"
                   >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M6 18 14.5 12 6 6v12zm8-12v12h2V6h-2z"/>
                     </svg>
                   </button>
@@ -732,7 +732,7 @@ const MusicPlayer: React.FC = () => {
                   <button
                     onClick={() => setIsRepeat(r => !r)}
                     aria-label="Toggle repeat"
-                    className="p-1 rounded-full transition-colors"
+                    className="p-0.5 rounded-full transition-colors"
                     style={{
                       color: isRepeat
                         ? '#E07A3B'
@@ -740,7 +740,7 @@ const MusicPlayer: React.FC = () => {
                     }}
                     title="Repeat"
                   >
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="m17 2 4 4-4 4"/>
                       <path d="M3 11v-1a4 4 0 0 1 4-4h14"/>
                       <path d="m7 22-4-4 4-4"/>
@@ -753,7 +753,7 @@ const MusicPlayer: React.FC = () => {
 
             {/* ── BOTTOM FOOTER ROW ─────────────────────────────────────── */}
             <div
-              className="flex items-center justify-between pt-2.5 border-t"
+              className="flex items-center justify-between pt-2 border-t"
               style={{
                 borderColor: isDark
                   ? 'rgba(255,255,255,0.06)'
@@ -764,35 +764,35 @@ const MusicPlayer: React.FC = () => {
               <button
                 onClick={() => setIsMuted(m => !m)}
                 aria-label={isMuted ? 'Unmute' : 'Mute'}
-                className="flex items-center gap-1.5 group transition-opacity hover:opacity-80"
+                className="flex items-center gap-1 group transition-opacity hover:opacity-80"
                 style={{ color: isDark ? '#B8AFA4' : '#5C5549' }}
               >
                 {/* Speaker icon */}
                 {isMuted ? (
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
                     <line x1="23" y1="9" x2="17" y2="15"/>
                     <line x1="17" y1="9" x2="23" y2="15"/>
                   </svg>
                 ) : (
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
                     <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/>
                   </svg>
                 )}
 
-                <span className="text-[11px] font-medium tracking-tight">
+                <span className="text-[10px] font-medium tracking-tight">
                   {isMuted ? 'Muted' : 'Living room'}
                 </span>
 
-                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
+                <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-60">
                   <path d="m6 9 6 6 6-6"/>
                 </svg>
               </button>
 
               {/* Right: Pill Badge with Animated Bars + "Lossless" */}
               <div
-                className="flex items-center gap-1.5 px-2 py-0.5 rounded-full"
+                className="flex items-center gap-1 px-1.5 py-0.5 rounded-full"
                 style={{
                   background: isDark
                     ? 'rgba(255,255,255,0.05)'
@@ -803,20 +803,20 @@ const MusicPlayer: React.FC = () => {
                 }}
               >
                 {/* 3 animated audio bars */}
-                <div className="flex items-end gap-[1.2px] h-3">
+                <div className="flex items-end gap-[1px] h-2.5">
                   <span
-                    className={`w-[1.8px] rounded-full bg-[#E07A3B] ${isPlaying ? 'crate-bar-1' : 'h-[5px]'}`}
+                    className={`w-[1.5px] rounded-full bg-[#E07A3B] ${isPlaying ? 'crate-bar-1' : 'h-[4px]'}`}
                   />
                   <span
-                    className={`w-[1.8px] rounded-full bg-[#E07A3B] ${isPlaying ? 'crate-bar-2' : 'h-[8px]'}`}
+                    className={`w-[1.5px] rounded-full bg-[#E07A3B] ${isPlaying ? 'crate-bar-2' : 'h-[7px]'}`}
                   />
                   <span
-                    className={`w-[1.8px] rounded-full bg-[#E07A3B] ${isPlaying ? 'crate-bar-3' : 'h-[3px]'}`}
+                    className={`w-[1.5px] rounded-full bg-[#E07A3B] ${isPlaying ? 'crate-bar-3' : 'h-[3px]'}`}
                   />
                 </div>
 
                 <span
-                  className="text-[9.5px] font-semibold tracking-wider"
+                  className="text-[8.5px] font-semibold tracking-wider"
                   style={{ color: isDark ? '#A69E92' : '#736B5F' }}
                 >
                   Lossless
