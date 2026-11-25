@@ -45,48 +45,6 @@ const PROJECTS: ProjectItem[] = [
     image: '/roomly-showcase.png',
     badge: 'Interactive Prototype',
   },
-  {
-    id: 'grocery',
-    num: '02',
-    category: 'Quick-Commerce · Cart Architecture',
-    title: 'Grocery',
-    subtitle: 'High-Velocity Ordering',
-    role: 'Lead UX/UI Designer',
-    year: '2026',
-    description:
-      'A stripped-down, ultra-rapid grocery commerce experience designed around cognitive friction reduction. Streamlined checkout architecture with predictive re-orders and tactile fresh-produce taxonomy.',
-    metrics: [
-      { label: 'Checkout Duration', value: '45s' },
-      { label: 'Cart Drop-Off', value: '−38%' },
-      { label: 'Order Rating', value: '4.9 / 5' },
-    ],
-    deliverables: ['Cart Architecture', 'Interaction Design', 'Micro-interactions', 'Design Systems'],
-    link: '#contact',
-    ctaText: 'Request Walkthrough',
-    image: '/grocery-mockup.jpg',
-    badge: 'Checkout Architecture',
-  },
-  {
-    id: 'pet-adoption',
-    num: '03',
-    category: 'Community Platform · Behavioral Match',
-    title: 'Pet Adoption',
-    subtitle: 'Empathy-Led Rescue Workflow',
-    role: 'Product Designer',
-    year: '2025',
-    description:
-      'An empathy-driven adoption ecosystem bridging municipal shelters with prospective adopters through lifestyle-aligned animal behavioral logs, medical transparency, and progressive verification tracks.',
-    metrics: [
-      { label: 'Inquiry Growth', value: '+52%' },
-      { label: 'Match Confidence', value: '91%' },
-      { label: 'Time-to-Placement', value: '4 Days' },
-    ],
-    deliverables: ['Service Blueprint', 'Interface Design', 'Editorial Direction', 'Design Systems'],
-    link: '/case-study/roomly',
-    ctaText: 'Explore Project',
-    image: '/pet-adoption-mockup.png',
-    badge: 'Emotional UI & Match Flow',
-  },
 ];
 
 /* ── Individual Editorial Project Item (Full Image Showcase) ──────── */
@@ -363,7 +321,7 @@ const ProjectsSection: React.FC = () => {
                 A rigorous archive of mobile interface systems, interaction psychology, and rapid digital product architectures engineered for scale.
               </p>
               <div className="mt-5 flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.2em] text-[#8E8980] dark:text-[#A09A90]">
-                <span>03 Curated Releases</span>
+                <span>{String(PROJECTS.length).padStart(2, '0')} Curated {PROJECTS.length === 1 ? 'Release' : 'Releases'}</span>
                 <span className="text-[#161513]/25 dark:text-white/20">|</span>
                 <span>End-to-End iOS &amp; Web</span>
               </div>
