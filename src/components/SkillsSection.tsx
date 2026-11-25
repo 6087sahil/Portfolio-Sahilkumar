@@ -70,17 +70,6 @@ const ToolCard = ({ tool, index }: { tool: typeof featuredTools[0]; index: numbe
           {tool.role}
         </p>
       </div>
-
-      {/* Progress bar */}
-      <div className="w-full bg-[#161513]/10 h-1 rounded-full overflow-hidden mt-1">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${tool.prof}%` }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.25 + index * 0.08, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-          className="h-full bg-[#8F5431] rounded-full"
-        />
-      </div>
     </motion.div>
   );
 };
